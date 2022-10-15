@@ -37,18 +37,6 @@ public class Barrels implements MinekeaBlockCategory {
     @Environment(EnvType.CLIENT)
     @Override
     public void initializeClient() {
-        BlockRenderLayerMap.INSTANCE.putBlocks(
-            RenderLayer.getTranslucent(),
-            Blocks.BARREL,
-            ACACIA_BARREL,
-            BIRCH_BARREL,
-            CRIMSON_BARREL,
-            DARK_OAK_BARREL,
-            JUNGLE_BARREL,
-            MANGROVE_BARREL,
-            SPRUCE_BARREL,
-            WARPED_BARREL
-        );
     }
 
     @Override

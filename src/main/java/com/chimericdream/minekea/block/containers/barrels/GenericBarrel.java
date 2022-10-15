@@ -59,8 +59,8 @@ public class GenericBarrel extends BarrelBlock implements MinekeaBlock {
         String PLANK_MATERIAL = settings.getMaterial("planks").toString();
         String SLAB_MATERIAL = settings.getMaterial("slab").toString();
 
-        Identifier LOG_TEXTURE = settings.getBlockTexture("stripped_log");
-        Identifier PLANK_TEXTURE = settings.getBlockTexture("planks");
+        String PLANK_TEXTURE = settings.getBlockTexture("planks").getPath();
+        String MATERIAL_NAME = PLANK_TEXTURE.substring("block/".length(), PLANK_TEXTURE.indexOf("_planks"));
 
         Identifier MODEL_ID = Model.getBlockModelID(getBlockID());
         Identifier ITEM_MODEL_ID = Model.getItemModelID(getBlockID());
@@ -80,15 +80,20 @@ public class GenericBarrel extends BarrelBlock implements MinekeaBlock {
         MinekeaResourcePack.RESOURCE_PACK.addLootTable(LootTable.blockID(getBlockID()), LootTable.dropSelf(getBlockID()));
 
         JTextures textures = new JTextures()
-            .var("face", LOG_TEXTURE.toString())
-            .var("sides", PLANK_TEXTURE.toString());
-
+                .var("top", "minekea:block/barrels/" + MATERIAL_NAME + "_barrel_top")
+                .var("side", "minekea:block/barrels/" + MATERIAL_NAME + "_barrel_side")
+                .var("bottom", "minekea:block/barrels/" + MATERIAL_NAME + "_barrel_bottom");
         MinekeaResourcePack.RESOURCE_PACK.addModel(
-            JModel.model("minekea:block/containers/barrel").textures(textures),
+            JModel.model("minecraft:block/cube_bottom_top").textures(textures),
             MODEL_ID
         );
+
+        JTextures textures_open = new JTextures()
+                .var("top", "minekea:block/barrels/" + MATERIAL_NAME + "_barrel_top_open")
+                .var("side", "minekea:block/barrels/" + MATERIAL_NAME + "_barrel_side")
+                .var("bottom", "minekea:block/barrels/" + MATERIAL_NAME + "_barrel_bottom");
         MinekeaResourcePack.RESOURCE_PACK.addModel(
-            JModel.model("minekea:block/containers/barrel_open").textures(textures),
+            JModel.model("minecraft:block/cube_bottom_top").textures(textures_open),
             OPEN_MODEL_ID
         );
 
