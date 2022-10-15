@@ -7,6 +7,7 @@ import com.chimericdream.minekea.config.ConfigManager;
 import com.chimericdream.minekea.config.MinekeaConfig;
 import com.chimericdream.minekea.resource.MinekeaResourcePack;
 import com.chimericdream.minekea.settings.BaseBlockSettings;
+import com.chimericdream.minekea.settings.MinekeaBlockSettings;
 import com.chimericdream.minekea.settings.MinekeaBlockSettings.DefaultSettings;
 import com.chimericdream.minekea.util.Colors;
 import com.chimericdream.minekea.util.MinekeaBlockCategory;
@@ -60,7 +61,14 @@ public class CompressedBlocks implements MinekeaBlockCategory {
 
     @Override
     public void initializeClient() {
-        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(), BLOCKS.toArray(new Block[0]));
+        for (GenericCompressedBlock block : BLOCKS) {
+            MinekeaBlockSettings<?> settings = (MinekeaBlockSettings<?>) block.settings;
+            if (settings.isTranslucent()) {
+                BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getTranslucent());
+            } else {
+                BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getCutout());
+            }
+        }
     }
 
     @Override
