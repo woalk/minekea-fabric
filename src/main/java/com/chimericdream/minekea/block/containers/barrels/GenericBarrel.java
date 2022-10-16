@@ -59,8 +59,7 @@ public class GenericBarrel extends BarrelBlock implements MinekeaBlock {
         String PLANK_MATERIAL = settings.getMaterial("planks").toString();
         String SLAB_MATERIAL = settings.getMaterial("slab").toString();
 
-        String PLANK_TEXTURE = settings.getBlockTexture("planks").getPath();
-        String MATERIAL_NAME = PLANK_TEXTURE.substring("block/".length(), PLANK_TEXTURE.indexOf("_planks"));
+        String MATERIAL_NAME = settings.getMainMaterial();
 
         Identifier MODEL_ID = Model.getBlockModelID(getBlockID());
         Identifier ITEM_MODEL_ID = Model.getItemModelID(getBlockID());
