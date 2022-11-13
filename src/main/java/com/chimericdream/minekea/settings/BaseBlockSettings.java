@@ -2407,6 +2407,20 @@ public class BaseBlockSettings {
         .withStairs()
         .withVerticalStairs();
 
+    public static DefaultSettings ACACIA_WOOD = new DefaultSettings(Blocks.ACACIA_WOOD)
+            .material("acacia_wood")
+            .wooden()
+            .tool(Tool.AXE)
+            .flammable()
+            .materials(
+                    Map.of(
+                            "main", new Identifier("minecraft:acacia_log"),
+                            "ingredient", new Identifier("minecraft:acacia_wood")
+                    )
+            )
+            .withSlab()
+            .withStairs();
+
     public static DefaultSettings AZALEA_LEAVES = new DefaultSettings(Blocks.AZALEA_LEAVES)
         .material("azalea_leaves")
         .tool(Tool.SHEARS)
@@ -2485,6 +2499,20 @@ public class BaseBlockSettings {
         .withStairs()
         .withVerticalStairs();
 
+    public static DefaultSettings BIRCH_WOOD = new DefaultSettings(Blocks.BIRCH_WOOD)
+            .material("birch_wood")
+            .wooden()
+            .tool(Tool.AXE)
+            .flammable()
+            .materials(
+                    Map.of(
+                            "main", new Identifier("minecraft:birch_log"),
+                            "ingredient", new Identifier("minecraft:birch_wood")
+                    )
+            )
+            .withSlab()
+            .withStairs();
+
     public static DefaultSettings CRIMSON = new DefaultSettings(Blocks.CRIMSON_PLANKS)
         .material("crimson")
         .wooden()
@@ -2538,6 +2566,19 @@ public class BaseBlockSettings {
         .withSlab()
         .withStairs()
         .withVerticalStairs();
+
+    public static DefaultSettings CRIMSON_HYPHAE = new DefaultSettings(Blocks.CRIMSON_HYPHAE)
+            .material("crimson_hyphae")
+            .wooden()
+            .tool(Tool.AXE)
+            .materials(
+                    Map.of(
+                            "main", new Identifier("minecraft:crimson_stem"),
+                            "ingredient", new Identifier("minecraft:crimson_hyphae")
+                    )
+            )
+            .withSlab()
+            .withStairs();
 
     public static DefaultSettings DARK_OAK = new DefaultSettings(Blocks.DARK_OAK_PLANKS)
         .material("dark_oak")
@@ -2605,6 +2646,20 @@ public class BaseBlockSettings {
         .withSlab()
         .withStairs()
         .withVerticalStairs();
+
+    public static DefaultSettings DARK_OAK_WOOD = new DefaultSettings(Blocks.DARK_OAK_WOOD)
+            .material("dark_oak_wood")
+            .wooden()
+            .tool(Tool.AXE)
+            .flammable()
+            .materials(
+                    Map.of(
+                            "main", new Identifier("minecraft:dark_oak_log"),
+                            "ingredient", new Identifier("minecraft:dark_oak_wood")
+                    )
+            )
+            .withSlab()
+            .withStairs();
 
     public static DefaultSettings FLOWERING_AZALEA_LEAVES = new DefaultSettings(Blocks.FLOWERING_AZALEA_LEAVES)
         .material("flowering_azalea_leaves")
@@ -2684,6 +2739,20 @@ public class BaseBlockSettings {
         .withStairs()
         .withVerticalStairs();
 
+    public static DefaultSettings JUNGLE_WOOD = new DefaultSettings(Blocks.JUNGLE_WOOD)
+            .material("jungle_wood")
+            .wooden()
+            .tool(Tool.AXE)
+            .flammable()
+            .materials(
+                    Map.of(
+                            "main", new Identifier("minecraft:jungle_log"),
+                            "ingredient", new Identifier("minecraft:jungle_wood")
+                    )
+            )
+            .withSlab()
+            .withStairs();
+
     public static DefaultSettings MANGROVE = new DefaultSettings(Blocks.MANGROVE_PLANKS)
         .material("mangrove")
         .wooden()
@@ -2750,6 +2819,20 @@ public class BaseBlockSettings {
         .withSlab()
         .withStairs()
         .withVerticalStairs();
+
+    public static DefaultSettings MANGROVE_WOOD = new DefaultSettings(Blocks.MANGROVE_WOOD)
+            .material("mangrove_wood")
+            .wooden()
+            .tool(Tool.AXE)
+            .flammable()
+            .materials(
+                    Map.of(
+                            "main", new Identifier("minecraft:mangrove_log"),
+                            "ingredient", new Identifier("minecraft:mangrove_wood")
+                    )
+            )
+            .withSlab()
+            .withStairs();
 
     public static DefaultSettings OAK = new DefaultSettings(Blocks.OAK_PLANKS)
         .material("oak")
@@ -2819,6 +2902,20 @@ public class BaseBlockSettings {
         .withStairs()
         .withVerticalStairs();
 
+    public static DefaultSettings OAK_WOOD = new DefaultSettings(Blocks.OAK_WOOD)
+            .material("oak_wood")
+            .wooden()
+            .tool(Tool.AXE)
+            .flammable()
+            .materials(
+                    Map.of(
+                            "main", new Identifier("minecraft:oak_log"),
+                            "ingredient", new Identifier("minecraft:oak_wood")
+                    )
+            )
+            .withSlab()
+            .withStairs();
+
     public static DefaultSettings SPRUCE = new DefaultSettings(Blocks.SPRUCE_PLANKS)
         .material("spruce")
         .wooden()
@@ -2886,6 +2983,20 @@ public class BaseBlockSettings {
         .withStairs()
         .withVerticalStairs();
 
+    public static DefaultSettings SPRUCE_WOOD = new DefaultSettings(Blocks.SPRUCE_WOOD)
+            .material("spruce_wood")
+            .wooden()
+            .tool(Tool.AXE)
+            .flammable()
+            .materials(
+                    Map.of(
+                            "main", new Identifier("minecraft:spruce_log"),
+                            "ingredient", new Identifier("minecraft:spruce_wood")
+                    )
+            )
+            .withSlab()
+            .withStairs();
+
     public static DefaultSettings WARPED = new DefaultSettings(Blocks.WARPED_PLANKS)
         .material("warped")
         .wooden()
@@ -2939,6 +3050,19 @@ public class BaseBlockSettings {
         .withSlab()
         .withStairs()
         .withVerticalStairs();
+
+    public static DefaultSettings WARPED_HYPHAE = new DefaultSettings(Blocks.WARPED_HYPHAE)
+            .material("warped_hyphae")
+            .wooden()
+            .tool(Tool.AXE)
+            .materials(
+                    Map.of(
+                            "main", new Identifier("minecraft:warped_stem"),
+                            "ingredient", new Identifier("minecraft:warped_hyphae")
+                    )
+            )
+            .withSlab()
+            .withStairs();
 
     /******************************************************************************************************************/
 
@@ -3490,30 +3614,39 @@ public class BaseBlockSettings {
         ACACIA,
         ACACIA_LEAVES,
         ACACIA_LOG,
+        ACACIA_WOOD,
         AZALEA_LEAVES,
         BIRCH,
         BIRCH_LEAVES,
         BIRCH_LOG,
+        BIRCH_WOOD,
         CRIMSON,
         CRIMSON_STEM,
+        CRIMSON_HYPHAE,
         DARK_OAK,
         DARK_OAK_LEAVES,
         DARK_OAK_LOG,
+        DARK_OAK_WOOD,
         FLOWERING_AZALEA_LEAVES,
         JUNGLE,
         JUNGLE_LEAVES,
         JUNGLE_LOG,
+        JUNGLE_WOOD,
         MANGROVE,
         MANGROVE_LEAVES,
         MANGROVE_LOG,
+        MANGROVE_WOOD,
         OAK,
         OAK_LEAVES,
         OAK_LOG,
+        OAK_WOOD,
         SPRUCE,
         SPRUCE_LEAVES,
         SPRUCE_LOG,
+        SPRUCE_WOOD,
         WARPED,
         WARPED_STEM,
+        WARPED_HYPHAE,
 
         BAMBOO,
         BEETROOT,
