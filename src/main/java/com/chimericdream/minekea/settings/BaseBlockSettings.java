@@ -1248,6 +1248,9 @@ public class BaseBlockSettings {
         .tool(Tool.SHEARS)
         .materials(Map.of("main", new Identifier("minecraft:white_wool")))
         .withButton()
+        .withSlab()
+        .withStairs()
+        .withVerticalStairs()
         .withPressurePlate(new Identifier("minecraft:white_carpet"), 2);
 
     public static DefaultSettings ORANGE_WOOL = new DefaultSettings(Blocks.ORANGE_WOOL)
@@ -1256,6 +1259,9 @@ public class BaseBlockSettings {
         .tool(Tool.SHEARS)
         .materials(Map.of("main", new Identifier("minecraft:orange_wool")))
         .withButton()
+        .withSlab()
+        .withStairs()
+        .withVerticalStairs()
         .withPressurePlate(new Identifier("minecraft:orange_carpet"), 2);
 
     public static DefaultSettings MAGENTA_WOOL = new DefaultSettings(Blocks.MAGENTA_WOOL)
@@ -1264,6 +1270,9 @@ public class BaseBlockSettings {
         .tool(Tool.SHEARS)
         .materials(Map.of("main", new Identifier("minecraft:magenta_wool")))
         .withButton()
+        .withSlab()
+        .withStairs()
+        .withVerticalStairs()
         .withPressurePlate(new Identifier("minecraft:magenta_carpet"), 2);
 
     public static DefaultSettings LIGHT_BLUE_WOOL = new DefaultSettings(Blocks.LIGHT_BLUE_WOOL)
@@ -1272,6 +1281,9 @@ public class BaseBlockSettings {
         .tool(Tool.SHEARS)
         .materials(Map.of("main", new Identifier("minecraft:light_blue_wool")))
         .withButton()
+        .withSlab()
+        .withStairs()
+        .withVerticalStairs()
         .withPressurePlate(new Identifier("minecraft:light_blue_carpet"), 2);
 
     public static DefaultSettings YELLOW_WOOL = new DefaultSettings(Blocks.YELLOW_WOOL)
@@ -1280,6 +1292,9 @@ public class BaseBlockSettings {
         .tool(Tool.SHEARS)
         .materials(Map.of("main", new Identifier("minecraft:yellow_wool")))
         .withButton()
+        .withSlab()
+        .withStairs()
+        .withVerticalStairs()
         .withPressurePlate(new Identifier("minecraft:yellow_carpet"), 2);
 
     public static DefaultSettings LIME_WOOL = new DefaultSettings(Blocks.LIME_WOOL)
@@ -1288,6 +1303,9 @@ public class BaseBlockSettings {
         .tool(Tool.SHEARS)
         .materials(Map.of("main", new Identifier("minecraft:lime_wool")))
         .withButton()
+        .withSlab()
+        .withStairs()
+        .withVerticalStairs()
         .withPressurePlate(new Identifier("minecraft:lime_carpet"), 2);
 
     public static DefaultSettings PINK_WOOL = new DefaultSettings(Blocks.PINK_WOOL)
@@ -1296,6 +1314,9 @@ public class BaseBlockSettings {
         .tool(Tool.SHEARS)
         .materials(Map.of("main", new Identifier("minecraft:pink_wool")))
         .withButton()
+        .withSlab()
+        .withStairs()
+        .withVerticalStairs()
         .withPressurePlate(new Identifier("minecraft:pink_carpet"), 2);
 
     public static DefaultSettings GRAY_WOOL = new DefaultSettings(Blocks.GRAY_WOOL)
@@ -1304,6 +1325,9 @@ public class BaseBlockSettings {
         .tool(Tool.SHEARS)
         .materials(Map.of("main", new Identifier("minecraft:gray_wool")))
         .withButton()
+        .withSlab()
+        .withStairs()
+        .withVerticalStairs()
         .withPressurePlate(new Identifier("minecraft:gray_carpet"), 2);
 
     public static DefaultSettings LIGHT_GRAY_WOOL = new DefaultSettings(Blocks.LIGHT_GRAY_WOOL)
@@ -1312,6 +1336,9 @@ public class BaseBlockSettings {
         .tool(Tool.SHEARS)
         .materials(Map.of("main", new Identifier("minecraft:light_gray_wool")))
         .withButton()
+        .withSlab()
+        .withStairs()
+        .withVerticalStairs()
         .withPressurePlate(new Identifier("minecraft:light_gray_carpet"), 2);
 
     public static DefaultSettings CYAN_WOOL = new DefaultSettings(Blocks.CYAN_WOOL)
@@ -1320,6 +1347,9 @@ public class BaseBlockSettings {
         .tool(Tool.SHEARS)
         .materials(Map.of("main", new Identifier("minecraft:cyan_wool")))
         .withButton()
+        .withSlab()
+        .withStairs()
+        .withVerticalStairs()
         .withPressurePlate(new Identifier("minecraft:cyan_carpet"), 2);
 
     public static DefaultSettings PURPLE_WOOL = new DefaultSettings(Blocks.PURPLE_WOOL)
@@ -1328,6 +1358,9 @@ public class BaseBlockSettings {
         .tool(Tool.SHEARS)
         .materials(Map.of("main", new Identifier("minecraft:purple_wool")))
         .withButton()
+        .withSlab()
+        .withStairs()
+        .withVerticalStairs()
         .withPressurePlate(new Identifier("minecraft:purple_carpet"), 2);
 
     public static DefaultSettings BLUE_WOOL = new DefaultSettings(Blocks.BLUE_WOOL)
@@ -1336,6 +1369,9 @@ public class BaseBlockSettings {
         .tool(Tool.SHEARS)
         .materials(Map.of("main", new Identifier("minecraft:blue_wool")))
         .withButton()
+        .withSlab()
+        .withStairs()
+        .withVerticalStairs()
         .withPressurePlate(new Identifier("minecraft:blue_carpet"), 2);
 
     public static DefaultSettings BROWN_WOOL = new DefaultSettings(Blocks.BROWN_WOOL)
@@ -1344,6 +1380,9 @@ public class BaseBlockSettings {
         .tool(Tool.SHEARS)
         .materials(Map.of("main", new Identifier("minecraft:brown_wool")))
         .withButton()
+        .withSlab()
+        .withStairs()
+        .withVerticalStairs()
         .withPressurePlate(new Identifier("minecraft:brown_carpet"), 2);
 
     public static DefaultSettings GREEN_WOOL = new DefaultSettings(Blocks.GREEN_WOOL)
@@ -1352,6 +1391,9 @@ public class BaseBlockSettings {
         .tool(Tool.SHEARS)
         .materials(Map.of("main", new Identifier("minecraft:green_wool")))
         .withButton()
+        .withSlab()
+        .withStairs()
+        .withVerticalStairs()
         .withPressurePlate(new Identifier("minecraft:green_carpet"), 2);
 
     public static DefaultSettings RED_WOOL = new DefaultSettings(Blocks.RED_WOOL)
@@ -1360,6 +1402,9 @@ public class BaseBlockSettings {
         .tool(Tool.SHEARS)
         .materials(Map.of("main", new Identifier("minecraft:red_wool")))
         .withButton()
+        .withSlab()
+        .withStairs()
+        .withVerticalStairs()
         .withPressurePlate(new Identifier("minecraft:red_carpet"), 2);
 
     public static DefaultSettings BLACK_WOOL = new DefaultSettings(Blocks.BLACK_WOOL)
@@ -1368,6 +1413,9 @@ public class BaseBlockSettings {
         .tool(Tool.SHEARS)
         .materials(Map.of("main", new Identifier("minecraft:black_wool")))
         .withButton()
+        .withSlab()
+        .withStairs()
+        .withVerticalStairs()
         .withPressurePlate(new Identifier("minecraft:black_carpet"), 2);
 
     /******************************************************************************************************************/
