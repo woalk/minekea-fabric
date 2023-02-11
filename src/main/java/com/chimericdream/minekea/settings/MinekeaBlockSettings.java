@@ -2,6 +2,7 @@ package com.chimericdream.minekea.settings;
 
 import com.chimericdream.minekea.ModInfo;
 import com.chimericdream.minekea.block.furniture.bookshelves.Bookshelves;
+import com.chimericdream.minekea.block.furniture.bookshelves.GenericBookshelf;
 import com.chimericdream.minekea.resource.Texture;
 import com.chimericdream.minekea.util.Tool;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -126,11 +127,11 @@ public abstract class MinekeaBlockSettings<T extends MinekeaBlockSettings<?>> ex
     }
 
     public Identifier getMaterial(String key) {
-        if (this.materials.containsKey(key)) {
-            return this.materials.get(key);
+        Identifier material = this.materials.get(key);
+        if (material == null) {
+            material = this.materials.get("main");
         }
-
-        return this.materials.get("main");
+        return material;
     }
 
     public Identifier getMaterial(String key, String fallback) {
@@ -404,7 +405,12 @@ public abstract class MinekeaBlockSettings<T extends MinekeaBlockSettings<?>> ex
                 return new Identifier(this.bookshelfId);
             }
 
-            return Bookshelves.BOOKSHELVES.get(this.mainMaterial).getBlockID();
+            GenericBookshelf bookshelf = Bookshelves.BOOKSHELVES.get(this.mainMaterial);
+            if (bookshelf != null) {
+                return bookshelf.getBlockID();
+            } else {
+                return new GenericBookshelf.BookshelfSettings(this).blockId;
+            }
         }
 
         public Identifier getBookshelfModel() {
