@@ -8,6 +8,7 @@ import com.chimericdream.minekea.block.furniture.FurnitureBlocks;
 import com.chimericdream.minekea.block.redstone.RedstoneBlocks;
 import com.chimericdream.minekea.compat.ModCompatLayer;
 import com.chimericdream.minekea.compat.PatchouliCompat;
+import com.chimericdream.minekea.compat.WorldEditCompat;
 import com.chimericdream.minekea.compat.betterend.BetterEndBlocks;
 import com.chimericdream.minekea.compat.betternether.BetterNetherBlocks;
 import com.chimericdream.minekea.compat.byg.BygBlocks;
@@ -151,6 +152,9 @@ public class MinekeaMod implements ModInitializer {
 
         if (loader.isModLoaded("patchouli")) {
             PatchouliCompat.init();
+        }
+        if (loader.isModLoaded("worldedit")) {
+            WorldEditCompat.getInstance().register();
         }
 
         LOGGER.info("[minekea] Registering dynamic resource pack");

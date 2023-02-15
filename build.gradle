@@ -45,6 +45,8 @@ dependencies {
     }
 
     modImplementation "com.terraformersmc:modmenu:${project.mod_menu_version}"
+
+    modImplementation("com.sk89q.worldedit:worldedit-fabric-mc1.19.2:${project.worldEditVersion}")
 }
 
 processResources {
