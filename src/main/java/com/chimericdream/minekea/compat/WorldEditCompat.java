@@ -8,6 +8,8 @@ import com.sk89q.worldedit.event.extent.EditSessionEvent;
 import com.sk89q.worldedit.math.transform.Transform;
 import com.sk89q.worldedit.util.eventbus.Subscribe;
 
+import java.util.Arrays;
+
 public class WorldEditCompat {
     private static WorldEditCompat INSTANCE;
 
@@ -31,7 +33,11 @@ public class WorldEditCompat {
             LocalSession sessionManager = WorldEdit.getInstance().getSessionManager().get(event.getActor());
             Transform transform = sessionManager.getClipboard().getTransform();
             if (!transform.isIdentity()) {
-                event.setExtent(new MinekeaExtent(event.getExtent(), transform));
+                boolean isPasting = Arrays.stream(Thread.currentThread().getStackTrace()).anyMatch(it ->
+                        it.getMethodName().equals("cmd$_paste"));
+                if (isPasting) {
+                    event.setExtent(new MinekeaExtent(event.getExtent(), transform));
+                }
             }
         } catch (EmptyClipboardException e) {
         }
