@@ -121,7 +121,7 @@ public class GenericBarrel extends BarrelBlock implements MinekeaBlock {
 
     public static class BarrelSettings extends MinekeaBlockSettings<BarrelSettings> {
         public BarrelSettings(DefaultSettings settings) {
-            super((DefaultSettings) settings.nonOpaque());
+            super(settings);
         }
 
         public String getNamePattern() {

@@ -108,36 +108,7 @@ public class BygBlocks implements ModCompatLayer {
         );
 
         BlockRenderLayerMap.INSTANCE.putBlocks(
-            RenderLayer.getTranslucent(),
-            ASPEN_BARREL,
-            BAOBAB_BARREL,
-            BLUE_ENCHANTED_BARREL,
-            BULBIS_BARREL,
-            CHERRY_BARREL,
-            CIKA_BARREL,
-            CYPRESS_BARREL,
-            EBONY_BARREL,
-            EMBUR_BARREL,
-            ETHER_BARREL,
-            FIR_BARREL,
-            GREEN_ENCHANTED_BARREL,
-            HOLLY_BARREL,
-            IMPARIUS_BARREL,
-            JACARANDA_BARREL,
-            LAMENT_BARREL,
-            MAHOGANY_BARREL,
-            MAPLE_BARREL,
-            NIGHTSHADE_BARREL,
-            PALM_BARREL,
-            PINE_BARREL,
-            RAINBOW_EUCALYPTUS_BARREL,
-            REDWOOD_BARREL,
-            SKYRIS_BARREL,
-            SYTHIAN_BARREL,
-            WHITE_MANGROVE_BARREL,
-            WILLOW_BARREL,
-            WITCH_HAZEL_BARREL,
-            ZELKOVA_BARREL
+            RenderLayer.getTranslucent()
         );
     }
 
