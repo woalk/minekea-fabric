@@ -1,12 +1,13 @@
 package com.chimericdream.minekea.compat;
 
+import com.chimericdream.minekea.block.building.beams.GenericBeamBlock;
 import com.sk89q.worldedit.WorldEditException;
 import com.sk89q.worldedit.extent.AbstractDelegateExtent;
 import com.sk89q.worldedit.extent.Extent;
 import com.sk89q.worldedit.math.BlockVector3;
-import com.sk89q.worldedit.math.Vector3;
 import com.sk89q.worldedit.math.transform.AffineTransform;
 import com.sk89q.worldedit.math.transform.Transform;
+import com.sk89q.worldedit.registry.state.BooleanProperty;
 import com.sk89q.worldedit.registry.state.DirectionalProperty;
 import com.sk89q.worldedit.registry.state.Property;
 import com.sk89q.worldedit.util.Direction;
@@ -40,7 +41,30 @@ public class MinekeaExtent extends AbstractDelegateExtent {
                     }
                 }
             }
+        } else if (block.getBlockType().getId().contains("building/beams/") && mTransform instanceof AffineTransform) {
+            for (Direction direction : Direction.valuesOf(Direction.Flag.CARDINAL | Direction.Flag.UPRIGHT)) {
+                Direction newDir = Direction.findClosest(mTransform.apply(direction.toVector()),
+                        Direction.Flag.CARDINAL | Direction.Flag.UPRIGHT);
+                if (newDir != null) {
+                    result = result.with(directionToBeamProp(newDir), block.getState(directionToBeamProp(direction)));
+                }
+            }
         }
         return super.setBlock(location, result);
+    }
+
+    private BooleanProperty directionToBeamProp(Direction direction) {
+        net.minecraft.state.property.BooleanProperty fabricProp = switch (direction) {
+            case NORTH -> GenericBeamBlock.CONNECTED_NORTH;
+            case SOUTH -> GenericBeamBlock.CONNECTED_SOUTH;
+            case EAST -> GenericBeamBlock.CONNECTED_EAST;
+            case WEST -> GenericBeamBlock.CONNECTED_WEST;
+            case UP -> GenericBeamBlock.CONNECTED_DOWN;
+            case DOWN -> GenericBeamBlock.CONNECTED_UP;
+            default -> null;
+        };
+        if (fabricProp != null) {
+            return new BooleanProperty(fabricProp.getName(), fabricProp.getValues().stream().toList());
+        } else return null;
     }
 }
