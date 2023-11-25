@@ -149,6 +149,10 @@ public class OpenShutterHalf extends Block implements MinekeaBlock, Waterloggabl
         }
 
         BlockState centerState = world.getBlockState(centerPos);
+        if (centerState == null || !(centerState.getBlock() instanceof ShutterBlock)) {
+            super.onBreak(world, pos, state, player);
+            return;
+        }
         if (centerState.getProperties().contains(Properties.WATERLOGGED) && centerState.get(WATERLOGGED)) {
             world.setBlockState(centerPos, Blocks.WATER.getDefaultState());
         } else {
@@ -156,7 +160,10 @@ public class OpenShutterHalf extends Block implements MinekeaBlock, Waterloggabl
         }
 
         BlockState oppositeState = world.getBlockState(oppositePos);
-
+        if (oppositeState == null || !(centerState.getBlock() instanceof OpenShutterHalf)) {
+            super.onBreak(world, pos, state, player);
+            return;
+        }
         if (oppositeState.getProperties().contains(Properties.WATERLOGGED) && oppositeState.get(WATERLOGGED)) {
             world.setBlockState(oppositePos, Blocks.WATER.getDefaultState());
         } else {
@@ -206,11 +213,17 @@ public class OpenShutterHalf extends Block implements MinekeaBlock, Waterloggabl
         }
 
         BlockState centerState = world.getBlockState(centerPos);
+        if (centerState == null || !(centerState.getBlock() instanceof ShutterBlock)) {
+            return ActionResult.FAIL;
+        }
         centerState = centerState.cycle(ShutterBlock.OPEN);
         world.setBlockState(centerPos, centerState, 2);
 
         BlockState oppositeState = world.getBlockState(oppositePos);
 
+        if (oppositeState == null || !(oppositeState.getBlock() instanceof OpenShutterHalf)) {
+            return ActionResult.FAIL;
+        }
         if (oppositeState.getProperties().contains(Properties.WATERLOGGED) && oppositeState.get(WATERLOGGED)) {
             world.setBlockState(oppositePos, Blocks.WATER.getDefaultState());
         } else {
