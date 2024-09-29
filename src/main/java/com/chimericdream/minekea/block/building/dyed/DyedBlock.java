@@ -36,16 +36,19 @@ public class DyedBlock extends Block implements MinekeaBlock {
 
     public DyedBlock(DyedBlockSettings settings) {
         super(settings);
-
-        this.setDefaultState(this.stateManager.getDefaultState().with(AXIS, Direction.Axis.Y));
     }
 
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(AXIS);
+        if (getSettings().isColumn()) {
+            builder.add(AXIS);
+        }
     }
 
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return this.getDefaultState().with(AXIS, ctx.getSide().getAxis());
+        if (getSettings().isColumn()) {
+            return this.getDefaultState().with(AXIS, ctx.getSide().getAxis());
+        }
+        return super.getPlacementState(ctx);
     }
 
     public DyedBlockSettings getSettings() {
@@ -60,6 +63,9 @@ public class DyedBlock extends Block implements MinekeaBlock {
     @Override
     public void register() {
         Registry.register(Registry.BLOCK, getBlockID(), this);
+        if (getSettings().isColumn()) {
+            this.setDefaultState(this.stateManager.getDefaultState().with(AXIS, Direction.Axis.Y));
+        }
         Registry.register(Registry.ITEM, getBlockID(), new BlockItem(this, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS)));
 
         setupResources();
