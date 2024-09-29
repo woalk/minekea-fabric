@@ -11,6 +11,7 @@ import net.devtech.arrp.json.models.JModel;
 import net.devtech.arrp.json.models.JTextures;
 import net.devtech.arrp.json.recipe.*;
 import net.devtech.arrp.json.tags.JTag;
+import net.fabricmc.fabric.mixin.object.builder.AbstractBlockSettingsAccessor;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.BlockItem;
@@ -154,6 +155,8 @@ public class DyedBlock extends Block implements MinekeaBlock {
 
         public DyedBlockSettings(DefaultSettings settings) {
             super(settings);
+            ((AbstractBlockSettingsAccessor) settings).setOpaque(true);
+            settings.solidBlock((state, world, pos) -> true);
         }
 
         public DefaultSettings asDefaultSettings() {
