@@ -30,92 +30,10 @@ public class Slabs implements ModThingGroup {
     public static final Item.Properties DEFAULT_VERTICAL_SLAB_SETTINGS = new Item.Properties();
 
     public static final List<RegistrySupplier<Block>> SLAB_BLOCKS = new ArrayList<>();
-    public static final List<RegistrySupplier<Block>> VERTICAL_SLAB_BLOCKS = new ArrayList<>();
     public static final List<RegistrySupplier<Block>> BOOKSHELF_SLAB_BLOCKS = new ArrayList<>();
-    public static final List<RegistrySupplier<Block>> VERTICAL_BOOKSHELF_SLAB_BLOCKS = new ArrayList<>();
 
     static {
         // basalt-brick-family plain slabs now come from BasaltBrickFamilies (chimeric-lib BlockFamily)
-
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("acacia"), () -> new VerticalSlabBlock(new BlockConfig().material("acacia").materialName("Acacia").ingredient(Blocks.ACACIA_PLANKS).tool(Tool.AXE)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("bamboo_planks"), () -> new VerticalSlabBlock(new BlockConfig().material("bamboo_planks").materialName("Bamboo").ingredient(Blocks.BAMBOO_PLANKS).tool(Tool.AXE)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("birch"), () -> new VerticalSlabBlock(new BlockConfig().material("birch").materialName("Birch").ingredient(Blocks.BIRCH_PLANKS).tool(Tool.AXE)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("cherry"), () -> new VerticalSlabBlock(new BlockConfig().material("cherry").materialName("Cherry").ingredient(Blocks.CHERRY_PLANKS).tool(Tool.AXE)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("crimson"), () -> new VerticalSlabBlock(new BlockConfig().material("crimson").materialName("Crimson").ingredient(Blocks.CRIMSON_PLANKS).tool(Tool.AXE)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("dark_oak"), () -> new VerticalSlabBlock(new BlockConfig().material("dark_oak").materialName("Dark Oak").ingredient(Blocks.DARK_OAK_PLANKS).tool(Tool.AXE)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("jungle"), () -> new VerticalSlabBlock(new BlockConfig().material("jungle").materialName("Jungle").ingredient(Blocks.JUNGLE_PLANKS).tool(Tool.AXE)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("mangrove"), () -> new VerticalSlabBlock(new BlockConfig().material("mangrove").materialName("Mangrove").ingredient(Blocks.MANGROVE_PLANKS).tool(Tool.AXE)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("oak"), () -> new VerticalSlabBlock(new BlockConfig().material("oak").materialName("Oak").ingredient(Blocks.OAK_PLANKS).tool(Tool.AXE)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("pale_oak"), () -> new VerticalSlabBlock(new BlockConfig().material("pale_oak").materialName("Pale Oak").ingredient(Blocks.PALE_OAK_PLANKS).tool(Tool.AXE)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("spruce"), () -> new VerticalSlabBlock(new BlockConfig().material("spruce").materialName("Spruce").ingredient(Blocks.SPRUCE_PLANKS).tool(Tool.AXE)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("warped"), () -> new VerticalSlabBlock(new BlockConfig().material("warped").materialName("Warped").ingredient(Blocks.WARPED_PLANKS).tool(Tool.AXE)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("andesite"), () -> new VerticalSlabBlock(new BlockConfig().material("andesite").materialName("Andesite").ingredient(Blocks.ANDESITE)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("bamboo_mosaic"), () -> new VerticalSlabBlock(new BlockConfig().material("bamboo_mosaic").materialName("Bamboo Mosaic").ingredient(Blocks.BAMBOO_MOSAIC).tool(Tool.AXE)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("blackstone"), () -> new VerticalSlabBlock(new BlockConfig().material("blackstone").materialName("Blackstone").ingredient(Blocks.BLACKSTONE)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("bricks"), () -> new VerticalSlabBlock(new BlockConfig().material("bricks").materialName("Brick").ingredient(Blocks.BRICKS)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("chiseled_cinnabar"), () -> new VerticalSlabBlock(new BlockConfig().material("chiseled_cinnabar").materialName("Chiseled Cinnabar").ingredient(Blocks.CHISELED_CINNABAR)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("chiseled_sulfur"), () -> new VerticalSlabBlock(new BlockConfig().material("chiseled_sulfur").materialName("Chiseled Sulfur").ingredient(Blocks.CHISELED_SULFUR)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("cinnabar"), () -> new VerticalSlabBlock(new BlockConfig().material("cinnabar").materialName("Cinnabar").ingredient(Blocks.CINNABAR)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("cinnabar_bricks"), () -> new VerticalSlabBlock(new BlockConfig().material("cinnabar_bricks").materialName("Cinnabar Brick").ingredient(Blocks.CINNABAR_BRICKS)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("cobbled_deepslate"), () -> new VerticalSlabBlock(new BlockConfig().material("cobbled_deepslate").materialName("Cobbled Deepslate").ingredient(Blocks.COBBLED_DEEPSLATE)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("cobblestone"), () -> new VerticalSlabBlock(new BlockConfig().material("cobblestone").materialName("Cobblestone").ingredient(Blocks.COBBLESTONE)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("cut_red_sandstone"), () -> new VerticalSlabBlock(new BlockConfig().material("cut_red_sandstone").materialName("Cut Red Sandstone").ingredient(Blocks.CUT_RED_SANDSTONE)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("cut_sandstone"), () -> new VerticalSlabBlock(new BlockConfig().material("cut_sandstone").materialName("Cut Sandstone").ingredient(Blocks.CUT_SANDSTONE)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("dark_prismarine"), () -> new VerticalSlabBlock(new BlockConfig().material("dark_prismarine").materialName("Dark Prismarine").ingredient(Blocks.DARK_PRISMARINE)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("deepslate_bricks"), () -> new VerticalSlabBlock(new BlockConfig().material("deepslate_bricks").materialName("Deepslate Brick").ingredient(Blocks.DEEPSLATE_BRICKS)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("deepslate_tiles"), () -> new VerticalSlabBlock(new BlockConfig().material("deepslate_tiles").materialName("Deepslate Tile").ingredient(Blocks.DEEPSLATE_TILES)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("diorite"), () -> new VerticalSlabBlock(new BlockConfig().material("diorite").materialName("Diorite").ingredient(Blocks.DIORITE)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("end_stone_bricks"), () -> new VerticalSlabBlock(new BlockConfig().material("end_stone_bricks").materialName("End Stone Brick").ingredient(Blocks.END_STONE_BRICKS)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("granite"), () -> new VerticalSlabBlock(new BlockConfig().material("granite").materialName("Granite").ingredient(Blocks.GRANITE)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("mossy_cobblestone"), () -> new VerticalSlabBlock(new BlockConfig().material("mossy_cobblestone").materialName("Mossy Cobblestone").ingredient(Blocks.MOSSY_COBBLESTONE)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("mossy_stone_bricks"), () -> new VerticalSlabBlock(new BlockConfig().material("mossy_stone_bricks").materialName("Mossy Stone Brick").ingredient(Blocks.MOSSY_STONE_BRICKS)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("mud_bricks"), () -> new VerticalSlabBlock(new BlockConfig().material("mud_bricks").materialName("Mud Brick").ingredient(Blocks.MUD_BRICKS)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("nether_bricks"), () -> new VerticalSlabBlock(new BlockConfig().material("nether_bricks").materialName("Nether Brick").ingredient(Blocks.NETHER_BRICKS)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("polished_andesite"), () -> new VerticalSlabBlock(new BlockConfig().material("polished_andesite").materialName("Polished Andesite").ingredient(Blocks.POLISHED_ANDESITE)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("polished_blackstone"), () -> new VerticalSlabBlock(new BlockConfig().material("polished_blackstone").materialName("Polished Blackstone").ingredient(Blocks.POLISHED_BLACKSTONE)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("polished_blackstone_bricks"), () -> new VerticalSlabBlock(new BlockConfig().material("polished_blackstone_bricks").materialName("Polished Blackstone Brick").ingredient(Blocks.POLISHED_BLACKSTONE_BRICKS)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("polished_cinnabar"), () -> new VerticalSlabBlock(new BlockConfig().material("polished_cinnabar").materialName("Polished Cinnabar").ingredient(Blocks.POLISHED_CINNABAR)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("polished_deepslate"), () -> new VerticalSlabBlock(new BlockConfig().material("polished_deepslate").materialName("Polished Deepslate").ingredient(Blocks.POLISHED_DEEPSLATE)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("polished_diorite"), () -> new VerticalSlabBlock(new BlockConfig().material("polished_diorite").materialName("Polished Diorite").ingredient(Blocks.POLISHED_DIORITE)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("polished_granite"), () -> new VerticalSlabBlock(new BlockConfig().material("polished_granite").materialName("Polished Granite").ingredient(Blocks.POLISHED_GRANITE)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("polished_sulfur"), () -> new VerticalSlabBlock(new BlockConfig().material("polished_sulfur").materialName("Polished Sulfur").ingredient(Blocks.POLISHED_SULFUR)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("polished_tuff"), () -> new VerticalSlabBlock(new BlockConfig().material("polished_tuff").materialName("Polished Tuff").ingredient(Blocks.POLISHED_TUFF)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("potent_sulfur"), () -> new VerticalSlabBlock(new BlockConfig().material("potent_sulfur").materialName("Potent Sulfur").ingredient(Blocks.POTENT_SULFUR)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("prismarine"), () -> new VerticalSlabBlock(new BlockConfig().material("prismarine").materialName("Prismarine").ingredient(Blocks.PRISMARINE)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("prismarine_bricks"), () -> new VerticalSlabBlock(new BlockConfig().material("prismarine_bricks").materialName("Prismarine Brick").ingredient(Blocks.PRISMARINE_BRICKS)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("purpur_block"), () -> new VerticalSlabBlock(new BlockConfig().material("purpur_block").materialName("Purpur").ingredient(Blocks.PURPUR_BLOCK)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("quartz_block"), () -> new VerticalSlabBlock(new BlockConfig().material("quartz_block").materialName("Quartz").ingredient(Blocks.QUARTZ_BLOCK).texture(TextureUtils.block(Blocks.QUARTZ_BLOCK, "_top"))), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("red_nether_bricks"), () -> new VerticalSlabBlock(new BlockConfig().material("red_nether_bricks").materialName("Red Nether Brick").ingredient(Blocks.RED_NETHER_BRICKS)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("red_sandstone"), () -> new VerticalSlabBlock(new BlockConfig().material("red_sandstone").materialName("Red Sandstone").ingredient(Blocks.RED_SANDSTONE)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("sandstone"), () -> new VerticalSlabBlock(new BlockConfig().material("sandstone").materialName("Sandstone").ingredient(Blocks.SANDSTONE)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("smooth_quartz"), () -> new VerticalSlabBlock(new BlockConfig().material("smooth_quartz").materialName("Smooth Quartz").ingredient(Blocks.SMOOTH_QUARTZ).texture(TextureUtils.block(Blocks.QUARTZ_BLOCK, "_bottom"))), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("smooth_red_sandstone"), () -> new VerticalSlabBlock(new BlockConfig().material("smooth_red_sandstone").materialName("Smooth Red Sandstone").ingredient(Blocks.SMOOTH_RED_SANDSTONE).texture(TextureUtils.block(Blocks.RED_SANDSTONE, "_top"))), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("smooth_sandstone"), () -> new VerticalSlabBlock(new BlockConfig().material("smooth_sandstone").materialName("Smooth Sandstone").ingredient(Blocks.SMOOTH_SANDSTONE).texture(TextureUtils.block(Blocks.SANDSTONE, "_top"))), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("smooth_stone"), () -> new VerticalSlabBlock(new BlockConfig().material("smooth_stone").materialName("Smooth Stone").ingredient(Blocks.SMOOTH_STONE)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("stone"), () -> new VerticalSlabBlock(new BlockConfig().material("stone").materialName("Stone").ingredient(Blocks.STONE)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("stone_bricks"), () -> new VerticalSlabBlock(new BlockConfig().material("stone_bricks").materialName("Stone Brick").ingredient(Blocks.STONE_BRICKS)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("sulfur"), () -> new VerticalSlabBlock(new BlockConfig().material("sulfur").materialName("Sulfur").ingredient(Blocks.SULFUR)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("sulfur_bricks"), () -> new VerticalSlabBlock(new BlockConfig().material("sulfur_bricks").materialName("Sulfur Brick").ingredient(Blocks.SULFUR_BRICKS)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("tuff"), () -> new VerticalSlabBlock(new BlockConfig().material("tuff").materialName("Tuff").ingredient(Blocks.TUFF)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("tuff_bricks"), () -> new VerticalSlabBlock(new BlockConfig().material("tuff_bricks").materialName("Tuff Brick").ingredient(Blocks.TUFF_BRICKS)), DEFAULT_VERTICAL_SLAB_SETTINGS));
-
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("cut_copper"), () -> new VerticalSlabBlock(new BlockConfig().material("cut_copper").materialName("Cut Copper").ingredient(Blocks.CUT_COPPER.weathering().unaffected())), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("waxed_cut_copper"), () -> new VerticalSlabBlock(new BlockConfig().material("waxed_cut_copper").materialName("Waxed Cut Copper").ingredient(Blocks.CUT_COPPER.waxed().unaffected()).texture(TextureUtils.block(Blocks.CUT_COPPER.weathering().unaffected()))), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("exposed_cut_copper"), () -> new VerticalSlabBlock(new BlockConfig().material("exposed_cut_copper").materialName("Exposed Cut Copper").ingredient(Blocks.CUT_COPPER.weathering().exposed())), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("waxed_exposed_cut_copper"), () -> new VerticalSlabBlock(new BlockConfig().material("waxed_exposed_cut_copper").materialName("Waxed Exposed Cut Copper").ingredient(Blocks.CUT_COPPER.waxed().exposed()).texture(TextureUtils.block(Blocks.CUT_COPPER.weathering().exposed()))), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("weathered_cut_copper"), () -> new VerticalSlabBlock(new BlockConfig().material("weathered_cut_copper").materialName("Weathered Cut Copper").ingredient(Blocks.CUT_COPPER.weathering().weathered())), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("waxed_weathered_cut_copper"), () -> new VerticalSlabBlock(new BlockConfig().material("waxed_weathered_cut_copper").materialName("Waxed Weathered Cut Copper").ingredient(Blocks.CUT_COPPER.waxed().weathered()).texture(TextureUtils.block(Blocks.CUT_COPPER.weathering().weathered()))), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("oxidized_cut_copper"), () -> new VerticalSlabBlock(new BlockConfig().material("oxidized_cut_copper").materialName("Oxidized Cut Copper").ingredient(Blocks.CUT_COPPER.weathering().oxidized())), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("waxed_oxidized_cut_copper"), () -> new VerticalSlabBlock(new BlockConfig().material("waxed_oxidized_cut_copper").materialName("Waxed Oxidized Cut Copper").ingredient(Blocks.CUT_COPPER.waxed().oxidized()).texture(TextureUtils.block(Blocks.CUT_COPPER.weathering().oxidized()))), DEFAULT_VERTICAL_SLAB_SETTINGS));
-
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("basalt_bricks"), () -> new VerticalSlabBlock(new BlockConfig().material("basalt_bricks").materialName("Basalt Brick").ingredient(BuildingBlocks.BASALT_BRICKS.get()).texture(TextureUtils.block(BasaltBricksBlock.BLOCK_ID))), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("cracked_basalt_bricks"), () -> new VerticalSlabBlock(new BlockConfig().material("cracked_basalt_bricks").materialName("Cracked Basalt Brick").ingredient(BuildingBlocks.CRACKED_BASALT_BRICKS.get()).texture(TextureUtils.block(CrackedBasaltBricksBlock.BLOCK_ID))), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("crimson_basalt_bricks"), () -> new VerticalSlabBlock(new BlockConfig().material("crimson_basalt_bricks").materialName("Crimson Basalt Brick").ingredient(BuildingBlocks.CRIMSON_BASALT_BRICKS.get()).texture(TextureUtils.block(CrimsonBasaltBricksBlock.BLOCK_ID))), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("mossy_basalt_bricks"), () -> new VerticalSlabBlock(new BlockConfig().material("mossy_basalt_bricks").materialName("Mossy Basalt Brick").ingredient(BuildingBlocks.MOSSY_BASALT_BRICKS.get()).texture(TextureUtils.block(MossyBasaltBricksBlock.BLOCK_ID))), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("warped_basalt_bricks"), () -> new VerticalSlabBlock(new BlockConfig().material("warped_basalt_bricks").materialName("Warped Basalt Brick").ingredient(BuildingBlocks.WARPED_BASALT_BRICKS.get()).texture(TextureUtils.block(WarpedBasaltBricksBlock.BLOCK_ID))), DEFAULT_VERTICAL_SLAB_SETTINGS));
-        VERTICAL_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalSlabBlock.makeId("warped_nether_bricks"), () -> new VerticalSlabBlock(new BlockConfig().material("warped_nether_bricks").materialName("Warped Nether Brick").ingredient(BuildingBlocks.WARPED_NETHER_BRICKS.get()).texture(TextureUtils.block(WarpedNetherBricksBlock.BLOCK_ID))), DEFAULT_VERTICAL_SLAB_SETTINGS));
-
         SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(SlabBlock.makeId("potent_sulfur"), () -> new SlabBlock(new BlockConfig().material("potent_sulfur").materialName("Potent Sulfur").ingredient(Blocks.POTENT_SULFUR)), DEFAULT_SLAB_SETTINGS));
 
         LogWoodFamilies.ALL.forEach(entry -> {
@@ -124,14 +42,6 @@ public class Slabs implements ModThingGroup {
                     SlabBlock.makeId(entry.material()),
                     () -> new SlabBlock(entry.newConfig()),
                     DEFAULT_SLAB_SETTINGS
-                )
-            );
-
-            VERTICAL_SLAB_BLOCKS.add(
-                REGISTRY_HELPER.registerWithItem(
-                    VerticalSlabBlock.makeId(entry.material()),
-                    () -> new VerticalSlabBlock(entry.newConfig()),
-                    DEFAULT_VERTICAL_SLAB_SETTINGS
                 )
             );
         });
@@ -143,20 +53,11 @@ public class Slabs implements ModThingGroup {
                     DEFAULT_SLAB_SETTINGS
                 )
             );
-
-            VERTICAL_BOOKSHELF_SLAB_BLOCKS.add(
-                REGISTRY_HELPER.registerWithItem(VerticalBookshelfSlabBlock.makeId(material),
-                    () -> new VerticalBookshelfSlabBlock(config),
-                    DEFAULT_VERTICAL_SLAB_SETTINGS
-                )
-            );
         });
 
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.BUILDING_BLOCKS).register((tab) -> {
             tab.acceptAll(SLAB_BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList());
-            tab.acceptAll(VERTICAL_SLAB_BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList());
             tab.acceptAll(BOOKSHELF_SLAB_BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList());
-            tab.acceptAll(VERTICAL_BOOKSHELF_SLAB_BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList());
         });
     }
 }
