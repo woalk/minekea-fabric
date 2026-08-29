@@ -1,0 +1,200 @@
+package com.chimericdream.minekea.block.building.dyed;
+
+import com.chimericdream.lib.blocks.BlockConfig;
+import com.chimericdream.lib.util.Tool;
+import com.chimericdream.minekea.registry.ModItemGroups;
+import com.chimericdream.minekea.util.ModThingGroup;
+import dev.architectury.registry.registries.RegistrySupplier;
+import org.jspecify.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+
+import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
+
+public class DyedBlocks implements ModThingGroup {
+    @SuppressWarnings("UnstableApiUsage")
+    public static final Item.Properties DEFAULT_DYED_BLOCK_SETTINGS = new Item.Properties().arch$tab(ModItemGroups.DYED_BLOCK_ITEM_GROUP);
+
+    public static final Map<String, RegistrySupplier<Block>> BLOCK_MAP = new LinkedHashMap<>();
+    public static final Map<String, RegistrySupplier<Block>> PILLAR_BLOCK_MAP = new LinkedHashMap<>();
+
+    public static final List<RegistrySupplier<Block>> BLOCKS = new ArrayList<>();
+
+    /** A vanilla block that can be dyed: display name, texture/id base, the block, and the tool. */
+    public record DyedEntry(String name, String id, Block block, @Nullable Tool tool) {}
+
+    protected static final List<DyedEntry> BLOCKS_TO_DYE = List.of(
+        new DyedEntry("Bricks", "bricks", Blocks.BRICKS, null),
+        new DyedEntry("Calcite", "calcite", Blocks.CALCITE, null),
+        new DyedEntry("Cobblestone", "cobblestone", Blocks.COBBLESTONE, null),
+        new DyedEntry("Dark Prismarine", "dark_prismarine", Blocks.DARK_PRISMARINE, null),
+        new DyedEntry("Mud Bricks", "mud_bricks", Blocks.MUD_BRICKS, null),
+        new DyedEntry("Oak Planks", "oak_planks", Blocks.OAK_PLANKS, Tool.AXE),
+        new DyedEntry("Prismarine", "prismarine", Blocks.PRISMARINE, null),
+        new DyedEntry("Prismarine Bricks", "prismarine_bricks", Blocks.PRISMARINE_BRICKS, null),
+        new DyedEntry("Smooth Stone", "smooth_stone", Blocks.SMOOTH_STONE, null),
+        new DyedEntry("Stone", "stone", Blocks.STONE, null),
+        new DyedEntry("Stone Bricks", "stone_bricks", Blocks.STONE_BRICKS, null)
+    );
+
+    protected static final List<DyedEntry> PILLAR_BLOCKS_TO_DYE = List.of(
+        new DyedEntry("Bone Block", "bone_block", Blocks.BONE_BLOCK, null)
+    );
+
+    protected static final List<RegistrySupplier<Block>> WHITE_BLOCKS = new ArrayList<>();
+    protected static final List<RegistrySupplier<Block>> LIGHT_GRAY_BLOCKS = new ArrayList<>();
+    protected static final List<RegistrySupplier<Block>> GRAY_BLOCKS = new ArrayList<>();
+    protected static final List<RegistrySupplier<Block>> BLACK_BLOCKS = new ArrayList<>();
+    protected static final List<RegistrySupplier<Block>> BROWN_BLOCKS = new ArrayList<>();
+    protected static final List<RegistrySupplier<Block>> RED_BLOCKS = new ArrayList<>();
+    protected static final List<RegistrySupplier<Block>> ORANGE_BLOCKS = new ArrayList<>();
+    protected static final List<RegistrySupplier<Block>> YELLOW_BLOCKS = new ArrayList<>();
+    protected static final List<RegistrySupplier<Block>> LIME_BLOCKS = new ArrayList<>();
+    protected static final List<RegistrySupplier<Block>> GREEN_BLOCKS = new ArrayList<>();
+    protected static final List<RegistrySupplier<Block>> CYAN_BLOCKS = new ArrayList<>();
+    protected static final List<RegistrySupplier<Block>> LIGHT_BLUE_BLOCKS = new ArrayList<>();
+    protected static final List<RegistrySupplier<Block>> BLUE_BLOCKS = new ArrayList<>();
+    protected static final List<RegistrySupplier<Block>> PURPLE_BLOCKS = new ArrayList<>();
+    protected static final List<RegistrySupplier<Block>> MAGENTA_BLOCKS = new ArrayList<>();
+    protected static final List<RegistrySupplier<Block>> PINK_BLOCKS = new ArrayList<>();
+
+    static {
+        BLOCKS_TO_DYE.forEach(data -> {
+            String materialName = data.name();
+            String material = data.id();
+            Block baseBlock = data.block();
+            Tool tool = data.tool();
+
+            BlockConfig config = new BlockConfig()
+                .material(material)
+                .materialName(materialName)
+                .ingredient(baseBlock)
+                .tool(tool);
+
+            RegistrySupplier<Block> whiteBlock = REGISTRY_HELPER.registerWithItem(DyedBlock.makeId(config.getMaterial(), DyeColor.WHITE), () -> new DyedBlock(config, DyeColor.WHITE), DEFAULT_DYED_BLOCK_SETTINGS);
+            RegistrySupplier<Block> lightGrayBlock = REGISTRY_HELPER.registerWithItem(DyedBlock.makeId(config.getMaterial(), DyeColor.LIGHT_GRAY), () -> new DyedBlock(config, DyeColor.LIGHT_GRAY), DEFAULT_DYED_BLOCK_SETTINGS);
+            RegistrySupplier<Block> grayBlock = REGISTRY_HELPER.registerWithItem(DyedBlock.makeId(config.getMaterial(), DyeColor.GRAY), () -> new DyedBlock(config, DyeColor.GRAY), DEFAULT_DYED_BLOCK_SETTINGS);
+            RegistrySupplier<Block> blackBlock = REGISTRY_HELPER.registerWithItem(DyedBlock.makeId(config.getMaterial(), DyeColor.BLACK), () -> new DyedBlock(config, DyeColor.BLACK), DEFAULT_DYED_BLOCK_SETTINGS);
+            RegistrySupplier<Block> brownBlock = REGISTRY_HELPER.registerWithItem(DyedBlock.makeId(config.getMaterial(), DyeColor.BROWN), () -> new DyedBlock(config, DyeColor.BROWN), DEFAULT_DYED_BLOCK_SETTINGS);
+            RegistrySupplier<Block> redBlock = REGISTRY_HELPER.registerWithItem(DyedBlock.makeId(config.getMaterial(), DyeColor.RED), () -> new DyedBlock(config, DyeColor.RED), DEFAULT_DYED_BLOCK_SETTINGS);
+            RegistrySupplier<Block> orangeBlock = REGISTRY_HELPER.registerWithItem(DyedBlock.makeId(config.getMaterial(), DyeColor.ORANGE), () -> new DyedBlock(config, DyeColor.ORANGE), DEFAULT_DYED_BLOCK_SETTINGS);
+            RegistrySupplier<Block> yellowBlock = REGISTRY_HELPER.registerWithItem(DyedBlock.makeId(config.getMaterial(), DyeColor.YELLOW), () -> new DyedBlock(config, DyeColor.YELLOW), DEFAULT_DYED_BLOCK_SETTINGS);
+            RegistrySupplier<Block> limeBlock = REGISTRY_HELPER.registerWithItem(DyedBlock.makeId(config.getMaterial(), DyeColor.LIME), () -> new DyedBlock(config, DyeColor.LIME), DEFAULT_DYED_BLOCK_SETTINGS);
+            RegistrySupplier<Block> greenBlock = REGISTRY_HELPER.registerWithItem(DyedBlock.makeId(config.getMaterial(), DyeColor.GREEN), () -> new DyedBlock(config, DyeColor.GREEN), DEFAULT_DYED_BLOCK_SETTINGS);
+            RegistrySupplier<Block> cyanBlock = REGISTRY_HELPER.registerWithItem(DyedBlock.makeId(config.getMaterial(), DyeColor.CYAN), () -> new DyedBlock(config, DyeColor.CYAN), DEFAULT_DYED_BLOCK_SETTINGS);
+            RegistrySupplier<Block> lightBlueBlock = REGISTRY_HELPER.registerWithItem(DyedBlock.makeId(config.getMaterial(), DyeColor.LIGHT_BLUE), () -> new DyedBlock(config, DyeColor.LIGHT_BLUE), DEFAULT_DYED_BLOCK_SETTINGS);
+            RegistrySupplier<Block> blueBlock = REGISTRY_HELPER.registerWithItem(DyedBlock.makeId(config.getMaterial(), DyeColor.BLUE), () -> new DyedBlock(config, DyeColor.BLUE), DEFAULT_DYED_BLOCK_SETTINGS);
+            RegistrySupplier<Block> purpleBlock = REGISTRY_HELPER.registerWithItem(DyedBlock.makeId(config.getMaterial(), DyeColor.PURPLE), () -> new DyedBlock(config, DyeColor.PURPLE), DEFAULT_DYED_BLOCK_SETTINGS);
+            RegistrySupplier<Block> magentaBlock = REGISTRY_HELPER.registerWithItem(DyedBlock.makeId(config.getMaterial(), DyeColor.MAGENTA), () -> new DyedBlock(config, DyeColor.MAGENTA), DEFAULT_DYED_BLOCK_SETTINGS);
+            RegistrySupplier<Block> pinkBlock = REGISTRY_HELPER.registerWithItem(DyedBlock.makeId(config.getMaterial(), DyeColor.PINK), () -> new DyedBlock(config, DyeColor.PINK), DEFAULT_DYED_BLOCK_SETTINGS);
+
+            BLOCK_MAP.put(material + "white", whiteBlock);
+            BLOCK_MAP.put(material + "light_gray", lightGrayBlock);
+            BLOCK_MAP.put(material + "gray", grayBlock);
+            BLOCK_MAP.put(material + "black", blackBlock);
+            BLOCK_MAP.put(material + "brown", brownBlock);
+            BLOCK_MAP.put(material + "red", redBlock);
+            BLOCK_MAP.put(material + "orange", orangeBlock);
+            BLOCK_MAP.put(material + "yellow", yellowBlock);
+            BLOCK_MAP.put(material + "lime", limeBlock);
+            BLOCK_MAP.put(material + "green", greenBlock);
+            BLOCK_MAP.put(material + "cyan", cyanBlock);
+            BLOCK_MAP.put(material + "light_blue", lightBlueBlock);
+            BLOCK_MAP.put(material + "blue", blueBlock);
+            BLOCK_MAP.put(material + "purple", purpleBlock);
+            BLOCK_MAP.put(material + "magenta", magentaBlock);
+            BLOCK_MAP.put(material + "pink", pinkBlock);
+
+            WHITE_BLOCKS.add(whiteBlock);
+            LIGHT_GRAY_BLOCKS.add(lightGrayBlock);
+            GRAY_BLOCKS.add(grayBlock);
+            BLACK_BLOCKS.add(blackBlock);
+            BROWN_BLOCKS.add(brownBlock);
+            RED_BLOCKS.add(redBlock);
+            ORANGE_BLOCKS.add(orangeBlock);
+            YELLOW_BLOCKS.add(yellowBlock);
+            LIME_BLOCKS.add(limeBlock);
+            GREEN_BLOCKS.add(greenBlock);
+            CYAN_BLOCKS.add(cyanBlock);
+            LIGHT_BLUE_BLOCKS.add(lightBlueBlock);
+            BLUE_BLOCKS.add(blueBlock);
+            PURPLE_BLOCKS.add(purpleBlock);
+            MAGENTA_BLOCKS.add(magentaBlock);
+            PINK_BLOCKS.add(pinkBlock);
+        });
+
+        PILLAR_BLOCKS_TO_DYE.forEach(data -> {
+            String materialName = data.name();
+            String material = data.id();
+            Block ingredient = data.block();
+            Tool tool = data.tool();
+
+            BlockConfig config = new BlockConfig()
+                .materialName(materialName)
+                .material(material)
+                .ingredient(ingredient)
+                .tool(tool);
+
+            RegistrySupplier<Block> whiteBlock = REGISTRY_HELPER.registerWithItem(DyedPillarBlock.makeId(config.getMaterial(), DyeColor.WHITE), () -> new DyedPillarBlock(config, DyeColor.WHITE), DEFAULT_DYED_BLOCK_SETTINGS);
+            RegistrySupplier<Block> lightGrayBlock = REGISTRY_HELPER.registerWithItem(DyedPillarBlock.makeId(config.getMaterial(), DyeColor.LIGHT_GRAY), () -> new DyedPillarBlock(config, DyeColor.LIGHT_GRAY), DEFAULT_DYED_BLOCK_SETTINGS);
+            RegistrySupplier<Block> grayBlock = REGISTRY_HELPER.registerWithItem(DyedPillarBlock.makeId(config.getMaterial(), DyeColor.GRAY), () -> new DyedPillarBlock(config, DyeColor.GRAY), DEFAULT_DYED_BLOCK_SETTINGS);
+            RegistrySupplier<Block> blackBlock = REGISTRY_HELPER.registerWithItem(DyedPillarBlock.makeId(config.getMaterial(), DyeColor.BLACK), () -> new DyedPillarBlock(config, DyeColor.BLACK), DEFAULT_DYED_BLOCK_SETTINGS);
+            RegistrySupplier<Block> brownBlock = REGISTRY_HELPER.registerWithItem(DyedPillarBlock.makeId(config.getMaterial(), DyeColor.BROWN), () -> new DyedPillarBlock(config, DyeColor.BROWN), DEFAULT_DYED_BLOCK_SETTINGS);
+            RegistrySupplier<Block> redBlock = REGISTRY_HELPER.registerWithItem(DyedPillarBlock.makeId(config.getMaterial(), DyeColor.RED), () -> new DyedPillarBlock(config, DyeColor.RED), DEFAULT_DYED_BLOCK_SETTINGS);
+            RegistrySupplier<Block> orangeBlock = REGISTRY_HELPER.registerWithItem(DyedPillarBlock.makeId(config.getMaterial(), DyeColor.ORANGE), () -> new DyedPillarBlock(config, DyeColor.ORANGE), DEFAULT_DYED_BLOCK_SETTINGS);
+            RegistrySupplier<Block> yellowBlock = REGISTRY_HELPER.registerWithItem(DyedPillarBlock.makeId(config.getMaterial(), DyeColor.YELLOW), () -> new DyedPillarBlock(config, DyeColor.YELLOW), DEFAULT_DYED_BLOCK_SETTINGS);
+            RegistrySupplier<Block> limeBlock = REGISTRY_HELPER.registerWithItem(DyedPillarBlock.makeId(config.getMaterial(), DyeColor.LIME), () -> new DyedPillarBlock(config, DyeColor.LIME), DEFAULT_DYED_BLOCK_SETTINGS);
+            RegistrySupplier<Block> greenBlock = REGISTRY_HELPER.registerWithItem(DyedPillarBlock.makeId(config.getMaterial(), DyeColor.GREEN), () -> new DyedPillarBlock(config, DyeColor.GREEN), DEFAULT_DYED_BLOCK_SETTINGS);
+            RegistrySupplier<Block> cyanBlock = REGISTRY_HELPER.registerWithItem(DyedPillarBlock.makeId(config.getMaterial(), DyeColor.CYAN), () -> new DyedPillarBlock(config, DyeColor.CYAN), DEFAULT_DYED_BLOCK_SETTINGS);
+            RegistrySupplier<Block> lightBlueBlock = REGISTRY_HELPER.registerWithItem(DyedPillarBlock.makeId(config.getMaterial(), DyeColor.LIGHT_BLUE), () -> new DyedPillarBlock(config, DyeColor.LIGHT_BLUE), DEFAULT_DYED_BLOCK_SETTINGS);
+            RegistrySupplier<Block> blueBlock = REGISTRY_HELPER.registerWithItem(DyedPillarBlock.makeId(config.getMaterial(), DyeColor.BLUE), () -> new DyedPillarBlock(config, DyeColor.BLUE), DEFAULT_DYED_BLOCK_SETTINGS);
+            RegistrySupplier<Block> purpleBlock = REGISTRY_HELPER.registerWithItem(DyedPillarBlock.makeId(config.getMaterial(), DyeColor.PURPLE), () -> new DyedPillarBlock(config, DyeColor.PURPLE), DEFAULT_DYED_BLOCK_SETTINGS);
+            RegistrySupplier<Block> magentaBlock = REGISTRY_HELPER.registerWithItem(DyedPillarBlock.makeId(config.getMaterial(), DyeColor.MAGENTA), () -> new DyedPillarBlock(config, DyeColor.MAGENTA), DEFAULT_DYED_BLOCK_SETTINGS);
+            RegistrySupplier<Block> pinkBlock = REGISTRY_HELPER.registerWithItem(DyedPillarBlock.makeId(config.getMaterial(), DyeColor.PINK), () -> new DyedPillarBlock(config, DyeColor.PINK), DEFAULT_DYED_BLOCK_SETTINGS);
+
+            PILLAR_BLOCK_MAP.put(material + "white", whiteBlock);
+            PILLAR_BLOCK_MAP.put(material + "light_gray", lightGrayBlock);
+            PILLAR_BLOCK_MAP.put(material + "gray", grayBlock);
+            PILLAR_BLOCK_MAP.put(material + "black", blackBlock);
+            PILLAR_BLOCK_MAP.put(material + "brown", brownBlock);
+            PILLAR_BLOCK_MAP.put(material + "red", redBlock);
+            PILLAR_BLOCK_MAP.put(material + "orange", orangeBlock);
+            PILLAR_BLOCK_MAP.put(material + "yellow", yellowBlock);
+            PILLAR_BLOCK_MAP.put(material + "lime", limeBlock);
+            PILLAR_BLOCK_MAP.put(material + "green", greenBlock);
+            PILLAR_BLOCK_MAP.put(material + "cyan", cyanBlock);
+            PILLAR_BLOCK_MAP.put(material + "light_blue", lightBlueBlock);
+            PILLAR_BLOCK_MAP.put(material + "blue", blueBlock);
+            PILLAR_BLOCK_MAP.put(material + "purple", purpleBlock);
+            PILLAR_BLOCK_MAP.put(material + "magenta", magentaBlock);
+            PILLAR_BLOCK_MAP.put(material + "pink", pinkBlock);
+
+            WHITE_BLOCKS.add(whiteBlock);
+            LIGHT_GRAY_BLOCKS.add(lightGrayBlock);
+            GRAY_BLOCKS.add(grayBlock);
+            BLACK_BLOCKS.add(blackBlock);
+            BROWN_BLOCKS.add(brownBlock);
+            RED_BLOCKS.add(redBlock);
+            ORANGE_BLOCKS.add(orangeBlock);
+            YELLOW_BLOCKS.add(yellowBlock);
+            LIME_BLOCKS.add(limeBlock);
+            GREEN_BLOCKS.add(greenBlock);
+            CYAN_BLOCKS.add(cyanBlock);
+            LIGHT_BLUE_BLOCKS.add(lightBlueBlock);
+            BLUE_BLOCKS.add(blueBlock);
+            PURPLE_BLOCKS.add(purpleBlock);
+            MAGENTA_BLOCKS.add(magentaBlock);
+            PINK_BLOCKS.add(pinkBlock);
+        });
+
+        BLOCKS.addAll(BLOCK_MAP.values());
+        BLOCKS.addAll(PILLAR_BLOCK_MAP.values());
+    }
+}

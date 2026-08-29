@@ -1,0 +1,17 @@
+{
+    "required": true,
+    "package": "com.chimericdream.minekea.mixin",
+    "compatibilityLevel": "JAVA_25",
+    "minVersion": "0.8",
+    "client": [
+    ],
+    "mixins": [
+        "AllayMixin",
+        "CauldronDispatcherAccessor",
+        "CauldronInteractionsAccessor",
+        "MilkBucketItemMixin"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}

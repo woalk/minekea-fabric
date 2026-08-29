@@ -1,0 +1,25 @@
+package com.chimericdream.minekea.fabric.registry;
+
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
+import net.minecraft.core.HolderLookup;
+
+import static com.chimericdream.minekea.fluid.ModFluids.*;
+
+public class ModRegistryDataGenerator {
+    public static void configureTranslations(HolderLookup.Provider registryLookup, FabricLanguageProvider.TranslationBuilder translationBuilder) {
+        translationBuilder.add("item_group.minekea.blocks.building.beams", "Minekea: Beams");
+        translationBuilder.add("item_group.minekea.blocks.building.compressed", "Minekea: Compressed Blocks");
+        translationBuilder.add("item_group.minekea.blocks.building.covers", "Minekea: Covers");
+        translationBuilder.add("item_group.minekea.blocks.building.dyed", "Minekea: Dyed Blocks");
+        translationBuilder.add("item_group.minekea.blocks.furniture", "Minekea: Furniture");
+
+        translationBuilder.add("key.category.minekea.keybinds", "Minekea");
+        translationBuilder.add("key.minekea.items.painter.cycle_color", "Cycle Painter Color");
+
+        translationBuilder.add(HONEY_BUCKET.get(), "Honey Bucket");
+        translationBuilder.add(HONEY_SOURCE_BLOCK.get(), "Honey");
+        translationBuilder.add(HONEY_CAULDRON.get(), "Honey Cauldron");
+//        translationBuilder.add(MILK_CAULDRON.get(), "Milk Cauldron");
+        translationBuilder.add(MILK_SOURCE_BLOCK.get(), "Milk");
+    }
+}

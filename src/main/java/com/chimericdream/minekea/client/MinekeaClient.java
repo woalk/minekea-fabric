@@ -1,0 +1,61 @@
+package com.chimericdream.minekea.client;
+
+import com.chimericdream.lib.entities.SimpleSeatEntity;
+import com.chimericdream.minekea.block.containers.GlassJarBlock;
+import com.chimericdream.minekea.block.containers.crates.Crates;
+import com.chimericdream.minekea.block.furniture.armoires.Armoires;
+import com.chimericdream.minekea.block.furniture.displaycases.DisplayCases;
+import com.chimericdream.minekea.block.furniture.seats.Seats;
+import com.chimericdream.minekea.block.furniture.shelves.Shelves;
+import com.chimericdream.minekea.client.render.block.ArmoireBlockEntityRenderer;
+import com.chimericdream.minekea.client.render.block.DisplayCaseBlockEntityRenderer;
+import com.chimericdream.minekea.client.render.block.ShelfBlockEntityRenderer;
+import com.chimericdream.minekea.client.render.item.GlassJarItemRenderer;
+import com.chimericdream.minekea.client.screen.BlockPainterScreen;
+import com.chimericdream.minekea.client.screen.crate.CrateScreen;
+import com.chimericdream.minekea.client.screen.crate.DoubleCrateScreen;
+import com.chimericdream.minekea.item.Tools;
+import dev.architectury.registry.client.level.entity.EntityRendererRegistry;
+import dev.architectury.registry.client.rendering.BlockEntityRendererRegistry;
+import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.special.SpecialModelRenderers;
+
+public class MinekeaClient {
+    public static void onInitializeClient() {
+        MenuScreens.register(Crates.CRATE_SCREEN_HANDLER.get(), CrateScreen::new);
+        MenuScreens.register(Crates.DOUBLE_CRATE_SCREEN_HANDLER.get(), DoubleCrateScreen::new);
+        MenuScreens.register(Tools.BLOCK_PAINTER_SCREEN_HANDLER.get(), BlockPainterScreen::new);
+        Keybindings.init();
+    }
+
+    public static void initializeClientRegistries() {
+    }
+
+    // NeoForge must call this during mod construction (see MinekeaNeoForge's constructor) - any lifecycle
+    // event is too late, since architectury's own RegisterRenderers listener fires on its bus before ours.
+    public static void registerEntityRenderers() {
+        EntityRendererRegistry.register(
+            Seats.SEAT_ENTITY,
+            SimpleSeatEntity.EmptyRenderer::new
+        );
+    }
+
+    public static void registerBlockEntityRenderers() {
+        BlockEntityRendererRegistry.register(
+            Armoires.ARMOIRE_BLOCK_ENTITY.get(),
+            ArmoireBlockEntityRenderer::new
+        );
+
+        BlockEntityRendererRegistry.register(
+            DisplayCases.DISPLAY_CASE_BLOCK_ENTITY.get(),
+            DisplayCaseBlockEntityRenderer::new
+        );
+
+        BlockEntityRendererRegistry.register(
+            Shelves.SHELF_BLOCK_ENTITY.get(),
+            ShelfBlockEntityRenderer::new
+        );
+
+        SpecialModelRenderers.ID_MAPPER.put(GlassJarBlock.BLOCK_ID, GlassJarItemRenderer.Unbaked.CODEC);
+    }
+}

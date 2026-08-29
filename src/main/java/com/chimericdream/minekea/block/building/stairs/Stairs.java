@@ -1,0 +1,152 @@
+package com.chimericdream.minekea.block.building.stairs;
+
+import com.chimericdream.lib.blocks.BlockConfig;
+import com.chimericdream.lib.resource.TextureUtils;
+import com.chimericdream.lib.util.Tool;
+import com.chimericdream.minekea.block.building.BuildingBlocks;
+import com.chimericdream.minekea.block.building.LogWoodFamilies;
+import com.chimericdream.minekea.block.building.general.BasaltBricksBlock;
+import com.chimericdream.minekea.block.building.general.CrackedBasaltBricksBlock;
+import com.chimericdream.minekea.block.building.general.CrimsonBasaltBricksBlock;
+import com.chimericdream.minekea.block.building.general.MossyBasaltBricksBlock;
+import com.chimericdream.minekea.block.building.general.WarpedBasaltBricksBlock;
+import com.chimericdream.minekea.block.building.general.WarpedNetherBricksBlock;
+import com.chimericdream.minekea.block.furniture.bookshelves.Bookshelves;
+import com.chimericdream.minekea.util.ModThingGroup;
+import dev.architectury.registry.registries.RegistrySupplier;
+import java.util.ArrayList;
+import java.util.List;
+
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+
+import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
+
+public class Stairs implements ModThingGroup {
+    @SuppressWarnings("UnstableApiUsage")
+    public static final Item.Properties DEFAULT_STAIRS_SETTINGS = new Item.Properties().arch$tab(CreativeModeTabs.BUILDING_BLOCKS);
+    @SuppressWarnings("UnstableApiUsage")
+    public static final Item.Properties DEFAULT_VERTICAL_STAIRS_SETTINGS = new Item.Properties().arch$tab(CreativeModeTabs.BUILDING_BLOCKS);
+
+    public static final List<RegistrySupplier<Block>> STAIRS_BLOCKS = new ArrayList<>();
+    public static final List<RegistrySupplier<Block>> VERTICAL_STAIRS_BLOCKS = new ArrayList<>();
+
+    public static final List<RegistrySupplier<Block>> BOOKSHELF_STAIRS_BLOCKS = new ArrayList<>();
+    public static final List<RegistrySupplier<Block>> VERTICAL_BOOKSHELF_STAIRS_BLOCKS = new ArrayList<>();
+
+    static {
+        // basalt-brick-family plain stairs now come from BasaltBrickFamilies (chimeric-lib BlockFamily)
+
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("acacia_planks"), () -> new VerticalStairsBlock(new BlockConfig().material("acacia_planks").materialName("Acacia").ingredient(Blocks.ACACIA_PLANKS).flammable().tool(Tool.AXE)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("birch_planks"), () -> new VerticalStairsBlock(new BlockConfig().material("birch_planks").materialName("Birch").ingredient(Blocks.BIRCH_PLANKS).flammable().tool(Tool.AXE)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("cherry_planks"), () -> new VerticalStairsBlock(new BlockConfig().material("cherry_planks").materialName("Cherry").ingredient(Blocks.CHERRY_PLANKS).flammable().tool(Tool.AXE)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("cinnabar"), () -> new VerticalStairsBlock(new BlockConfig().material("cinnabar").materialName("Cinnabar").ingredient(Blocks.CINNABAR).tool(Tool.PICKAXE)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("cinnabar_bricks"), () -> new VerticalStairsBlock(new BlockConfig().material("cinnabar_bricks").materialName("Cinnabar Brick").ingredient(Blocks.CINNABAR_BRICKS).tool(Tool.PICKAXE)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("crimson_planks"), () -> new VerticalStairsBlock(new BlockConfig().material("crimson_planks").materialName("Crimson").ingredient(Blocks.CRIMSON_PLANKS).tool(Tool.AXE)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("dark_oak_planks"), () -> new VerticalStairsBlock(new BlockConfig().material("dark_oak_planks").materialName("Dark Oak").ingredient(Blocks.DARK_OAK_PLANKS).flammable().tool(Tool.AXE)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("jungle_planks"), () -> new VerticalStairsBlock(new BlockConfig().material("jungle_planks").materialName("Jungle").ingredient(Blocks.JUNGLE_PLANKS).flammable().tool(Tool.AXE)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("mangrove_planks"), () -> new VerticalStairsBlock(new BlockConfig().material("mangrove_planks").materialName("Mangrove").ingredient(Blocks.MANGROVE_PLANKS).flammable().tool(Tool.AXE)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("oak_planks"), () -> new VerticalStairsBlock(new BlockConfig().material("oak_planks").materialName("Oak").ingredient(Blocks.OAK_PLANKS).flammable().tool(Tool.AXE)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("pale_oak_planks"), () -> new VerticalStairsBlock(new BlockConfig().material("pale_oak_planks").materialName("Pale Oak").ingredient(Blocks.PALE_OAK_PLANKS).flammable().tool(Tool.AXE)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("spruce_planks"), () -> new VerticalStairsBlock(new BlockConfig().material("spruce_planks").materialName("Spruce").ingredient(Blocks.SPRUCE_PLANKS).flammable().tool(Tool.AXE)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("warped_planks"), () -> new VerticalStairsBlock(new BlockConfig().material("warped_planks").materialName("Warped").ingredient(Blocks.WARPED_PLANKS).tool(Tool.AXE)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("andesite"), () -> new VerticalStairsBlock(new BlockConfig().material("andesite").materialName("Andesite").ingredient(Blocks.ANDESITE)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("bamboo_mosaic"), () -> new VerticalStairsBlock(new BlockConfig().material("bamboo_mosaic").materialName("Bamboo Mosaic").ingredient(Blocks.BAMBOO_MOSAIC).tool(Tool.AXE)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("blackstone"), () -> new VerticalStairsBlock(new BlockConfig().material("blackstone").materialName("Blackstone").ingredient(Blocks.BLACKSTONE)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("bricks"), () -> new VerticalStairsBlock(new BlockConfig().material("bricks").materialName("Brick").ingredient(Blocks.BRICKS)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("chiseled_cinnabar"), () -> new VerticalStairsBlock(new BlockConfig().material("chiseled_cinnabar").materialName("Chiseled Cinnabar").ingredient(Blocks.CHISELED_CINNABAR)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("chiseled_sulfur"), () -> new VerticalStairsBlock(new BlockConfig().material("chiseled_sulfur").materialName("Chiseled Sulfur").ingredient(Blocks.CHISELED_SULFUR)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("cobbled_deepslate"), () -> new VerticalStairsBlock(new BlockConfig().material("cobbled_deepslate").materialName("Cobbled Deepslate").ingredient(Blocks.COBBLED_DEEPSLATE)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("cobblestone"), () -> new VerticalStairsBlock(new BlockConfig().material("cobblestone").materialName("Cobblestone").ingredient(Blocks.COBBLESTONE)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("dark_prismarine"), () -> new VerticalStairsBlock(new BlockConfig().material("dark_prismarine").materialName("Dark Prismarine").ingredient(Blocks.DARK_PRISMARINE)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("deepslate_bricks"), () -> new VerticalStairsBlock(new BlockConfig().material("deepslate_bricks").materialName("Deepslate Brick").ingredient(Blocks.DEEPSLATE_BRICKS)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("deepslate_tiles"), () -> new VerticalStairsBlock(new BlockConfig().material("deepslate_tiles").materialName("Deepslate Tile").ingredient(Blocks.DEEPSLATE_TILES)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("diorite"), () -> new VerticalStairsBlock(new BlockConfig().material("diorite").materialName("Diorite").ingredient(Blocks.DIORITE)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("end_stone_bricks"), () -> new VerticalStairsBlock(new BlockConfig().material("end_stone_bricks").materialName("End Stone Brick").ingredient(Blocks.END_STONE_BRICKS)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("granite"), () -> new VerticalStairsBlock(new BlockConfig().material("granite").materialName("Granite").ingredient(Blocks.GRANITE)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("mossy_cobblestone"), () -> new VerticalStairsBlock(new BlockConfig().material("mossy_cobblestone").materialName("Mossy Cobblestone").ingredient(Blocks.MOSSY_COBBLESTONE)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("mossy_stone_bricks"), () -> new VerticalStairsBlock(new BlockConfig().material("mossy_stone_bricks").materialName("Mossy Stone Brick").ingredient(Blocks.MOSSY_STONE_BRICKS)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("mud_bricks"), () -> new VerticalStairsBlock(new BlockConfig().material("mud_bricks").materialName("Mud Brick").ingredient(Blocks.MUD_BRICKS)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("nether_bricks"), () -> new VerticalStairsBlock(new BlockConfig().material("nether_bricks").materialName("Nether Brick").ingredient(Blocks.NETHER_BRICKS)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("polished_andesite"), () -> new VerticalStairsBlock(new BlockConfig().material("polished_andesite").materialName("Polished Andesite").ingredient(Blocks.POLISHED_ANDESITE)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("polished_blackstone_bricks"), () -> new VerticalStairsBlock(new BlockConfig().material("polished_blackstone_bricks").materialName("Polished Blackstone Brick").ingredient(Blocks.POLISHED_BLACKSTONE_BRICKS)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("polished_blackstone"), () -> new VerticalStairsBlock(new BlockConfig().material("polished_blackstone").materialName("Polished Blackstone").ingredient(Blocks.POLISHED_BLACKSTONE)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("polished_cinnabar"), () -> new VerticalStairsBlock(new BlockConfig().material("polished_cinnabar").materialName("Polished Cinnabar").ingredient(Blocks.POLISHED_CINNABAR)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("polished_deepslate"), () -> new VerticalStairsBlock(new BlockConfig().material("polished_deepslate").materialName("Polished Deepslate").ingredient(Blocks.POLISHED_DEEPSLATE)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("polished_diorite"), () -> new VerticalStairsBlock(new BlockConfig().material("polished_diorite").materialName("Polished Diorite").ingredient(Blocks.POLISHED_DIORITE)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("polished_granite"), () -> new VerticalStairsBlock(new BlockConfig().material("polished_granite").materialName("Polished Granite").ingredient(Blocks.POLISHED_GRANITE)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("polished_sulfur"), () -> new VerticalStairsBlock(new BlockConfig().material("polished_sulfur").materialName("Polished Sulfur").ingredient(Blocks.POLISHED_SULFUR)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("polished_tuff"), () -> new VerticalStairsBlock(new BlockConfig().material("polished_tuff").materialName("Polished Tuff").ingredient(Blocks.POLISHED_TUFF)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("potent_sulfur"), () -> new VerticalStairsBlock(new BlockConfig().material("potent_sulfur").materialName("Potent Sulfur").ingredient(Blocks.POTENT_SULFUR)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("prismarine_bricks"), () -> new VerticalStairsBlock(new BlockConfig().material("prismarine_bricks").materialName("Prismarine Brick").ingredient(Blocks.PRISMARINE_BRICKS)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("prismarine"), () -> new VerticalStairsBlock(new BlockConfig().material("prismarine").materialName("Prismarine").ingredient(Blocks.PRISMARINE)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("purpur_block"), () -> new VerticalStairsBlock(new BlockConfig().material("purpur_block").materialName("Purpur").ingredient(Blocks.PURPUR_BLOCK)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("quartz_block"), () -> new VerticalStairsBlock(new BlockConfig().material("quartz_block").materialName("Quartz").ingredient(Blocks.QUARTZ_BLOCK).texture(TextureUtils.block(Blocks.QUARTZ_BLOCK, "_top"))), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("red_nether_bricks"), () -> new VerticalStairsBlock(new BlockConfig().material("red_nether_bricks").materialName("Red Nether Brick").ingredient(Blocks.RED_NETHER_BRICKS)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("red_sandstone"), () -> new VerticalStairsBlock(new BlockConfig().material("red_sandstone").materialName("Red Sandstone").ingredient(Blocks.RED_SANDSTONE)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("sandstone"), () -> new VerticalStairsBlock(new BlockConfig().material("sandstone").materialName("Sandstone").ingredient(Blocks.SANDSTONE)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("sulfur"), () -> new VerticalStairsBlock(new BlockConfig().material("sulfur").materialName("Sulfur").ingredient(Blocks.SULFUR)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("sulfur_bricks"), () -> new VerticalStairsBlock(new BlockConfig().material("sulfur_bricks").materialName("Sulfur Brick").ingredient(Blocks.SULFUR_BRICKS)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("quartz_block_bottom"), () -> new VerticalStairsBlock(new BlockConfig().material("quartz_block_bottom").materialName("Smooth Quartz").ingredient(Blocks.SMOOTH_QUARTZ).texture(TextureUtils.block(Blocks.QUARTZ_BLOCK, "_bottom"))), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("red_sandstone_top"), () -> new VerticalStairsBlock(new BlockConfig().material("red_sandstone_top").materialName("Smooth Red Sandstone").ingredient(Blocks.SMOOTH_RED_SANDSTONE).texture(TextureUtils.block(Blocks.RED_SANDSTONE, "_top"))), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("sandstone_top"), () -> new VerticalStairsBlock(new BlockConfig().material("sandstone_top").materialName("Smooth Sandstone").ingredient(Blocks.SMOOTH_SANDSTONE).texture(TextureUtils.block(Blocks.SANDSTONE, "_top"))), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("stone_bricks"), () -> new VerticalStairsBlock(new BlockConfig().material("stone_bricks").materialName("Stone Brick").ingredient(Blocks.STONE_BRICKS)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("stone"), () -> new VerticalStairsBlock(new BlockConfig().material("stone").materialName("Stone").ingredient(Blocks.STONE)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("tuff_bricks"), () -> new VerticalStairsBlock(new BlockConfig().material("tuff_bricks").materialName("Tuff Brick").ingredient(Blocks.TUFF_BRICKS)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("tuff"), () -> new VerticalStairsBlock(new BlockConfig().material("tuff").materialName("Tuff").ingredient(Blocks.TUFF)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("cut_copper"), () -> new VerticalStairsBlock(new BlockConfig().material("cut_copper").materialName("Cut Copper").ingredient(Blocks.CUT_COPPER.weathering().unaffected())), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("waxed_cut_copper"), () -> new VerticalStairsBlock(new BlockConfig().material("waxed_cut_copper").materialName("Waxed Cut Copper").ingredient(Blocks.CUT_COPPER.waxed().unaffected()).texture(TextureUtils.block(Blocks.CUT_COPPER.weathering().unaffected()))), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("exposed_cut_copper"), () -> new VerticalStairsBlock(new BlockConfig().material("exposed_cut_copper").materialName("Exposed Cut Copper").ingredient(Blocks.CUT_COPPER.weathering().exposed())), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("waxed_exposed_cut_copper"), () -> new VerticalStairsBlock(new BlockConfig().material("waxed_exposed_cut_copper").materialName("Waxed Exposed Cut Copper").ingredient(Blocks.CUT_COPPER.waxed().exposed()).texture(TextureUtils.block(Blocks.CUT_COPPER.weathering().exposed()))), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("weathered_cut_copper"), () -> new VerticalStairsBlock(new BlockConfig().material("weathered_cut_copper").materialName("Weathered Cut Copper").ingredient(Blocks.CUT_COPPER.weathering().weathered())), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("waxed_weathered_cut_copper"), () -> new VerticalStairsBlock(new BlockConfig().material("waxed_weathered_cut_copper").materialName("Waxed Weathered Cut Copper").ingredient(Blocks.CUT_COPPER.waxed().weathered()).texture(TextureUtils.block(Blocks.CUT_COPPER.weathering().weathered()))), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("oxidized_cut_copper"), () -> new VerticalStairsBlock(new BlockConfig().material("oxidized_cut_copper").materialName("Oxidized Cut Copper").ingredient(Blocks.CUT_COPPER.weathering().oxidized())), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("waxed_oxidized_cut_copper"), () -> new VerticalStairsBlock(new BlockConfig().material("waxed_oxidized_cut_copper").materialName("Waxed Oxidized Cut Copper").ingredient(Blocks.CUT_COPPER.waxed().oxidized()).texture(TextureUtils.block(Blocks.CUT_COPPER.weathering().oxidized()))), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("basalt_bricks"), () -> new VerticalStairsBlock(new BlockConfig().material("basalt_bricks").materialName("Basalt Brick").ingredient(BuildingBlocks.BASALT_BRICKS.get()).texture(TextureUtils.block(BasaltBricksBlock.BLOCK_ID))), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("cracked_basalt_bricks"), () -> new VerticalStairsBlock(new BlockConfig().material("cracked_basalt_bricks").materialName("Cracked Basalt Brick").ingredient(BuildingBlocks.CRACKED_BASALT_BRICKS.get()).texture(TextureUtils.block(CrackedBasaltBricksBlock.BLOCK_ID))), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("crimson_basalt_bricks"), () -> new VerticalStairsBlock(new BlockConfig().material("crimson_basalt_bricks").materialName("Crimson Basalt Brick").ingredient(BuildingBlocks.CRIMSON_BASALT_BRICKS.get()).texture(TextureUtils.block(CrimsonBasaltBricksBlock.BLOCK_ID))), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("mossy_basalt_bricks"), () -> new VerticalStairsBlock(new BlockConfig().material("mossy_basalt_bricks").materialName("Mossy Basalt Brick").ingredient(BuildingBlocks.MOSSY_BASALT_BRICKS.get()).texture(TextureUtils.block(MossyBasaltBricksBlock.BLOCK_ID))), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("warped_basalt_bricks"), () -> new VerticalStairsBlock(new BlockConfig().material("warped_basalt_bricks").materialName("Warped Basalt Brick").ingredient(BuildingBlocks.WARPED_BASALT_BRICKS.get()).texture(TextureUtils.block(WarpedBasaltBricksBlock.BLOCK_ID))), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("warped_nether_bricks"), () -> new VerticalStairsBlock(new BlockConfig().material("warped_nether_bricks").materialName("Warped Nether Brick").ingredient(BuildingBlocks.WARPED_NETHER_BRICKS.get()).texture(TextureUtils.block(WarpedNetherBricksBlock.BLOCK_ID))), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+
+        STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(StairsBlock.makeId("potent_sulfur"), () -> new StairsBlock(new BlockConfig().material("potent_sulfur").materialName("Potent Sulfur").ingredient(Blocks.POTENT_SULFUR)), DEFAULT_STAIRS_SETTINGS));
+
+        LogWoodFamilies.ALL.forEach(entry -> {
+            STAIRS_BLOCKS.add(
+                REGISTRY_HELPER.registerWithItem(
+                    StairsBlock.makeId(entry.material()),
+                    () -> new StairsBlock(entry.newConfig()),
+                    DEFAULT_STAIRS_SETTINGS
+                )
+            );
+
+            VERTICAL_STAIRS_BLOCKS.add(
+                REGISTRY_HELPER.registerWithItem(
+                    VerticalStairsBlock.makeId(entry.material()),
+                    () -> new VerticalStairsBlock(entry.newConfig()),
+                    DEFAULT_VERTICAL_STAIRS_SETTINGS
+                )
+            );
+        });
+
+        Bookshelves.BOOKSHELF_CONFIGS.forEach((material, config) -> {
+            BOOKSHELF_STAIRS_BLOCKS.add(
+                REGISTRY_HELPER.registerWithItem(BookshelfStairsBlock.makeId(material),
+                    () -> new BookshelfStairsBlock(config),
+                    DEFAULT_STAIRS_SETTINGS
+                )
+            );
+
+            VERTICAL_BOOKSHELF_STAIRS_BLOCKS.add(
+                REGISTRY_HELPER.registerWithItem(VerticalBookshelfStairsBlock.makeId(material),
+                    () -> new VerticalBookshelfStairsBlock(config),
+                    DEFAULT_VERTICAL_STAIRS_SETTINGS
+                )
+            );
+        });
+    }
+}
