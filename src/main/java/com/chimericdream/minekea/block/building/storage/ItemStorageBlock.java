@@ -61,7 +61,7 @@ public class ItemStorageBlock extends Block {
                 .any()
                 .setValue(AXIS, Direction.Axis.Y)
                 .setValue(FACING, Direction.NORTH)
-                .setValue(IS_BAGGED, false)
+                .setValue(IS_BAGGED, isBaggedItem)
         );
 
         this.BLOCK_ID = makeId(config.getMaterial());
