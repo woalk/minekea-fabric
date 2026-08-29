@@ -2,10 +2,13 @@
   "schemaVersion": 1,
   "id": "minekea",
   "version": "${version}",
-  "name": "Minekea",
+  "name": "Minekea Rewalked",
   "description": "",
-  "authors": [],
-  "contact": {},
+  "authors": ["woalk", "ChimericDream"],
+  "contact": {
+    "sources": "https://github.com/woalk/minekea-fabric",
+    "issues": "https://github.com/woalk/minekea-fabric/issues"
+  },
   "license": "GPL-3.0",
   "icon": "assets/minekea/icon.png",
   "environment": "*",
