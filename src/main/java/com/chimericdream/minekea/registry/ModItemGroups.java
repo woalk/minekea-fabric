@@ -1,7 +1,6 @@
 package com.chimericdream.minekea.registry;
 
 import com.chimericdream.minekea.block.building.beams.Beams;
-import com.chimericdream.minekea.block.building.compressed.CompressedBlocks;
 import com.chimericdream.minekea.block.building.covers.Covers;
 import com.chimericdream.minekea.block.building.dyed.DyedBlocks;
 import com.chimericdream.minekea.block.furniture.tables.Tables;
@@ -14,11 +13,6 @@ public class ModItemGroups {
     public static final RegistrySupplier<CreativeModeTab> BEAMS_ITEM_GROUP = REGISTRY_HELPER.registerItemGroup(
         "item_group.minekea.blocks.building.beams",
         () -> Beams.BLOCKS.getFirst().get()
-    );
-
-    public static final RegistrySupplier<CreativeModeTab> COMPRESSED_BLOCK_ITEM_GROUP = REGISTRY_HELPER.registerItemGroup(
-        "item_group.minekea.blocks.building.compressed",
-        () -> CompressedBlocks.BLOCKS.getFirst().get()
     );
 
     public static final RegistrySupplier<CreativeModeTab> COVERS_ITEM_GROUP = REGISTRY_HELPER.registerItemGroup(
