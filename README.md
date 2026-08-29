@@ -19,7 +19,8 @@ and [Architectury API](https://modrinth.com/mod/architectury-api).
 
 ## Origin
 
-This mod is a rework of [Minekea](https://www.curseforge.com/minecraft/mc-mods/minekeamod),
+This mod is an _opinionated_ rework of
+[Minekea](https://www.curseforge.com/minecraft/mc-mods/minekeamod),
 a mod by ChimericDream.
 It was forked from version
 [26.2-10.1.0 from the Monorepo](https://github.com/chimericdream/minecraft-mods/tree/minekea/26.2-10.1.0/minekea).
@@ -31,6 +32,10 @@ There is no plan to upstream these changes.
 Only the Fabric version was extracted.
 While we still currently depend on Architectury API,
 the Architectury build setup is no longer used for simplicity.
+
+Various features from older versions of Minekea will be brought back in this fork,
+and some features I personally don't see a use for will be removed.
+This is not intended as criticism of the original mod, this is simply personal preferences.
 
 ## License
 
