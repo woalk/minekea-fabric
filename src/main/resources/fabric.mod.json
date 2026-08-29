@@ -11,7 +11,7 @@
   "environment": "*",
   "entrypoints": {
     "fabric-datagen": [
-      "com.chimericdream.minekea.fabric.ModDataGenerator"
+      "com.chimericdream.minekea.fabric.data.ModDataGenerator"
     ],
     "client": [
       "com.chimericdream.minekea.fabric.client.MinekeaFabricClient"
@@ -21,11 +21,7 @@
     ]
   },
   "mixins": [
-    "minekea.mixins.json",
-    {
-      "config": "minekea.client.mixins.json",
-      "environment": "client"
-    }
+    "minekea.mixins.json"
   ],
   "accessWidener": "minekea.accesswidener",
   "depends": {

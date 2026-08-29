@@ -5,6 +5,9 @@ import com.chimericdream.minekea.util.ModThingGroup;
 import dev.architectury.registry.registries.RegistrySupplier;
 import java.util.ArrayList;
 import java.util.List;
+
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
@@ -21,5 +24,10 @@ public class NuggetBags implements ModThingGroup {
         ITEMS.add(COPPER_NUGGET_BAG);
         ITEMS.add(GOLD_NUGGET_BAG);
         ITEMS.add(IRON_NUGGET_BAG);
+
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.INGREDIENTS)
+                .register((tab) -> tab.acceptAll(
+                        ITEMS.stream().map((item) -> item.get().getDefaultInstance()).toList()
+                ));
     }
 }

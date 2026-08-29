@@ -5,6 +5,7 @@ import com.chimericdream.lib.util.Tool;
 import com.chimericdream.minekea.registry.ModItemGroups;
 import com.chimericdream.minekea.util.ModThingGroup;
 import dev.architectury.registry.registries.RegistrySupplier;
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -19,8 +20,7 @@ import net.minecraft.world.level.block.Blocks;
 import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
 
 public class DyedBlocks implements ModThingGroup {
-    @SuppressWarnings("UnstableApiUsage")
-    public static final Item.Properties DEFAULT_DYED_BLOCK_SETTINGS = new Item.Properties().arch$tab(ModItemGroups.DYED_BLOCK_ITEM_GROUP);
+    public static final Item.Properties DEFAULT_DYED_BLOCK_SETTINGS = new Item.Properties();
 
     public static final Map<String, RegistrySupplier<Block>> BLOCK_MAP = new LinkedHashMap<>();
     public static final Map<String, RegistrySupplier<Block>> PILLAR_BLOCK_MAP = new LinkedHashMap<>();
@@ -196,5 +196,10 @@ public class DyedBlocks implements ModThingGroup {
 
         BLOCKS.addAll(BLOCK_MAP.values());
         BLOCKS.addAll(PILLAR_BLOCK_MAP.values());
+
+        CreativeModeTabEvents.modifyOutputEvent(ModItemGroups.DYED_BLOCK_ITEM_GROUP.getKey())
+                .register((tab) -> tab.acceptAll(
+                        BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList()
+                ));
     }
 }

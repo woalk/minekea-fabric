@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Supplier;
+
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -19,8 +21,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
 
 public class DisplayCases implements ModThingGroup {
-    @SuppressWarnings("UnstableApiUsage")
-    public static final Item.Properties DEFAULT_DISPLAY_CASE_SETTINGS = new Item.Properties().arch$tab(ModItemGroups.FURNITURE_ITEM_GROUP);
+    public static final Item.Properties DEFAULT_DISPLAY_CASE_SETTINGS = new Item.Properties();
 
     public static final List<RegistrySupplier<Block>> BLOCKS = new ArrayList<>();
 
@@ -53,6 +54,11 @@ public class DisplayCases implements ModThingGroup {
         BLOCKS.add(REGISTRY_HELPER.registerWithItem(DisplayCaseBlock.makeId("stripped/pale_oak"), () -> new DisplayCaseBlock(new BlockConfig().material("stripped/pale_oak").materialName("Stripped Pale Oak").ingredient("planks", Blocks.PALE_OAK_PLANKS).ingredient("log", Blocks.STRIPPED_PALE_OAK_LOG).flammable()), DEFAULT_DISPLAY_CASE_SETTINGS));
         BLOCKS.add(REGISTRY_HELPER.registerWithItem(DisplayCaseBlock.makeId("stripped/spruce"), () -> new DisplayCaseBlock(new BlockConfig().material("stripped/spruce").materialName("Stripped Spruce").ingredient("planks", Blocks.SPRUCE_PLANKS).ingredient("log", Blocks.STRIPPED_SPRUCE_LOG).flammable()), DEFAULT_DISPLAY_CASE_SETTINGS));
         BLOCKS.add(REGISTRY_HELPER.registerWithItem(DisplayCaseBlock.makeId("stripped/warped"), () -> new DisplayCaseBlock(new BlockConfig().material("stripped/warped").materialName("Stripped Warped").ingredient("planks", Blocks.WARPED_PLANKS).ingredient("log", Blocks.STRIPPED_WARPED_STEM)), DEFAULT_DISPLAY_CASE_SETTINGS));
+
+        CreativeModeTabEvents.modifyOutputEvent(ModItemGroups.FURNITURE_ITEM_GROUP.getKey())
+                .register((tab) -> tab.acceptAll(
+                        BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList()
+                ));
 
         DISPLAY_CASE_BLOCK_ENTITY = REGISTRY_HELPER.registerBlockEntity(
             DISPLAY_CASE_BLOCK_ENTITY_ID,

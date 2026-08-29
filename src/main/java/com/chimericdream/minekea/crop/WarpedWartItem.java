@@ -12,6 +12,6 @@ public class WarpedWartItem extends BlockItem {
     public static final Identifier ITEM_ID = Identifier.fromNamespaceAndPath(ModInfo.MOD_ID, "crops/warped_wart");
 
     public WarpedWartItem() {
-        super(ModCrops.WARPED_WART_PLANT_BLOCK.get(), new Properties().arch$tab(CreativeModeTabs.INGREDIENTS).setId(REGISTRY_HELPER.makeItemRegistryKey(ITEM_ID)));
+        super(ModCrops.WARPED_WART_PLANT_BLOCK.get(), new Properties().setId(REGISTRY_HELPER.makeItemRegistryKey(ITEM_ID)));
     }
 }

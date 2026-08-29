@@ -5,7 +5,9 @@ import com.chimericdream.minekea.block.containers.HoneyCauldronBlock;
 import com.chimericdream.minekea.block.containers.MilkCauldronBlock;
 import com.chimericdream.minekea.util.ModThingGroup;
 import dev.architectury.registry.registries.RegistrySupplier;
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LiquidBlock;
@@ -24,6 +26,11 @@ public class ModFluids implements ModThingGroup {
     public static final RegistrySupplier<FlowingFluid> FLOWING_MILK = REGISTRY_HELPER.registerFluid(Identifier.fromNamespaceAndPath(ModInfo.MOD_ID, "fluids/milk/flowing"), MilkFluid.Flowing::new);
     public static final RegistrySupplier<LiquidBlock> MILK_SOURCE_BLOCK = REGISTRY_HELPER.registerBlock(Identifier.fromNamespaceAndPath(ModInfo.MOD_ID, "fluids/milk/source"), MilkFluid.Block::new);
     public static final RegistrySupplier<Block> MILK_CAULDRON = REGISTRY_HELPER.registerBlock(Identifier.fromNamespaceAndPath(ModInfo.MOD_ID, "containers/cauldrons/milk"), MilkCauldronBlock::new);
+
+    static {
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.INGREDIENTS)
+                .register((tab) -> tab.accept(HONEY_BUCKET.get().getDefaultInstance()));
+    }
 
     public static void init() {
     }

@@ -13,7 +13,7 @@ public class WaxItem extends Item {
     public final Item ingredient;
 
     public WaxItem(String color, Item ingredient) {
-        super(new Properties().arch$tab(CreativeModeTabs.INGREDIENTS).setId(REGISTRY_HELPER.makeItemRegistryKey(makeId(color))));
+        super(new Properties().setId(REGISTRY_HELPER.makeItemRegistryKey(makeId(color))));
 
         ITEM_ID = makeId(color);
 

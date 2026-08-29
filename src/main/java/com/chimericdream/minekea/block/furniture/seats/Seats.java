@@ -8,6 +8,8 @@ import com.chimericdream.minekea.util.ModThingGroup;
 import dev.architectury.registry.registries.RegistrySupplier;
 import java.util.ArrayList;
 import java.util.List;
+
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
@@ -20,10 +22,8 @@ import net.minecraft.world.level.block.Blocks;
 import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
 
 public class Seats implements ModThingGroup {
-    @SuppressWarnings("UnstableApiUsage")
-    public static final Item.Properties DEFAULT_CHAIR_SETTINGS = new Item.Properties().arch$tab(ModItemGroups.FURNITURE_ITEM_GROUP);
-    @SuppressWarnings("UnstableApiUsage")
-    public static final Item.Properties DEFAULT_STOOL_SETTINGS = new Item.Properties().arch$tab(ModItemGroups.FURNITURE_ITEM_GROUP);
+    public static final Item.Properties DEFAULT_CHAIR_SETTINGS = new Item.Properties();
+    public static final Item.Properties DEFAULT_STOOL_SETTINGS = new Item.Properties();
 
     public static final List<RegistrySupplier<Block>> CHAIR_BLOCKS = new ArrayList<>();
     public static final List<RegistrySupplier<Block>> STOOL_BLOCKS = new ArrayList<>();
@@ -86,5 +86,11 @@ public class Seats implements ModThingGroup {
         STOOL_BLOCKS.add(REGISTRY_HELPER.registerWithItem(StoolBlock.makeId("stripped_pale_oak"), () -> new StoolBlock(new BlockConfig().material("stripped_pale_oak").materialName("Stripped Pale Oak").ingredient(Blocks.PALE_OAK_PLANKS).ingredient("log", Blocks.STRIPPED_PALE_OAK_LOG).flammable()), DEFAULT_STOOL_SETTINGS));
         STOOL_BLOCKS.add(REGISTRY_HELPER.registerWithItem(StoolBlock.makeId("stripped_spruce"), () -> new StoolBlock(new BlockConfig().material("stripped_spruce").materialName("Stripped Spruce").ingredient(Blocks.SPRUCE_PLANKS).ingredient("log", Blocks.STRIPPED_SPRUCE_LOG).flammable()), DEFAULT_STOOL_SETTINGS));
         STOOL_BLOCKS.add(REGISTRY_HELPER.registerWithItem(StoolBlock.makeId("stripped_warped"), () -> new StoolBlock(new BlockConfig().material("stripped_warped").materialName("Stripped Warped").ingredient(Blocks.WARPED_PLANKS).ingredient("log", Blocks.STRIPPED_WARPED_STEM)), DEFAULT_STOOL_SETTINGS));
+
+        CreativeModeTabEvents.modifyOutputEvent(ModItemGroups.FURNITURE_ITEM_GROUP.getKey())
+                .register((tab) -> {
+                    tab.acceptAll(CHAIR_BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList());
+                    tab.acceptAll(STOOL_BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList());
+                });
     }
 }

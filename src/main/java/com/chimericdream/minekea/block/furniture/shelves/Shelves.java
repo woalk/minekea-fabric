@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Supplier;
+
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -19,8 +21,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
 
 public class Shelves implements ModThingGroup {
-    @SuppressWarnings("UnstableApiUsage")
-    public static final Item.Properties DEFAULT_SHELF_SETTINGS = new Item.Properties().arch$tab(ModItemGroups.FURNITURE_ITEM_GROUP);
+    public static final Item.Properties DEFAULT_SHELF_SETTINGS = new Item.Properties();
 
     public static final List<RegistrySupplier<Block>> BLOCKS = new ArrayList<>();
     public static final List<RegistrySupplier<Block>> SHELF_BLOCKS = new ArrayList<>();
@@ -58,6 +59,11 @@ public class Shelves implements ModThingGroup {
 
         BLOCKS.addAll(SHELF_BLOCKS);
         BLOCKS.addAll(FLOATING_SHELF_BLOCKS);
+
+        CreativeModeTabEvents.modifyOutputEvent(ModItemGroups.FURNITURE_ITEM_GROUP.getKey())
+                .register((tab) -> tab.acceptAll(
+                        BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList()
+                ));
 
         SHELF_BLOCK_ENTITY = REGISTRY_HELPER.registerBlockEntity(
             SHELF_BLOCK_ENTITY_ID,

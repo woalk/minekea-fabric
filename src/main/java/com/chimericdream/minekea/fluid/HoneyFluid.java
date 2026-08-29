@@ -81,7 +81,7 @@ public class HoneyFluid extends ArchitecturyFlowingFluid.Source {
 
     public static class Bucket extends ArchitecturyBucketItem {
         public Bucket() {
-            super(ModFluids.HONEY_FLUID, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1).arch$tab(CreativeModeTabs.INGREDIENTS).setId(REGISTRY_HELPER.makeItemRegistryKey(Identifier.fromNamespaceAndPath(ModInfo.MOD_ID, "containers/honey_bucket"))));
+            super(ModFluids.HONEY_FLUID, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1).setId(REGISTRY_HELPER.makeItemRegistryKey(Identifier.fromNamespaceAndPath(ModInfo.MOD_ID, "containers/honey_bucket"))));
         }
     }
 }

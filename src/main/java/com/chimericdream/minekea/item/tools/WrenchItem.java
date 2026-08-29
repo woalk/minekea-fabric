@@ -12,6 +12,6 @@ public class WrenchItem extends AbstractWrenchItem {
     public static final Identifier ITEM_ID = Identifier.fromNamespaceAndPath(ModInfo.MOD_ID, "tools/wrench");
 
     public WrenchItem() {
-        super(new Item.Properties().stacksTo(1).arch$tab(CreativeModeTabs.TOOLS_AND_UTILITIES).setId(ResourceKey.create(Registries.ITEM, ITEM_ID)));
+        super(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM, ITEM_ID)));
     }
 }

@@ -6,6 +6,8 @@ import com.chimericdream.minekea.util.ModThingGroup;
 import dev.architectury.registry.registries.RegistrySupplier;
 import java.util.ArrayList;
 import java.util.List;
+
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -13,8 +15,7 @@ import net.minecraft.world.level.block.Blocks;
 import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
 
 public class Tables implements ModThingGroup {
-    @SuppressWarnings("UnstableApiUsage")
-    public static final Item.Properties DEFAULT_TABLE_SETTINGS = new Item.Properties().arch$tab(ModItemGroups.FURNITURE_ITEM_GROUP);
+    public static final Item.Properties DEFAULT_TABLE_SETTINGS = new Item.Properties();
 
     public static final List<RegistrySupplier<Block>> BLOCKS = new ArrayList<>();
 
@@ -44,5 +45,9 @@ public class Tables implements ModThingGroup {
         BLOCKS.add(REGISTRY_HELPER.registerWithItem(TableBlock.makeId("stripped_pale_oak"), () -> new TableBlock(new BlockConfig().material("stripped_pale_oak").materialName("Stripped Pale Oak").ingredient(Blocks.PALE_OAK_PLANKS).ingredient("log", Blocks.STRIPPED_PALE_OAK_LOG).flammable()), DEFAULT_TABLE_SETTINGS));
         BLOCKS.add(REGISTRY_HELPER.registerWithItem(TableBlock.makeId("stripped_spruce"), () -> new TableBlock(new BlockConfig().material("stripped_spruce").materialName("Stripped Spruce").ingredient(Blocks.SPRUCE_PLANKS).ingredient("log", Blocks.STRIPPED_SPRUCE_LOG).flammable()), DEFAULT_TABLE_SETTINGS));
         BLOCKS.add(REGISTRY_HELPER.registerWithItem(TableBlock.makeId("stripped_warped"), () -> new TableBlock(new BlockConfig().material("stripped_warped").materialName("Stripped Warped").ingredient(Blocks.WARPED_PLANKS).ingredient("log", Blocks.STRIPPED_WARPED_STEM)), DEFAULT_TABLE_SETTINGS));
+
+        CreativeModeTabEvents.modifyOutputEvent(ModItemGroups.FURNITURE_ITEM_GROUP.getKey()).register((tab) -> {
+            tab.acceptAll(BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList());
+        });
     }
 }

@@ -8,9 +8,12 @@ import com.chimericdream.minekea.util.ModThingGroup;
 import dev.architectury.registry.registries.RegistrySupplier;
 import java.util.ArrayList;
 import java.util.List;
+
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ToolMaterial;
@@ -44,5 +47,10 @@ public class Tools implements ModThingGroup {
         ITEMS.addAll(HAMMERS);
         ITEMS.add(BLOCK_PAINTER_ITEM);
         ITEMS.add(WRENCH_ITEM);
+
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.TOOLS_AND_UTILITIES)
+                .register((tab) -> tab.acceptAll(
+                        ITEMS.stream().map((item) -> item.get().asItem().getDefaultInstance()).toList()
+                ));
     }
 }

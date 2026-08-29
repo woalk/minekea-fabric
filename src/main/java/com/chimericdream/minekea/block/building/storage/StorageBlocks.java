@@ -8,6 +8,8 @@ import com.chimericdream.minekea.util.ModThingGroup;
 import dev.architectury.registry.registries.RegistrySupplier;
 import java.util.ArrayList;
 import java.util.List;
+
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
@@ -20,10 +22,8 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
 
 public class StorageBlocks implements ModThingGroup {
-    @SuppressWarnings("UnstableApiUsage")
-    public static final Item.Properties DEFAULT_DYE_BLOCK_SETTINGS = new Item.Properties().arch$tab(CreativeModeTabs.COLORED_BLOCKS);
-    @SuppressWarnings("UnstableApiUsage")
-    public static final Item.Properties DEFAULT_STORAGE_BLOCK_SETTINGS = new Item.Properties().arch$tab(CreativeModeTabs.BUILDING_BLOCKS);
+    public static final Item.Properties DEFAULT_DYE_BLOCK_SETTINGS = new Item.Properties();
+    public static final Item.Properties DEFAULT_STORAGE_BLOCK_SETTINGS = new Item.Properties();
 
     public static final RegistrySupplier<Block> WHITE_DYE_BLOCK;
     public static final RegistrySupplier<Block> ORANGE_DYE_BLOCK;
@@ -209,10 +209,18 @@ public class StorageBlocks implements ModThingGroup {
             WILDFLOWER_BLOCK
         );
 
-        BLOCKS.addAll(DYE_BLOCKS);
         BLOCKS.addAll(STORAGE_BLOCKS);
         BLOCKS.add(BLUE_EGG_CRATE_BLOCK);
         BLOCKS.add(BROWN_EGG_CRATE_BLOCK);
         BLOCKS.add(EGG_CRATE_BLOCK);
+
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.COLORED_BLOCKS).register((tab) -> {
+            tab.acceptAll(DYE_BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList());
+        });
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.BUILDING_BLOCKS).register((tab) -> {
+            tab.acceptAll(BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList());
+        });
+
+        BLOCKS.addAll(DYE_BLOCKS);
     }
 }

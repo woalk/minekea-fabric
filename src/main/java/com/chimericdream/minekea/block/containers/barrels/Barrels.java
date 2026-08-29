@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Supplier;
+
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -17,8 +19,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
 
 public class Barrels implements ModThingGroup {
-    @SuppressWarnings("UnstableApiUsage")
-    public static final Item.Properties DEFAULT_BARREL_SETTINGS = new Item.Properties().arch$tab(CreativeModeTabs.FUNCTIONAL_BLOCKS);
+    public static final Item.Properties DEFAULT_BARREL_SETTINGS = new Item.Properties();
 
     public static RegistrySupplier<BlockEntityType<MinekeaBarrelBlockEntity>> MINEKEA_BARREL_BLOCK_ENTITY;
 
@@ -36,6 +37,11 @@ public class Barrels implements ModThingGroup {
         BLOCKS.add(REGISTRY_HELPER.registerWithItem(BarrelBlock.makeId("pale_oak"), () -> new BarrelBlock(new BlockConfig().material("pale_oak").materialName("Pale Oak").ingredient(Blocks.PALE_OAK_PLANKS).ingredient("slab", Blocks.PALE_OAK_SLAB), "pale_oak_planks", "stripped_pale_oak_log"), DEFAULT_BARREL_SETTINGS.setId(REGISTRY_HELPER.makeItemRegistryKey(BarrelBlock.makeId("pale_oak")))));
         BLOCKS.add(REGISTRY_HELPER.registerWithItem(BarrelBlock.makeId("spruce"), () -> new BarrelBlock(new BlockConfig().material("spruce").materialName("Spruce").ingredient(Blocks.SPRUCE_PLANKS).ingredient("slab", Blocks.SPRUCE_SLAB), "spruce_planks", "stripped_spruce_log"), DEFAULT_BARREL_SETTINGS.setId(REGISTRY_HELPER.makeItemRegistryKey(BarrelBlock.makeId("spruce")))));
         BLOCKS.add(REGISTRY_HELPER.registerWithItem(BarrelBlock.makeId("warped"), () -> new BarrelBlock(new BlockConfig().material("warped").materialName("Warped").ingredient(Blocks.WARPED_PLANKS).ingredient("slab", Blocks.WARPED_SLAB), "warped_planks", "stripped_warped_stem"), DEFAULT_BARREL_SETTINGS.setId(REGISTRY_HELPER.makeItemRegistryKey(BarrelBlock.makeId("warped")))));
+
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.FUNCTIONAL_BLOCKS)
+                .register((tab) -> tab.acceptAll(
+                        BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList()
+                ));
 
         MINEKEA_BARREL_BLOCK_ENTITY = REGISTRY_HELPER.registerBlockEntity(
             MinekeaBarrelBlockEntity.ENTITY_ID,

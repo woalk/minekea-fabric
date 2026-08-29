@@ -14,6 +14,8 @@ import com.chimericdream.minekea.block.building.general.WarpedNetherBricksBlock;
 import com.chimericdream.minekea.util.ModThingGroup;
 import dev.architectury.registry.registries.RegistrySupplier;
 import java.util.List;
+
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
@@ -29,8 +31,7 @@ import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
  * recipes, and loot tables are unaffected.
  */
 public class BasaltBrickFamilies implements ModThingGroup {
-    @SuppressWarnings("UnstableApiUsage")
-    private static final Item.Properties DEFAULT_SETTINGS = new Item.Properties().arch$tab(CreativeModeTabs.BUILDING_BLOCKS);
+    private static final Item.Properties DEFAULT_SETTINGS = new Item.Properties();
 
     public static final BlockFamily BASALT_BRICKS = family("basalt_bricks", "Basalt Brick", BuildingBlocks.BASALT_BRICKS, TextureUtils.block(BasaltBricksBlock.BLOCK_ID));
     public static final BlockFamily CRACKED_BASALT_BRICKS = family("cracked_basalt_bricks", "Cracked Basalt Brick", BuildingBlocks.CRACKED_BASALT_BRICKS, TextureUtils.block(CrackedBasaltBricksBlock.BLOCK_ID));
@@ -59,5 +60,14 @@ public class BasaltBrickFamilies implements ModThingGroup {
             .slabId(Identifier.fromNamespaceAndPath(ModInfo.MOD_ID, String.format("building/slabs/%s", material)))
             .wallId(Identifier.fromNamespaceAndPath(ModInfo.MOD_ID, String.format("building/walls/%s", material)))
             .build();
+    }
+
+    static {
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.BUILDING_BLOCKS)
+                .register((tab) -> ALL.forEach((family) -> {
+                    tab.acceptAll(family.getSlab().stream().map((block) -> block.get().asItem().getDefaultInstance()).toList());
+                    tab.acceptAll(family.getStairs().stream().map((block) -> block.get().asItem().getDefaultInstance()).toList());
+                    tab.acceptAll(family.getWall().stream().map((block) -> block.get().asItem().getDefaultInstance()).toList());
+                }));
     }
 }

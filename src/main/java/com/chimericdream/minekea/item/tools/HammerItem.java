@@ -46,7 +46,7 @@ public class HammerItem extends Item {
     }
 
     public HammerItem(ToolMaterial material, int maxSlots, String materialName, Item itemIngredient, TagKey<Item> itemIngredientTag, Properties settings) {
-        super(settings.stacksTo(1).arch$tab(CreativeModeTabs.TOOLS_AND_UTILITIES).pickaxe(material, 1.0F, -2.8F).setId(REGISTRY_HELPER.makeItemRegistryKey(makeId(materialName))));
+        super(settings.stacksTo(1).pickaxe(material, 1.0F, -2.8F).setId(REGISTRY_HELPER.makeItemRegistryKey(makeId(materialName))));
 
         this.material = material;
         this.maxSlots = maxSlots;

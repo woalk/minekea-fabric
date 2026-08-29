@@ -15,6 +15,8 @@ import com.chimericdream.minekea.util.ModThingGroup;
 import dev.architectury.registry.registries.RegistrySupplier;
 import java.util.ArrayList;
 import java.util.List;
+
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -23,8 +25,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
 
 public class Covers implements ModThingGroup {
-    @SuppressWarnings("UnstableApiUsage")
-    public static final Item.Properties DEFAULT_COVER_SETTINGS = new Item.Properties().arch$tab(ModItemGroups.COVERS_ITEM_GROUP);
+    public static final Item.Properties DEFAULT_COVER_SETTINGS = new Item.Properties();
 
     public static final List<RegistrySupplier<Block>> BLOCKS = new ArrayList<>();
 
@@ -189,5 +190,10 @@ public class Covers implements ModThingGroup {
         BLOCKS.add(REGISTRY_HELPER.registerWithItem(CoverBlock.makeId("pale_oak_log"), () -> new CoverBlock(new BlockConfig().material("pale_oak_log").materialName("Pale Oak Log").flammable().settings(BlockBehaviour.Properties.ofFullCopy(Blocks.PALE_OAK_PLANKS)).ingredient(Blocks.PALE_OAK_LOG).texture(TextureUtils.block(Blocks.PALE_OAK_LOG, "_top")).texture("side", TextureUtils.block(Blocks.PALE_OAK_LOG)).tool(Tool.AXE)), DEFAULT_COVER_SETTINGS));
         BLOCKS.add(REGISTRY_HELPER.registerWithItem(CoverBlock.makeId("spruce_log"), () -> new CoverBlock(new BlockConfig().material("spruce_log").materialName("Spruce Log").flammable().settings(BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_PLANKS)).ingredient(Blocks.SPRUCE_LOG).texture(TextureUtils.block(Blocks.SPRUCE_LOG, "_top")).texture("side", TextureUtils.block(Blocks.SPRUCE_LOG)).tool(Tool.AXE)), DEFAULT_COVER_SETTINGS));
         BLOCKS.add(REGISTRY_HELPER.registerWithItem(CoverBlock.makeId("warped_stem"), () -> new CoverBlock(new BlockConfig().material("warped_stem").materialName("Warped Stem").settings(BlockBehaviour.Properties.ofFullCopy(Blocks.WARPED_PLANKS)).ingredient(Blocks.WARPED_STEM).texture(TextureUtils.block(Blocks.WARPED_STEM, "_top")).texture("side", TextureUtils.block(Blocks.WARPED_STEM)).tool(Tool.AXE)), DEFAULT_COVER_SETTINGS));
+
+        CreativeModeTabEvents.modifyOutputEvent(ModItemGroups.COVERS_ITEM_GROUP.getKey())
+                .register((tab) -> tab.acceptAll(
+                        BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList()
+                ));
     }
 }

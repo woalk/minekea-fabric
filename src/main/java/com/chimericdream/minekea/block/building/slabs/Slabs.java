@@ -16,6 +16,8 @@ import com.chimericdream.minekea.util.ModThingGroup;
 import dev.architectury.registry.registries.RegistrySupplier;
 import java.util.ArrayList;
 import java.util.List;
+
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -24,10 +26,8 @@ import net.minecraft.world.level.block.Blocks;
 import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
 
 public class Slabs implements ModThingGroup {
-    @SuppressWarnings("UnstableApiUsage")
-    public static final Item.Properties DEFAULT_SLAB_SETTINGS = new Item.Properties().arch$tab(CreativeModeTabs.BUILDING_BLOCKS);
-    @SuppressWarnings("UnstableApiUsage")
-    public static final Item.Properties DEFAULT_VERTICAL_SLAB_SETTINGS = new Item.Properties().arch$tab(CreativeModeTabs.BUILDING_BLOCKS);
+    public static final Item.Properties DEFAULT_SLAB_SETTINGS = new Item.Properties();
+    public static final Item.Properties DEFAULT_VERTICAL_SLAB_SETTINGS = new Item.Properties();
 
     public static final List<RegistrySupplier<Block>> SLAB_BLOCKS = new ArrayList<>();
     public static final List<RegistrySupplier<Block>> VERTICAL_SLAB_BLOCKS = new ArrayList<>();
@@ -150,6 +150,13 @@ public class Slabs implements ModThingGroup {
                     DEFAULT_VERTICAL_SLAB_SETTINGS
                 )
             );
+        });
+
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.BUILDING_BLOCKS).register((tab) -> {
+            tab.acceptAll(SLAB_BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList());
+            tab.acceptAll(VERTICAL_SLAB_BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList());
+            tab.acceptAll(BOOKSHELF_SLAB_BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList());
+            tab.acceptAll(VERTICAL_BOOKSHELF_SLAB_BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList());
         });
     }
 }

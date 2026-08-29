@@ -12,6 +12,7 @@ import com.chimericdream.minekea.block.building.general.WarpedNetherBricksBlock;
 import com.chimericdream.minekea.registry.ModItemGroups;
 import com.chimericdream.minekea.util.ModThingGroup;
 import dev.architectury.registry.registries.RegistrySupplier;
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -315,10 +316,15 @@ public class CompressedBlocks implements ModThingGroup {
             MINEKEA_BLOCKS.addAll(compressedBlocks);
             BLOCK_MAP.put(materialName, compressedBlocks);
         });
+
+        CreativeModeTabEvents.modifyOutputEvent(ModItemGroups.COMPRESSED_BLOCK_ITEM_GROUP.getKey())
+                .register((tab) -> {
+                    tab.acceptAll(BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList());
+                    tab.acceptAll(COLUMN_BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList());
+                });
     }
 
-    @SuppressWarnings("UnstableApiUsage")
     public static Item.Properties getItemSettings(String material) {
-        return new Item.Properties().arch$tab(ModItemGroups.COMPRESSED_BLOCK_ITEM_GROUP).overrideDescription(CompressedBlock.makeTranslationKey(material));
+        return new Item.Properties().overrideDescription(CompressedBlock.makeTranslationKey(material));
     }
 }

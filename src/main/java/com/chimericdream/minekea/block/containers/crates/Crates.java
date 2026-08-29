@@ -5,6 +5,7 @@ import com.chimericdream.lib.resource.TextureUtils;
 import com.chimericdream.minekea.client.screen.crate.CrateScreenHandler;
 import com.chimericdream.minekea.client.screen.crate.DoubleCrateScreenHandler;
 import com.chimericdream.minekea.entity.block.containers.CrateBlockEntity;
+import com.chimericdream.minekea.registry.ModItemGroups;
 import com.chimericdream.minekea.util.ModThingGroup;
 import dev.architectury.registry.registries.RegistrySupplier;
 import java.util.ArrayList;
@@ -13,6 +14,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
+
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.inventory.MenuType;
@@ -25,8 +28,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
 
 public class Crates implements ModThingGroup {
-    @SuppressWarnings("UnstableApiUsage")
-    public static final Item.Properties DEFAULT_CRATE_SETTINGS = new Item.Properties().arch$tab(CreativeModeTabs.FUNCTIONAL_BLOCKS);
+    public static final Item.Properties DEFAULT_CRATE_SETTINGS = new Item.Properties();
 
     public static RegistrySupplier<BlockEntityType<CrateBlockEntity>> CRATE_BLOCK_ENTITY;
 
@@ -87,6 +89,11 @@ public class Crates implements ModThingGroup {
 
         BLOCKS.addAll(CRATES.values());
         BLOCKS.addAll(TRAPPED_CRATES.values());
+
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.FUNCTIONAL_BLOCKS)
+                .register((tab) -> tab.acceptAll(
+                        BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList()
+                ));
 
         CRATE_BLOCK_ENTITY = REGISTRY_HELPER.registerBlockEntity(
             CrateBlockEntity.ENTITY_ID,

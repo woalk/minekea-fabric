@@ -5,6 +5,8 @@ import com.chimericdream.minekea.util.ModThingGroup;
 import dev.architectury.registry.registries.RegistrySupplier;
 import java.util.ArrayList;
 import java.util.List;
+
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -13,8 +15,7 @@ import net.minecraft.world.level.block.Blocks;
 import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
 
 public class VotiveCandles implements ModThingGroup {
-    @SuppressWarnings("UnstableApiUsage")
-    public static final Item.Properties DEFAULT_CANDLE_SETTINGS = new Item.Properties().arch$tab(CreativeModeTabs.FUNCTIONAL_BLOCKS);
+    public static final Item.Properties DEFAULT_CANDLE_SETTINGS = new Item.Properties();
 
     public static final List<RegistrySupplier<Block>> BLOCKS = new ArrayList<>();
 
@@ -36,5 +37,10 @@ public class VotiveCandles implements ModThingGroup {
         BLOCKS.add(REGISTRY_HELPER.registerWithItem(VotiveCandleBlock.makeId("purple"), () -> new VotiveCandleBlock(new BlockConfig().ingredient(Blocks.DYED_CANDLE.purple()), "purple"), DEFAULT_CANDLE_SETTINGS));
         BLOCKS.add(REGISTRY_HELPER.registerWithItem(VotiveCandleBlock.makeId("magenta"), () -> new VotiveCandleBlock(new BlockConfig().ingredient(Blocks.DYED_CANDLE.magenta()), "magenta"), DEFAULT_CANDLE_SETTINGS));
         BLOCKS.add(REGISTRY_HELPER.registerWithItem(VotiveCandleBlock.makeId("pink"), () -> new VotiveCandleBlock(new BlockConfig().ingredient(Blocks.DYED_CANDLE.pink()), "pink"), DEFAULT_CANDLE_SETTINGS));
+
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.FUNCTIONAL_BLOCKS)
+                .register((tab) -> tab.acceptAll(
+                        BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList()
+                ));
     }
 }

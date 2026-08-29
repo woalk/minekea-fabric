@@ -17,6 +17,7 @@ import dev.architectury.registry.registries.RegistrySupplier;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -25,10 +26,8 @@ import net.minecraft.world.level.block.Blocks;
 import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
 
 public class Stairs implements ModThingGroup {
-    @SuppressWarnings("UnstableApiUsage")
-    public static final Item.Properties DEFAULT_STAIRS_SETTINGS = new Item.Properties().arch$tab(CreativeModeTabs.BUILDING_BLOCKS);
-    @SuppressWarnings("UnstableApiUsage")
-    public static final Item.Properties DEFAULT_VERTICAL_STAIRS_SETTINGS = new Item.Properties().arch$tab(CreativeModeTabs.BUILDING_BLOCKS);
+    public static final Item.Properties DEFAULT_STAIRS_SETTINGS = new Item.Properties();
+    public static final Item.Properties DEFAULT_VERTICAL_STAIRS_SETTINGS = new Item.Properties();
 
     public static final List<RegistrySupplier<Block>> STAIRS_BLOCKS = new ArrayList<>();
     public static final List<RegistrySupplier<Block>> VERTICAL_STAIRS_BLOCKS = new ArrayList<>();
@@ -147,6 +146,13 @@ public class Stairs implements ModThingGroup {
                     DEFAULT_VERTICAL_STAIRS_SETTINGS
                 )
             );
+        });
+
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.BUILDING_BLOCKS).register((tab) -> {
+            tab.acceptAll(STAIRS_BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList());
+            tab.acceptAll(VERTICAL_STAIRS_BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList());
+            tab.acceptAll(BOOKSHELF_STAIRS_BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList());
+            tab.acceptAll(VERTICAL_BOOKSHELF_STAIRS_BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList());
         });
     }
 }

@@ -6,6 +6,8 @@ import com.chimericdream.minekea.util.ModThingGroup;
 import dev.architectury.registry.registries.RegistrySupplier;
 import java.util.ArrayList;
 import java.util.List;
+
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -15,8 +17,7 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
 
 public class Trapdoors implements ModThingGroup {
-    @SuppressWarnings("UnstableApiUsage")
-    public static final Item.Properties DEFAULT_TRAPDOOR_SETTINGS = new Item.Properties().arch$tab(CreativeModeTabs.REDSTONE_BLOCKS);
+    public static final Item.Properties DEFAULT_TRAPDOOR_SETTINGS = new Item.Properties();
 
     public static final List<RegistrySupplier<Block>> BLOCKS = new ArrayList<>();
     public static final List<RegistrySupplier<Block>> BOOKSHELF_TRAPDOOR_BLOCKS = new ArrayList<>();
@@ -36,5 +37,10 @@ public class Trapdoors implements ModThingGroup {
         BOOKSHELF_TRAPDOOR_BLOCKS.add(REGISTRY_HELPER.registerWithItem(BookshelfTrapdoorBlock.makeId("warped"), () -> new BookshelfTrapdoorBlock(BlockSetType.WARPED, new BlockConfig().material("warped").materialName("Warped").ingredient(Bookshelves.BOOKSHELVES.get("warped")).ingredient("planks", Blocks.WARPED_PLANKS)), DEFAULT_TRAPDOOR_SETTINGS));
 
         BLOCKS.addAll(BOOKSHELF_TRAPDOOR_BLOCKS);
+
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.REDSTONE_BLOCKS)
+                .register((tab) -> tab.acceptAll(
+                        BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList()
+                ));
     }
 }

@@ -22,19 +22,20 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
 import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
 
-@SuppressWarnings("UnstableApiUsage")
 public class BuildingBlocks implements ModThingGroup {
     public static final List<RegistrySupplier<Block>> BLOCKS = new ArrayList<>();
     public static final Map<String, RegistrySupplier<Block>> WAX_BLOCKS = new LinkedHashMap<>();
 
-    public static final Item.Properties DEFAULT_SETTINGS = new Item.Properties().arch$tab(CreativeModeTabs.BUILDING_BLOCKS);
-    public static final Item.Properties WAX_BLOCK_SETTINGS = new Item.Properties().arch$tab(CreativeModeTabs.COLORED_BLOCKS);
+    public static final Item.Properties DEFAULT_SETTINGS = new Item.Properties();
+    public static final Item.Properties WAX_BLOCK_SETTINGS = new Item.Properties();
 
     public static final RegistrySupplier<Block> BASALT_BRICKS = REGISTRY_HELPER.registerWithItem(BasaltBricksBlock.BLOCK_ID, BasaltBricksBlock::new, DEFAULT_SETTINGS);
     public static final RegistrySupplier<Block> CHISELED_BASALT_BRICKS = REGISTRY_HELPER.registerWithItem(ChiseledBasaltBricksBlock.BLOCK_ID, ChiseledBasaltBricksBlock::new, DEFAULT_SETTINGS);
@@ -71,6 +72,11 @@ public class BuildingBlocks implements ModThingGroup {
         BLOCKS.add(WARPED_BASALT_BRICKS);
         BLOCKS.add(WARPED_NETHER_BRICKS);
 
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.BUILDING_BLOCKS)
+                .register((tab) -> tab.acceptAll(
+                        BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList()
+                ));
+
         WAX_BLOCKS.put("plain", PLAIN_WAX_BLOCK);
         WAX_BLOCKS.put("white", WHITE_WAX_BLOCK);
         WAX_BLOCKS.put("light_gray", LIGHT_GRAY_WAX_BLOCK);
@@ -88,6 +94,11 @@ public class BuildingBlocks implements ModThingGroup {
         WAX_BLOCKS.put("purple", PURPLE_WAX_BLOCK);
         WAX_BLOCKS.put("magenta", MAGENTA_WAX_BLOCK);
         WAX_BLOCKS.put("pink", PINK_WAX_BLOCK);
+
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.COLORED_BLOCKS)
+                .register((tab) -> tab.acceptAll(
+                        WAX_BLOCKS.values().stream().map((block) -> block.get().asItem().getDefaultInstance()).toList()
+                ));
 
         BLOCKS.addAll(WAX_BLOCKS.values());
 

@@ -7,6 +7,9 @@ import dev.architectury.registry.registries.RegistrySupplier;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Supplier;
+
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
@@ -51,6 +54,11 @@ public class WaxItems implements ModThingGroup {
         WAX_ITEMS.put("purple", PURPLE_WAX_ITEM);
         WAX_ITEMS.put("magenta", MAGENTA_WAX_ITEM);
         WAX_ITEMS.put("pink", PINK_WAX_ITEM);
+
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.INGREDIENTS)
+                .register((tab) -> tab.acceptAll(
+                        WAX_ITEMS.values().stream().map((item) -> item.get().getDefaultInstance()).toList()
+                ));
     }
 
     public static void postInit() {

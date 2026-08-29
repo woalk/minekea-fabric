@@ -15,6 +15,8 @@ import com.chimericdream.minekea.util.ModThingGroup;
 import dev.architectury.registry.registries.RegistrySupplier;
 import java.util.ArrayList;
 import java.util.List;
+
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -23,8 +25,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
 
 public class Beams implements ModThingGroup {
-    @SuppressWarnings("UnstableApiUsage")
-    public static final Item.Properties DEFAULT_BEAM_SETTINGS = new Item.Properties().arch$tab(ModItemGroups.BEAMS_ITEM_GROUP);
+    public static final Item.Properties DEFAULT_BEAM_SETTINGS = new Item.Properties();
 
     public static final List<RegistrySupplier<Block>> BLOCKS = new ArrayList<>();
 
@@ -188,5 +189,10 @@ public class Beams implements ModThingGroup {
         BLOCKS.add(REGISTRY_HELPER.registerWithItem(BeamBlock.makeId("spruce_log"), () -> new BeamBlock(new BlockConfig().material("spruce_log").materialName("Spruce Log").ingredient(Blocks.SPRUCE_LOG).flammable().settings(BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_PLANKS)).texture(TextureUtils.block(Blocks.SPRUCE_LOG)).texture("end", TextureUtils.block(Blocks.SPRUCE_LOG, "_top")).tool(Tool.AXE)), DEFAULT_BEAM_SETTINGS));
         BLOCKS.add(REGISTRY_HELPER.registerWithItem(BeamBlock.makeId("warped"), () -> new BeamBlock(new BlockConfig().material("warped").materialName("Warped").ingredient(Blocks.WARPED_PLANKS).tool(Tool.AXE)), DEFAULT_BEAM_SETTINGS));
         BLOCKS.add(REGISTRY_HELPER.registerWithItem(BeamBlock.makeId("warped_stem"), () -> new BeamBlock(new BlockConfig().material("warped_stem").materialName("Warped Stem").ingredient(Blocks.WARPED_STEM).settings(BlockBehaviour.Properties.ofFullCopy(Blocks.WARPED_PLANKS)).texture(TextureUtils.block(Blocks.WARPED_STEM)).texture("end", TextureUtils.block(Blocks.WARPED_STEM, "_top")).tool(Tool.AXE)), DEFAULT_BEAM_SETTINGS));
+
+        CreativeModeTabEvents.modifyOutputEvent(ModItemGroups.BEAMS_ITEM_GROUP.getKey())
+                .register((tab) -> tab.acceptAll(
+                        BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList()
+                ));
     }
 }

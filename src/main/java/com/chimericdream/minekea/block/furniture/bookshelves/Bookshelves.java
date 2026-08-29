@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
@@ -20,7 +22,7 @@ import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
 
 public class Bookshelves implements ModThingGroup {
     @SuppressWarnings("UnstableApiUsage")
-    public static final Item.Properties DEFAULT_BOOKSHELF_SETTINGS = new Item.Properties().arch$tab(CreativeModeTabs.BUILDING_BLOCKS);
+    public static final Item.Properties DEFAULT_BOOKSHELF_SETTINGS = new Item.Properties();
 
     public static final List<RegistrySupplier<Block>> BLOCKS = new ArrayList<>();
     public static final Map<String, RegistrySupplier<Block>> BOOKSHELVES = new LinkedHashMap<>();
@@ -75,5 +77,10 @@ public class Bookshelves implements ModThingGroup {
         BOOKSHELF_CONFIGS.forEach((key, value) -> BOOKSHELVES.put(key, REGISTRY_HELPER.registerWithItem(BookshelfBlock.makeId(key), () -> new BookshelfBlock(value), DEFAULT_BOOKSHELF_SETTINGS)));
 
         BLOCKS.addAll(BOOKSHELVES.values());
+
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.BUILDING_BLOCKS)
+                .register((tab) -> tab.acceptAll(
+                        BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList()
+                ));
     }
 }

@@ -4,6 +4,8 @@ import com.chimericdream.minekea.util.ModThingGroup;
 import dev.architectury.registry.registries.RegistrySupplier;
 import java.util.ArrayList;
 import java.util.List;
+
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -12,7 +14,7 @@ import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
 
 public class Pillows implements ModThingGroup {
     @SuppressWarnings("UnstableApiUsage")
-    public static final Item.Properties DEFAULT_PILLOW_SETTINGS = new Item.Properties().arch$tab(CreativeModeTabs.COLORED_BLOCKS);
+    public static final Item.Properties DEFAULT_PILLOW_SETTINGS = new Item.Properties();
 
     public static final RegistrySupplier<Block> WHITE_PILLOW;
     public static final RegistrySupplier<Block> LIGHT_GRAY_PILLOW;
@@ -69,5 +71,10 @@ public class Pillows implements ModThingGroup {
             MAGENTA_PILLOW,
             PINK_PILLOW
         ));
+
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.COLORED_BLOCKS)
+                .register((tab) -> tab.acceptAll(
+                        BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList()
+                ));
     }
 }

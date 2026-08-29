@@ -36,7 +36,7 @@ public class BlockPainterItem extends Item {
     public static final Identifier ITEM_ID = Identifier.fromNamespaceAndPath(ModInfo.MOD_ID, "tools/painter");
 
     public BlockPainterItem() {
-        super(new Properties().stacksTo(1).arch$tab(CreativeModeTabs.TOOLS_AND_UTILITIES).setId(REGISTRY_HELPER.makeItemRegistryKey(ITEM_ID)));
+        super(new Properties().stacksTo(1).setId(REGISTRY_HELPER.makeItemRegistryKey(ITEM_ID)));
     }
 
     public static BlockColor getColor(ItemStack stack) {

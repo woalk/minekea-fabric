@@ -5,6 +5,8 @@ import com.chimericdream.minekea.util.ModThingGroup;
 import dev.architectury.registry.registries.RegistrySupplier;
 import java.util.ArrayList;
 import java.util.List;
+
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -13,8 +15,7 @@ import net.minecraft.world.level.block.Blocks;
 import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
 
 public class FramedBlocks implements ModThingGroup {
-    @SuppressWarnings("UnstableApiUsage")
-    public static final Item.Properties DEFAULT_FRAMED_BLOCK_SETTINGS = new Item.Properties().arch$tab(CreativeModeTabs.BUILDING_BLOCKS);
+    public static final Item.Properties DEFAULT_FRAMED_BLOCK_SETTINGS = new Item.Properties();
 
     public static final List<RegistrySupplier<Block>> FRAMED_PLANKS = new ArrayList<>();
 
@@ -43,5 +44,10 @@ public class FramedBlocks implements ModThingGroup {
         FRAMED_PLANKS.add(REGISTRY_HELPER.registerWithItem(FramedPlanksBlock.makeId("spruce_stripped"), () -> new FramedPlanksBlock(new BlockConfig().material("spruce_stripped").materialName("Stripped Spruce").ingredient(Blocks.SPRUCE_PLANKS).ingredient("log", Blocks.STRIPPED_SPRUCE_LOG).flammable()), DEFAULT_FRAMED_BLOCK_SETTINGS));
         FRAMED_PLANKS.add(REGISTRY_HELPER.registerWithItem(FramedPlanksBlock.makeId("warped"), () -> new FramedPlanksBlock(new BlockConfig().material("warped").materialName("Warped").ingredient(Blocks.WARPED_PLANKS).ingredient("log", Blocks.WARPED_STEM)), DEFAULT_FRAMED_BLOCK_SETTINGS));
         FRAMED_PLANKS.add(REGISTRY_HELPER.registerWithItem(FramedPlanksBlock.makeId("warped_stripped"), () -> new FramedPlanksBlock(new BlockConfig().material("warped_stripped").materialName("Stripped Warped").ingredient(Blocks.WARPED_PLANKS).ingredient("log", Blocks.STRIPPED_WARPED_STEM)), DEFAULT_FRAMED_BLOCK_SETTINGS));
+
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.BUILDING_BLOCKS)
+                .register((tab) -> tab.acceptAll(
+                        FRAMED_PLANKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList()
+                ));
     }
 }

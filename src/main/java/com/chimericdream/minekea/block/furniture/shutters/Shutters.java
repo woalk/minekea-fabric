@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -16,8 +18,7 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
 
 public class Shutters implements ModThingGroup {
-    @SuppressWarnings("UnstableApiUsage")
-    public static final Item.Properties DEFAULT_SHUTTER_SETTINGS = new Item.Properties().arch$tab(ModItemGroups.FURNITURE_ITEM_GROUP);
+    public static final Item.Properties DEFAULT_SHUTTER_SETTINGS = new Item.Properties();
     public static final Item.Properties DEFAULT_SHUTTER_HALF_SETTINGS = new Item.Properties();
 
     public static final List<RegistrySupplier<Block>> BLOCKS = new ArrayList<>();
@@ -64,6 +65,11 @@ public class Shutters implements ModThingGroup {
         SHUTTER_BLOCKS.put("pale_oak", REGISTRY_HELPER.registerWithItem(ShutterBlock.makeId("pale_oak"), () -> new ShutterBlock(BlockSetType.PALE_OAK, CONFIGS.get("pale_oak")), DEFAULT_SHUTTER_SETTINGS));
         SHUTTER_BLOCKS.put("spruce", REGISTRY_HELPER.registerWithItem(ShutterBlock.makeId("spruce"), () -> new ShutterBlock(BlockSetType.SPRUCE, CONFIGS.get("spruce")), DEFAULT_SHUTTER_SETTINGS));
         SHUTTER_BLOCKS.put("warped", REGISTRY_HELPER.registerWithItem(ShutterBlock.makeId("warped"), () -> new ShutterBlock(BlockSetType.WARPED, CONFIGS.get("warped")), DEFAULT_SHUTTER_SETTINGS));
+
+        CreativeModeTabEvents.modifyOutputEvent(ModItemGroups.FURNITURE_ITEM_GROUP.getKey())
+                .register((tab) -> tab.acceptAll(
+                        SHUTTER_BLOCKS.values().stream().map((block) -> block.get().asItem().getDefaultInstance()).toList()
+                ));
 
         SHUTTER_BLOCKS.put("stripped_acacia", REGISTRY_HELPER.registerWithItem(ShutterBlock.makeId("stripped_acacia"), () -> new ShutterBlock(BlockSetType.ACACIA, CONFIGS.get("stripped_acacia")), DEFAULT_SHUTTER_SETTINGS));
         SHUTTER_BLOCKS.put("stripped_bamboo", REGISTRY_HELPER.registerWithItem(ShutterBlock.makeId("stripped_bamboo"), () -> new ShutterBlock(BlockSetType.BAMBOO, CONFIGS.get("stripped_bamboo")), DEFAULT_SHUTTER_SETTINGS));

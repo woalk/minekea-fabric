@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Supplier;
+
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -19,8 +21,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
 
 public class Armoires implements ModThingGroup {
-    @SuppressWarnings("UnstableApiUsage")
-    public static final Item.Properties DEFAULT_ARMOIRE_SETTINGS = new Item.Properties().arch$tab(ModItemGroups.FURNITURE_ITEM_GROUP);
+    public static final Item.Properties DEFAULT_ARMOIRE_SETTINGS = new Item.Properties();
 
     public static final List<RegistrySupplier<Block>> BLOCKS = new ArrayList<>();
 
@@ -40,6 +41,11 @@ public class Armoires implements ModThingGroup {
         BLOCKS.add(REGISTRY_HELPER.registerWithItem(ArmoireBlock.makeId("pale_oak"), () -> new ArmoireBlock(new BlockConfig().material("pale_oak").materialName("Pale Oak").ingredient("planks", Blocks.PALE_OAK_PLANKS).ingredient("log", Blocks.STRIPPED_PALE_OAK_LOG).ingredient("slab", Blocks.PALE_OAK_SLAB).flammable()), DEFAULT_ARMOIRE_SETTINGS));
         BLOCKS.add(REGISTRY_HELPER.registerWithItem(ArmoireBlock.makeId("spruce"), () -> new ArmoireBlock(new BlockConfig().material("spruce").materialName("Spruce").ingredient("planks", Blocks.SPRUCE_PLANKS).ingredient("log", Blocks.STRIPPED_SPRUCE_LOG).ingredient("slab", Blocks.SPRUCE_SLAB).flammable()), DEFAULT_ARMOIRE_SETTINGS));
         BLOCKS.add(REGISTRY_HELPER.registerWithItem(ArmoireBlock.makeId("warped"), () -> new ArmoireBlock(new BlockConfig().material("warped").materialName("Warped").ingredient("planks", Blocks.WARPED_PLANKS).ingredient("log", Blocks.STRIPPED_WARPED_STEM).ingredient("slab", Blocks.WARPED_SLAB)), DEFAULT_ARMOIRE_SETTINGS));
+
+        CreativeModeTabEvents.modifyOutputEvent(ModItemGroups.FURNITURE_ITEM_GROUP.getKey())
+                .register((tab) -> tab.acceptAll(
+                        BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList()
+                ));
 
         ARMOIRE_BLOCK_ENTITY = REGISTRY_HELPER.registerBlockEntity(
             ARMOIRE_BLOCK_ENTITY_ID,

@@ -14,7 +14,7 @@ public class NuggetBag extends Item {
     public final Item ingredient;
 
     public NuggetBag(String material, String materialName, Item ingredient) {
-        super(new Properties().arch$tab(CreativeModeTabs.INGREDIENTS).setId(REGISTRY_HELPER.makeItemRegistryKey(makeId(material))));
+        super(new Properties().setId(REGISTRY_HELPER.makeItemRegistryKey(makeId(material))));
 
         ITEM_ID = makeId(material);
 
