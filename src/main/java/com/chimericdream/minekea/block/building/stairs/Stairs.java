@@ -134,6 +134,24 @@ public class Stairs implements ModThingGroup {
             );
         });
 
+        Blocks.WOOL.forEach(wool -> {
+            final var woolId = BuiltInRegistries.BLOCK.getKey(wool);
+            STAIRS_BLOCKS.add(
+                REGISTRY_HELPER.registerWithItem(
+                    StairsBlock.makeId(woolId.getPath()),
+                    () -> new StairsBlock(new BlockConfig().material(woolId.getPath()).materialName(wool.getName().getString()).ingredient(wool)),
+                    DEFAULT_STAIRS_SETTINGS
+                )
+            );
+            VERTICAL_STAIRS_BLOCKS.add(
+                    REGISTRY_HELPER.registerWithItem(
+                            VerticalStairsBlock.makeId(woolId.getPath()),
+                            () -> new VerticalStairsBlock(new BlockConfig().material(woolId.getPath()).materialName(wool.getName().getString()).ingredient(wool)),
+                            DEFAULT_STAIRS_SETTINGS
+                    )
+            );
+        });
+
         final var oakConfig = new BlockConfig()
                 .material("oak")
                 .materialName("Oak")

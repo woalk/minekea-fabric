@@ -1,16 +1,7 @@
 package com.chimericdream.minekea.block.building.slabs;
 
 import com.chimericdream.lib.blocks.BlockConfig;
-import com.chimericdream.lib.resource.TextureUtils;
-import com.chimericdream.lib.util.Tool;
-import com.chimericdream.minekea.block.building.BuildingBlocks;
 import com.chimericdream.minekea.block.building.LogWoodFamilies;
-import com.chimericdream.minekea.block.building.general.BasaltBricksBlock;
-import com.chimericdream.minekea.block.building.general.CrackedBasaltBricksBlock;
-import com.chimericdream.minekea.block.building.general.CrimsonBasaltBricksBlock;
-import com.chimericdream.minekea.block.building.general.MossyBasaltBricksBlock;
-import com.chimericdream.minekea.block.building.general.WarpedBasaltBricksBlock;
-import com.chimericdream.minekea.block.building.general.WarpedNetherBricksBlock;
 import com.chimericdream.minekea.block.furniture.bookshelves.Bookshelves;
 import com.chimericdream.minekea.util.ModThingGroup;
 import dev.architectury.registry.registries.RegistrySupplier;
@@ -18,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -27,7 +19,6 @@ import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
 
 public class Slabs implements ModThingGroup {
     public static final Item.Properties DEFAULT_SLAB_SETTINGS = new Item.Properties();
-    public static final Item.Properties DEFAULT_VERTICAL_SLAB_SETTINGS = new Item.Properties();
 
     public static final List<RegistrySupplier<Block>> SLAB_BLOCKS = new ArrayList<>();
     public static final List<RegistrySupplier<Block>> BOOKSHELF_SLAB_BLOCKS = new ArrayList<>();
@@ -43,6 +34,17 @@ public class Slabs implements ModThingGroup {
                     () -> new SlabBlock(entry.newConfig()),
                     DEFAULT_SLAB_SETTINGS
                 )
+            );
+        });
+
+        Blocks.WOOL.forEach(wool -> {
+            final var woolId = BuiltInRegistries.BLOCK.getKey(wool);
+            SLAB_BLOCKS.add(
+                    REGISTRY_HELPER.registerWithItem(
+                            SlabBlock.makeId(woolId.getPath()),
+                            () -> new SlabBlock(new BlockConfig().material(woolId.getPath()).materialName(wool.getName().getString()).ingredient(wool)),
+                            DEFAULT_SLAB_SETTINGS
+                    )
             );
         });
 
