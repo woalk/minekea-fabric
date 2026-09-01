@@ -35,17 +35,11 @@ public class DyedBlocks implements ModThingGroup {
         new DyedEntry("Calcite", "calcite", Blocks.CALCITE, null),
         new DyedEntry("Cobblestone", "cobblestone", Blocks.COBBLESTONE, null),
         new DyedEntry("Dark Prismarine", "dark_prismarine", Blocks.DARK_PRISMARINE, null),
-        new DyedEntry("Mud Bricks", "mud_bricks", Blocks.MUD_BRICKS, null),
-        new DyedEntry("Oak Planks", "oak_planks", Blocks.OAK_PLANKS, Tool.AXE),
-        new DyedEntry("Prismarine", "prismarine", Blocks.PRISMARINE, null),
         new DyedEntry("Prismarine Bricks", "prismarine_bricks", Blocks.PRISMARINE_BRICKS, null),
-        new DyedEntry("Smooth Stone", "smooth_stone", Blocks.SMOOTH_STONE, null),
-        new DyedEntry("Stone", "stone", Blocks.STONE, null),
         new DyedEntry("Stone Bricks", "stone_bricks", Blocks.STONE_BRICKS, null)
     );
 
     protected static final List<DyedEntry> PILLAR_BLOCKS_TO_DYE = List.of(
-        new DyedEntry("Bone Block", "bone_block", Blocks.BONE_BLOCK, null)
     );
 
     protected static final List<RegistrySupplier<Block>> WHITE_BLOCKS = new ArrayList<>();
