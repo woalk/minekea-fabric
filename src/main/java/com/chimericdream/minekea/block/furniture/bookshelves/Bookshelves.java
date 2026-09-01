@@ -43,6 +43,8 @@ public class Bookshelves implements ModThingGroup {
 
         BOOKSHELF_CONFIGS.put("polished_blackstone", new BlockConfig().material("polished_blackstone").materialName("Polished Blackstone").ingredient(Blocks.POLISHED_BLACKSTONE));
         BOOKSHELF_CONFIGS.put("polished_diorite", new BlockConfig().material("polished_diorite").materialName("Polished Diorite").ingredient(Blocks.POLISHED_DIORITE));
+        BOOKSHELF_CONFIGS.put("polished_andesite", new BlockConfig().material("polished_andesite").materialName("Polished Andesite").ingredient(Blocks.POLISHED_ANDESITE));
+        BOOKSHELF_CONFIGS.put("prismarine_bricks", new BlockConfig().material("prismarine_bricks").materialName("Prismarine Bricks").ingredient(Blocks.PRISMARINE_BRICKS));
 
         BOOKSHELF_CONFIGS.forEach((key, value) -> BOOKSHELVES.put(key, REGISTRY_HELPER.registerWithItem(BookshelfBlock.makeId(key), () -> new BookshelfBlock(value), DEFAULT_BOOKSHELF_SETTINGS)));
 
