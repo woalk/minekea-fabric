@@ -14,6 +14,12 @@ public class BookshelfStairsBlock extends StairsBlock {
         BASE_BLOCK_ID = BookshelfBlock.makeId(config.getMaterial());
     }
 
+    public BookshelfStairsBlock(BlockConfig config, Identifier baseBlockId) {
+        super(config, makeId(config.getMaterial()));
+
+        BASE_BLOCK_ID = baseBlockId;
+    }
+
     public static Identifier makeId(String material) {
         return Identifier.fromNamespaceAndPath(ModInfo.MOD_ID, String.format("building/stairs/bookshelves/%s", material));
     }

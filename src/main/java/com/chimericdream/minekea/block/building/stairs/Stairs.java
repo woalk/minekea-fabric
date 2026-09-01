@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.references.BlockIds;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -132,6 +134,25 @@ public class Stairs implements ModThingGroup {
             );
         });
 
+        final var oakConfig = new BlockConfig()
+                .material("oak")
+                .materialName("Oak")
+                .ingredient(Blocks.OAK_PLANKS)
+                .flammable()
+                .tool(Tool.AXE);
+        final var oakBookshelfId = BuiltInRegistries.BLOCK.getKey(Blocks.BOOKSHELF);
+        BOOKSHELF_STAIRS_BLOCKS.add(
+                REGISTRY_HELPER.registerWithItem(BookshelfStairsBlock.makeId("oak"),
+                        () -> new BookshelfStairsBlock(oakConfig, oakBookshelfId),
+                        DEFAULT_STAIRS_SETTINGS
+                )
+        );
+        VERTICAL_BOOKSHELF_STAIRS_BLOCKS.add(
+                REGISTRY_HELPER.registerWithItem(VerticalBookshelfStairsBlock.makeId("oak"),
+                        () -> new VerticalBookshelfStairsBlock(oakConfig, oakBookshelfId),
+                        DEFAULT_STAIRS_SETTINGS
+                )
+        );
         Bookshelves.BOOKSHELF_CONFIGS.forEach((material, config) -> {
             BOOKSHELF_STAIRS_BLOCKS.add(
                 REGISTRY_HELPER.registerWithItem(BookshelfStairsBlock.makeId(material),
