@@ -7,6 +7,9 @@
 # Gradle build folder
 build
 
+# Datagen
+src/main/generated
+
 # IntelliJ
 out/
 .idea
