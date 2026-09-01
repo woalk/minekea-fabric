@@ -2,6 +2,7 @@ package com.chimericdream.minekea.fabric.block.building;
 
 import com.chimericdream.lib.fabric.blocks.family.BlockFamilyDataGenerators;
 import com.chimericdream.minekea.block.building.BasaltBrickFamilies;
+import com.chimericdream.minekea.block.building.dyed.DyedBlockFamilies;
 import com.chimericdream.minekea.block.building.BuildingBlocks;
 import com.chimericdream.minekea.block.building.beams.Beams;
 import com.chimericdream.minekea.block.building.covers.Covers;
@@ -63,6 +64,9 @@ public class BuildingBlocksDataGenerator implements BlockDataGeneratorGroup {
         StorageBlocks.STORAGE_BLOCKS.forEach(block -> BLOCK_GENERATORS.add(new ItemStorageBlockDataGenerator(block.get())));
         StorageBlocks.DYE_BLOCKS.forEach(block -> BLOCK_GENERATORS.add(new DyeBlockDataGenerator(block.get())));
         BasaltBrickFamilies.ALL.forEach(family ->
+            BlockFamilyDataGenerators.of(family).forEach(generator ->
+                BLOCK_GENERATORS.add(new ChimericLibBlockDataGeneratorAdapter(generator))));
+        DyedBlockFamilies.ALL.forEach(family ->
             BlockFamilyDataGenerators.of(family).forEach(generator ->
                 BLOCK_GENERATORS.add(new ChimericLibBlockDataGeneratorAdapter(generator))));
 

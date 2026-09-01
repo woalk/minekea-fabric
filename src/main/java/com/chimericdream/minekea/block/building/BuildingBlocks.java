@@ -2,6 +2,7 @@ package com.chimericdream.minekea.block.building;
 
 import com.chimericdream.minekea.block.building.beams.Beams;
 import com.chimericdream.minekea.block.building.covers.Covers;
+import com.chimericdream.minekea.block.building.dyed.DyedBlockFamilies;
 import com.chimericdream.minekea.block.building.dyed.DyedBlocks;
 import com.chimericdream.minekea.block.building.framed.FramedBlocks;
 import com.chimericdream.minekea.block.building.general.BasaltBricksBlock;
@@ -114,5 +115,6 @@ public class BuildingBlocks implements ModThingGroup {
         BLOCKS.addAll(Stairs.VERTICAL_BOOKSHELF_STAIRS_BLOCKS);
         BLOCKS.addAll(StorageBlocks.BLOCKS);
         BasaltBrickFamilies.ALL.forEach(family -> family.getVariants().forEach(variant -> BLOCKS.add(family.getBlock(variant).orElseThrow())));
+        DyedBlockFamilies.ALL.forEach(family -> family.getVariants().forEach(variant -> BLOCKS.add(family.getBlock(variant).orElseThrow())));
     }
 }
