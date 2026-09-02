@@ -1,6 +1,7 @@
 package com.chimericdream.minekea.block.building.slabs;
 
 import com.chimericdream.lib.blocks.BlockConfig;
+import com.chimericdream.lib.util.Tool;
 import com.chimericdream.minekea.block.building.LogWoodFamilies;
 import com.chimericdream.minekea.block.furniture.bookshelves.Bookshelves;
 import com.chimericdream.minekea.util.ModThingGroup;
@@ -48,6 +49,19 @@ public class Slabs implements ModThingGroup {
             );
         });
 
+        final var oakConfig = new BlockConfig()
+                .material("oak")
+                .materialName("Oak")
+                .ingredient(Blocks.OAK_PLANKS)
+                .flammable()
+                .tool(Tool.AXE);
+        final var oakBookshelfId = BuiltInRegistries.BLOCK.getKey(Blocks.BOOKSHELF);
+        BOOKSHELF_SLAB_BLOCKS.add(
+                REGISTRY_HELPER.registerWithItem(BookshelfSlabBlock.makeId("oak"),
+                        () -> new BookshelfSlabBlock(oakConfig, oakBookshelfId),
+                        DEFAULT_SLAB_SETTINGS
+                )
+        );
         Bookshelves.BOOKSHELF_CONFIGS.forEach((material, config) -> {
             BOOKSHELF_SLAB_BLOCKS.add(
                 REGISTRY_HELPER.registerWithItem(BookshelfSlabBlock.makeId(material),

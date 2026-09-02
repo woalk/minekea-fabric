@@ -21,6 +21,14 @@ public class BookshelfSlabBlock extends SlabBlock {
         this.config = config;
     }
 
+    public BookshelfSlabBlock(BlockConfig config, Identifier baseBlockId) {
+        super(config.getBaseSettings().setId(REGISTRY_HELPER.makeBlockRegistryKey(makeId(config.getMaterial()))));
+
+        BLOCK_ID = makeId(config.getMaterial());
+        BASE_BLOCK_ID = baseBlockId;
+        this.config = config;
+    }
+
     public static Identifier makeId(String material) {
         return Identifier.fromNamespaceAndPath(ModInfo.MOD_ID, String.format("building/slabs/bookshelves/%s", material));
     }
