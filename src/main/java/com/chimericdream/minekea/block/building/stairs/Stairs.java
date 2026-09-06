@@ -3,8 +3,10 @@ package com.chimericdream.minekea.block.building.stairs;
 import com.chimericdream.lib.blocks.BlockConfig;
 import com.chimericdream.lib.resource.TextureUtils;
 import com.chimericdream.lib.util.Tool;
+import com.chimericdream.minekea.ModInfo;
 import com.chimericdream.minekea.block.building.BuildingBlocks;
 import com.chimericdream.minekea.block.building.LogWoodFamilies;
+import com.chimericdream.minekea.block.building.dyed.DyedBlocks;
 import com.chimericdream.minekea.block.building.general.BasaltBricksBlock;
 import com.chimericdream.minekea.block.building.general.CrackedBasaltBricksBlock;
 import com.chimericdream.minekea.block.building.general.CrimsonBasaltBricksBlock;
@@ -20,6 +22,7 @@ import java.util.List;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.references.BlockIds;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -58,6 +61,23 @@ public class Stairs implements ModThingGroup {
         VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("quartz_block_bottom"), () -> new VerticalStairsBlock(new BlockConfig().material("quartz_block_bottom").materialName("Smooth Quartz").ingredient(Blocks.SMOOTH_QUARTZ).texture(TextureUtils.block(Blocks.QUARTZ_BLOCK, "_bottom"))), DEFAULT_VERTICAL_STAIRS_SETTINGS));
         VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("stone_bricks"), () -> new VerticalStairsBlock(new BlockConfig().material("stone_bricks").materialName("Stone Brick").ingredient(Blocks.STONE_BRICKS)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
         VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("gold_block"), () -> new VerticalStairsBlock(new BlockConfig().material("gold_block").materialName("Block of Gold").ingredient(Blocks.GOLD_BLOCK)), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(
+                Identifier.fromNamespaceAndPath(ModInfo.MOD_ID, "building/stairs/vertical/stone_brick/white"), () -> new VerticalStairsBlock(
+                        new BlockConfig()
+                                .material("stone_bricks" + "white")
+                                .texture(Identifier.fromNamespaceAndPath("minekea", "block/building/dyed/stone_bricks/white"))
+                                .materialName("White Dyed Stone Brick")
+                                .ingredient(DyedBlocks.BLOCK_MAP.get("stone_bricks" + "white"))
+                ), DEFAULT_VERTICAL_STAIRS_SETTINGS));
+        VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(
+                Identifier.fromNamespaceAndPath(ModInfo.MOD_ID, "building/stairs/vertical/brick/light_gray"), () -> new VerticalStairsBlock(
+                        new BlockConfig()
+                                .material("bricks" + "light_gray")
+                                .texture(Identifier.fromNamespaceAndPath("minekea", "block/building/dyed/bricks/light_gray"))
+                                .materialName("Light Gray Dyed Bricks")
+                                .ingredient(DyedBlocks.BLOCK_MAP.get("bricks" + "light_gray"))
+                ), DEFAULT_VERTICAL_STAIRS_SETTINGS));
 
         STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(StairsBlock.makeId("potent_sulfur"), () -> new StairsBlock(new BlockConfig().material("potent_sulfur").materialName("Potent Sulfur").ingredient(Blocks.POTENT_SULFUR)), DEFAULT_STAIRS_SETTINGS));
         STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(StairsBlock.makeId("gold_block"), () -> new StairsBlock(new BlockConfig().material("gold_block").materialName("Gold Block").ingredient(Blocks.GOLD_BLOCK)), DEFAULT_STAIRS_SETTINGS));
