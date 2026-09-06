@@ -18,7 +18,6 @@ import com.chimericdream.minekea.fabric.block.building.general.CrimsonBasaltBric
 import com.chimericdream.minekea.fabric.block.building.general.MossyBasaltBricksDataGenerator;
 import com.chimericdream.minekea.fabric.block.building.general.WarpedBasaltBricksDataGenerator;
 import com.chimericdream.minekea.fabric.block.building.general.WarpedNetherBricksDataGenerator;
-import com.chimericdream.minekea.fabric.block.building.general.WaxBlockDataGenerator;
 import com.chimericdream.minekea.fabric.block.building.slabs.BookshelfSlabBlockDataGenerator;
 import com.chimericdream.minekea.fabric.block.building.slabs.SlabBlockDataGenerator;
 import com.chimericdream.minekea.fabric.block.building.stairs.BookshelfStairsBlockDataGenerator;
@@ -49,7 +48,6 @@ public class BuildingBlocksDataGenerator implements BlockDataGeneratorGroup {
         BLOCK_GENERATORS.add(new WarpedBasaltBricksDataGenerator());
         BLOCK_GENERATORS.add(new WarpedNetherBricksDataGenerator());
 
-        BuildingBlocks.WAX_BLOCKS.values().forEach(block -> BLOCK_GENERATORS.add(new WaxBlockDataGenerator(block.get())));
         Beams.BLOCKS.forEach(block -> BLOCK_GENERATORS.add(new BeamBlockDataGenerator(block.get())));
         Covers.BLOCKS.forEach(block -> BLOCK_GENERATORS.add(new CoverBlockDataGenerator(block.get())));
         DyedBlocks.BLOCK_MAP.values().forEach(block -> BLOCK_GENERATORS.add(new DyedBlockDataGenerator(block.get())));

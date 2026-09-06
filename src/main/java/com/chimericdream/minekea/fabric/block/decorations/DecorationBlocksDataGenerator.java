@@ -1,6 +1,5 @@
 package com.chimericdream.minekea.fabric.block.decorations;
 
-import com.chimericdream.minekea.block.decorations.candles.VotiveCandles;
 import com.chimericdream.minekea.block.decorations.lighting.Lanterns;
 import com.chimericdream.minekea.fabric.data.ChimericLibBlockDataGenerator;
 import com.chimericdream.minekea.fabric.util.BlockDataGeneratorGroup;
@@ -13,7 +12,6 @@ public class DecorationBlocksDataGenerator implements BlockDataGeneratorGroup {
 
     static {
         Lanterns.BLOCKS.forEach(block -> BLOCK_GENERATORS.add(new LanternBlockDataGenerator(block.get())));
-        VotiveCandles.BLOCKS.forEach(block -> BLOCK_GENERATORS.add(new VotiveCandleBlockDataGenerator(block.get())));
 
         BLOCK_GENERATORS.add(new EndlessRodBlockDataGenerator());
         BLOCK_GENERATORS.add(new FakeCakeBlockDataGenerator());

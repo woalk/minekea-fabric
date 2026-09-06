@@ -12,16 +12,13 @@ import com.chimericdream.minekea.block.building.general.CrimsonBasaltBricksBlock
 import com.chimericdream.minekea.block.building.general.MossyBasaltBricksBlock;
 import com.chimericdream.minekea.block.building.general.WarpedBasaltBricksBlock;
 import com.chimericdream.minekea.block.building.general.WarpedNetherBricksBlock;
-import com.chimericdream.minekea.block.building.general.WaxBlock;
 import com.chimericdream.minekea.block.building.slabs.Slabs;
 import com.chimericdream.minekea.block.building.stairs.Stairs;
 import com.chimericdream.minekea.block.building.storage.StorageBlocks;
 import com.chimericdream.minekea.util.ModThingGroup;
 import dev.architectury.registry.registries.RegistrySupplier;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -32,10 +29,8 @@ import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
 
 public class BuildingBlocks implements ModThingGroup {
     public static final List<RegistrySupplier<Block>> BLOCKS = new ArrayList<>();
-    public static final Map<String, RegistrySupplier<Block>> WAX_BLOCKS = new LinkedHashMap<>();
 
     public static final Item.Properties DEFAULT_SETTINGS = new Item.Properties();
-    public static final Item.Properties WAX_BLOCK_SETTINGS = new Item.Properties();
 
     public static final RegistrySupplier<Block> BASALT_BRICKS = REGISTRY_HELPER.registerWithItem(BasaltBricksBlock.BLOCK_ID, BasaltBricksBlock::new, DEFAULT_SETTINGS);
     public static final RegistrySupplier<Block> CHISELED_BASALT_BRICKS = REGISTRY_HELPER.registerWithItem(ChiseledBasaltBricksBlock.BLOCK_ID, ChiseledBasaltBricksBlock::new, DEFAULT_SETTINGS);
@@ -44,24 +39,6 @@ public class BuildingBlocks implements ModThingGroup {
     public static final RegistrySupplier<Block> MOSSY_BASALT_BRICKS = REGISTRY_HELPER.registerWithItem(MossyBasaltBricksBlock.BLOCK_ID, MossyBasaltBricksBlock::new, DEFAULT_SETTINGS);
     public static final RegistrySupplier<Block> WARPED_BASALT_BRICKS = REGISTRY_HELPER.registerWithItem(WarpedBasaltBricksBlock.BLOCK_ID, WarpedBasaltBricksBlock::new, DEFAULT_SETTINGS);
     public static final RegistrySupplier<Block> WARPED_NETHER_BRICKS = REGISTRY_HELPER.registerWithItem(WarpedNetherBricksBlock.BLOCK_ID, WarpedNetherBricksBlock::new, DEFAULT_SETTINGS);
-
-    public static final RegistrySupplier<Block> PLAIN_WAX_BLOCK = REGISTRY_HELPER.registerWithItem(WaxBlock.makeId("plain"), () -> new WaxBlock("plain"), WAX_BLOCK_SETTINGS);
-    public static final RegistrySupplier<Block> WHITE_WAX_BLOCK = REGISTRY_HELPER.registerWithItem(WaxBlock.makeId("white"), () -> new WaxBlock("white"), WAX_BLOCK_SETTINGS);
-    public static final RegistrySupplier<Block> LIGHT_GRAY_WAX_BLOCK = REGISTRY_HELPER.registerWithItem(WaxBlock.makeId("light_gray"), () -> new WaxBlock("light_gray"), WAX_BLOCK_SETTINGS);
-    public static final RegistrySupplier<Block> GRAY_WAX_BLOCK = REGISTRY_HELPER.registerWithItem(WaxBlock.makeId("gray"), () -> new WaxBlock("gray"), WAX_BLOCK_SETTINGS);
-    public static final RegistrySupplier<Block> BLACK_WAX_BLOCK = REGISTRY_HELPER.registerWithItem(WaxBlock.makeId("black"), () -> new WaxBlock("black"), WAX_BLOCK_SETTINGS);
-    public static final RegistrySupplier<Block> BROWN_WAX_BLOCK = REGISTRY_HELPER.registerWithItem(WaxBlock.makeId("brown"), () -> new WaxBlock("brown"), WAX_BLOCK_SETTINGS);
-    public static final RegistrySupplier<Block> RED_WAX_BLOCK = REGISTRY_HELPER.registerWithItem(WaxBlock.makeId("red"), () -> new WaxBlock("red"), WAX_BLOCK_SETTINGS);
-    public static final RegistrySupplier<Block> ORANGE_WAX_BLOCK = REGISTRY_HELPER.registerWithItem(WaxBlock.makeId("orange"), () -> new WaxBlock("orange"), WAX_BLOCK_SETTINGS);
-    public static final RegistrySupplier<Block> YELLOW_WAX_BLOCK = REGISTRY_HELPER.registerWithItem(WaxBlock.makeId("yellow"), () -> new WaxBlock("yellow"), WAX_BLOCK_SETTINGS);
-    public static final RegistrySupplier<Block> LIME_WAX_BLOCK = REGISTRY_HELPER.registerWithItem(WaxBlock.makeId("lime"), () -> new WaxBlock("lime"), WAX_BLOCK_SETTINGS);
-    public static final RegistrySupplier<Block> GREEN_WAX_BLOCK = REGISTRY_HELPER.registerWithItem(WaxBlock.makeId("green"), () -> new WaxBlock("green"), WAX_BLOCK_SETTINGS);
-    public static final RegistrySupplier<Block> CYAN_WAX_BLOCK = REGISTRY_HELPER.registerWithItem(WaxBlock.makeId("cyan"), () -> new WaxBlock("cyan"), WAX_BLOCK_SETTINGS);
-    public static final RegistrySupplier<Block> LIGHT_BLUE_WAX_BLOCK = REGISTRY_HELPER.registerWithItem(WaxBlock.makeId("light_blue"), () -> new WaxBlock("light_blue"), WAX_BLOCK_SETTINGS);
-    public static final RegistrySupplier<Block> BLUE_WAX_BLOCK = REGISTRY_HELPER.registerWithItem(WaxBlock.makeId("blue"), () -> new WaxBlock("blue"), WAX_BLOCK_SETTINGS);
-    public static final RegistrySupplier<Block> PURPLE_WAX_BLOCK = REGISTRY_HELPER.registerWithItem(WaxBlock.makeId("purple"), () -> new WaxBlock("purple"), WAX_BLOCK_SETTINGS);
-    public static final RegistrySupplier<Block> MAGENTA_WAX_BLOCK = REGISTRY_HELPER.registerWithItem(WaxBlock.makeId("magenta"), () -> new WaxBlock("magenta"), WAX_BLOCK_SETTINGS);
-    public static final RegistrySupplier<Block> PINK_WAX_BLOCK = REGISTRY_HELPER.registerWithItem(WaxBlock.makeId("pink"), () -> new WaxBlock("pink"), WAX_BLOCK_SETTINGS);
 
     static {
         BLOCKS.add(BASALT_BRICKS);
@@ -76,31 +53,6 @@ public class BuildingBlocks implements ModThingGroup {
                 .register((tab) -> tab.acceptAll(
                         BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList()
                 ));
-
-        WAX_BLOCKS.put("plain", PLAIN_WAX_BLOCK);
-        WAX_BLOCKS.put("white", WHITE_WAX_BLOCK);
-        WAX_BLOCKS.put("light_gray", LIGHT_GRAY_WAX_BLOCK);
-        WAX_BLOCKS.put("gray", GRAY_WAX_BLOCK);
-        WAX_BLOCKS.put("black", BLACK_WAX_BLOCK);
-        WAX_BLOCKS.put("brown", BROWN_WAX_BLOCK);
-        WAX_BLOCKS.put("red", RED_WAX_BLOCK);
-        WAX_BLOCKS.put("orange", ORANGE_WAX_BLOCK);
-        WAX_BLOCKS.put("yellow", YELLOW_WAX_BLOCK);
-        WAX_BLOCKS.put("lime", LIME_WAX_BLOCK);
-        WAX_BLOCKS.put("green", GREEN_WAX_BLOCK);
-        WAX_BLOCKS.put("cyan", CYAN_WAX_BLOCK);
-        WAX_BLOCKS.put("light_blue", LIGHT_BLUE_WAX_BLOCK);
-        WAX_BLOCKS.put("blue", BLUE_WAX_BLOCK);
-        WAX_BLOCKS.put("purple", PURPLE_WAX_BLOCK);
-        WAX_BLOCKS.put("magenta", MAGENTA_WAX_BLOCK);
-        WAX_BLOCKS.put("pink", PINK_WAX_BLOCK);
-
-        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.COLORED_BLOCKS)
-                .register((tab) -> tab.acceptAll(
-                        WAX_BLOCKS.values().stream().map((block) -> block.get().asItem().getDefaultInstance()).toList()
-                ));
-
-        BLOCKS.addAll(WAX_BLOCKS.values());
 
         BLOCKS.addAll(Beams.BLOCKS);
         BLOCKS.addAll(Covers.BLOCKS);

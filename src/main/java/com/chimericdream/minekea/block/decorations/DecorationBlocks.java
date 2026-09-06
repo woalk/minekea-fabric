@@ -1,6 +1,5 @@
 package com.chimericdream.minekea.block.decorations;
 
-import com.chimericdream.minekea.block.decorations.candles.VotiveCandles;
 import com.chimericdream.minekea.block.decorations.lighting.EndlessRodBlock;
 import com.chimericdream.minekea.block.decorations.lighting.Lanterns;
 import com.chimericdream.minekea.util.ModThingGroup;
@@ -31,6 +30,5 @@ public class DecorationBlocks implements ModThingGroup {
                 .register((tab) -> tab.accept(FAKE_CAKE.get().asItem().getDefaultInstance()));
 
         BLOCKS.addAll(Lanterns.BLOCKS);
-        BLOCKS.addAll(VotiveCandles.BLOCKS);
     }
 }
