@@ -115,6 +115,8 @@ public class Stairs implements ModThingGroup {
         VERTICAL_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(VerticalStairsBlock.makeId("warped_nether_bricks"), () -> new VerticalStairsBlock(new BlockConfig().material("warped_nether_bricks").materialName("Warped Nether Brick").ingredient(BuildingBlocks.WARPED_NETHER_BRICKS.get()).texture(TextureUtils.block(WarpedNetherBricksBlock.BLOCK_ID))), DEFAULT_VERTICAL_STAIRS_SETTINGS));
 
         STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(StairsBlock.makeId("potent_sulfur"), () -> new StairsBlock(new BlockConfig().material("potent_sulfur").materialName("Potent Sulfur").ingredient(Blocks.POTENT_SULFUR)), DEFAULT_STAIRS_SETTINGS));
+        STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(StairsBlock.makeId("dirt"), () -> new StairsBlock(new BlockConfig().material("dirt").materialName("Dirt").ingredient(Blocks.DIRT)), DEFAULT_STAIRS_SETTINGS));
+        STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(StairsBlock.makeId("sand"), () -> new StairsBlock(new BlockConfig().material("sand").materialName("Sand").ingredient(Blocks.SAND)), DEFAULT_STAIRS_SETTINGS));
 
         LogWoodFamilies.ALL.forEach(entry -> {
             STAIRS_BLOCKS.add(
