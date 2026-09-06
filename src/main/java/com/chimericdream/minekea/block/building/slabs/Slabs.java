@@ -29,6 +29,7 @@ public class Slabs implements ModThingGroup {
         SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(SlabBlock.makeId("potent_sulfur"), () -> new SlabBlock(new BlockConfig().material("potent_sulfur").materialName("Potent Sulfur").ingredient(Blocks.POTENT_SULFUR)), DEFAULT_SLAB_SETTINGS));
         SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(SlabBlock.makeId("dirt"), () -> new SlabBlock(new BlockConfig().material("dirt").materialName("Dirt").ingredient(Blocks.DIRT)), DEFAULT_SLAB_SETTINGS));
         SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(SlabBlock.makeId("sand"), () -> new SlabBlock(new BlockConfig().material("sand").materialName("Sand").ingredient(Blocks.SAND)), DEFAULT_SLAB_SETTINGS));
+        SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(SlabBlock.makeId("gold_block"), () -> new SlabBlock(new BlockConfig().material("gold_block").materialName("Gold Block").ingredient(Blocks.GOLD_BLOCK)), DEFAULT_SLAB_SETTINGS));
 
         LogWoodFamilies.ALL.forEach(entry -> {
             SLAB_BLOCKS.add(
