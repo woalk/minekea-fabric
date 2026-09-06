@@ -8,10 +8,8 @@ import com.chimericdream.minekea.block.furniture.tables.Tables;
 import com.chimericdream.minekea.client.MinekeaClient;
 import com.chimericdream.minekea.fabric.client.render.block.FabricGlassJarBlockEntityRenderer;
 import com.chimericdream.minekea.item.tools.BlockPainterItem;
-import com.chimericdream.minekea.item.tools.HammerItem;
 import com.chimericdream.minekea.network.CyclePainterColorPayload;
 import dev.architectury.registry.client.rendering.BlockEntityRendererRegistry;
-import dev.architectury.registry.registries.RegistrySupplier;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
@@ -37,11 +35,6 @@ public final class MinekeaFabricClient implements ClientModInitializer {
 
     private void initializeTooltips() {
         ItemTooltipCallback.EVENT.register((itemStack, tooltipContext, tooltipType, list) -> {
-            if (itemStack.getItem() instanceof HammerItem hammer) {
-                list.addAll(hammer.getTooltip());
-                return;
-            }
-
             if (itemStack.getItem() instanceof BlockPainterItem painter) {
                 list.addAll(painter.getTooltip(itemStack));
                 return;
