@@ -64,7 +64,8 @@ public class DyedBlockFamilies implements ModThingGroup {
 
     private static BlockFamily family(String material, String materialName, Block ingredient, DyeColor color, boolean pillar) {
         String colorName = color.getName();
-        String baseId = String.format("building/dyed/%s/%s", material, colorName);
+        String formatId = "building/%s/%s/%s";
+        String baseId = String.format(formatId, "dyed", material, colorName);
         String textureId = "block/" + baseId + (pillar ? "_end" : "");
         return BlockFamily.builder(REGISTRY_HELPER, material + "_" + colorName, new BlockConfig()
                 .materialName(materialName)
@@ -72,9 +73,9 @@ public class DyedBlockFamilies implements ModThingGroup {
                 .texture(Identifier.fromNamespaceAndPath(ModInfo.MOD_ID, textureId)))
             .variants(BlockFamilyVariant.STAIRS, BlockFamilyVariant.SLAB, BlockFamilyVariant.WALL)
             .itemSettings(DEFAULT_SETTINGS)
-            .stairsId(Identifier.fromNamespaceAndPath(ModInfo.MOD_ID, baseId + "_stairs"))
-            .slabId(Identifier.fromNamespaceAndPath(ModInfo.MOD_ID, baseId + "_slab"))
-            .wallId(Identifier.fromNamespaceAndPath(ModInfo.MOD_ID, baseId + "_wall"))
+            .stairsId(Identifier.fromNamespaceAndPath(ModInfo.MOD_ID, String.format(formatId, "stairs", material, colorName)))
+            .slabId(Identifier.fromNamespaceAndPath(ModInfo.MOD_ID, String.format(formatId, "slabs", material, colorName)))
+            .wallId(Identifier.fromNamespaceAndPath(ModInfo.MOD_ID, String.format(formatId, "walls", material, colorName)))
             .build();
     }
 

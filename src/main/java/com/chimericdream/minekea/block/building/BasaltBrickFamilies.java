@@ -50,15 +50,16 @@ public class BasaltBrickFamilies implements ModThingGroup {
     );
 
     private static BlockFamily family(String material, String materialName, RegistrySupplier<Block> ingredient, Identifier texture) {
+        String formatId = "building/%s/%s";
         return BlockFamily.builder(REGISTRY_HELPER, material, new BlockConfig()
                 .materialName(materialName)
                 .ingredient(ingredient)
                 .texture(texture))
             .variants(BlockFamilyVariant.STAIRS, BlockFamilyVariant.SLAB, BlockFamilyVariant.WALL)
             .itemSettings(DEFAULT_SETTINGS)
-            .stairsId(Identifier.fromNamespaceAndPath(ModInfo.MOD_ID, String.format("building/stairs/%s", material)))
-            .slabId(Identifier.fromNamespaceAndPath(ModInfo.MOD_ID, String.format("building/slabs/%s", material)))
-            .wallId(Identifier.fromNamespaceAndPath(ModInfo.MOD_ID, String.format("building/walls/%s", material)))
+            .stairsId(Identifier.fromNamespaceAndPath(ModInfo.MOD_ID, String.format(formatId, "stairs", material)))
+            .slabId(Identifier.fromNamespaceAndPath(ModInfo.MOD_ID, String.format(formatId, "slabs", material)))
+            .wallId(Identifier.fromNamespaceAndPath(ModInfo.MOD_ID, String.format(formatId, "walls", material)))
             .build();
     }
 
