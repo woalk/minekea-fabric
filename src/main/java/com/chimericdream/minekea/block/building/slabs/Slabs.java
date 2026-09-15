@@ -15,6 +15,7 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ColorCollection;
 
 import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
 
@@ -40,17 +41,8 @@ public class Slabs implements ModThingGroup {
                 )
             );
         });
-
-        Blocks.WOOL.forEach(wool -> {
-            final var woolId = BuiltInRegistries.BLOCK.getKey(wool);
-            SLAB_BLOCKS.add(
-                    REGISTRY_HELPER.registerWithItem(
-                            SlabBlock.makeId(woolId.getPath()),
-                            () -> new SlabBlock(new BlockConfig().material(woolId.getPath()).materialName(wool.getName().getString()).ingredient(wool)),
-                            DEFAULT_SLAB_SETTINGS
-                    )
-            );
-        });
+        
+        registerBlocks(Blocks.WOOL);
 
         final var oakConfig = new BlockConfig()
                 .material("oak")
@@ -77,6 +69,19 @@ public class Slabs implements ModThingGroup {
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.BUILDING_BLOCKS).register((tab) -> {
             tab.acceptAll(SLAB_BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList());
             tab.acceptAll(BOOKSHELF_SLAB_BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList());
+        });
+    }
+
+    private static void registerBlocks(ColorCollection<Block> blocks) {
+        blocks.forEach(block -> {
+            final var blockId = BuiltInRegistries.BLOCK.getKey(block);
+            SLAB_BLOCKS.add(
+                REGISTRY_HELPER.registerWithItem(
+                    SlabBlock.makeId(blockId.getPath()),
+                    () -> new SlabBlock(new BlockConfig().material(blockId.getPath()).materialName(block.getName().getString()).ingredient(block)),
+                    DEFAULT_SLAB_SETTINGS
+                )
+            );
         });
     }
 }

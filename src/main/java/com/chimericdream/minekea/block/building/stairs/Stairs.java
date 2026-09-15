@@ -4,15 +4,8 @@ import com.chimericdream.lib.blocks.BlockConfig;
 import com.chimericdream.lib.resource.TextureUtils;
 import com.chimericdream.lib.util.Tool;
 import com.chimericdream.minekea.ModInfo;
-import com.chimericdream.minekea.block.building.BuildingBlocks;
 import com.chimericdream.minekea.block.building.LogWoodFamilies;
 import com.chimericdream.minekea.block.building.dyed.DyedBlocks;
-import com.chimericdream.minekea.block.building.general.BasaltBricksBlock;
-import com.chimericdream.minekea.block.building.general.CrackedBasaltBricksBlock;
-import com.chimericdream.minekea.block.building.general.CrimsonBasaltBricksBlock;
-import com.chimericdream.minekea.block.building.general.MossyBasaltBricksBlock;
-import com.chimericdream.minekea.block.building.general.WarpedBasaltBricksBlock;
-import com.chimericdream.minekea.block.building.general.WarpedNetherBricksBlock;
 import com.chimericdream.minekea.block.furniture.bookshelves.Bookshelves;
 import com.chimericdream.minekea.util.ModThingGroup;
 import dev.architectury.registry.registries.RegistrySupplier;
@@ -21,12 +14,12 @@ import java.util.List;
 
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.references.BlockIds;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ColorCollection;
 
 import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
 
@@ -160,6 +153,19 @@ public class Stairs implements ModThingGroup {
             tab.acceptAll(VERTICAL_STAIRS_BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList());
             tab.acceptAll(BOOKSHELF_STAIRS_BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList());
             tab.acceptAll(VERTICAL_BOOKSHELF_STAIRS_BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList());
+        });
+    }
+
+    private static void registerBlocks(ColorCollection<Block> blocks) {
+        blocks.forEach(block -> {
+            final var blockId = BuiltInRegistries.BLOCK.getKey(block);
+            STAIRS_BLOCKS.add(
+                    REGISTRY_HELPER.registerWithItem(
+                            StairsBlock.makeId(blockId.getPath()),
+                            () -> new StairsBlock(new BlockConfig().material(blockId.getPath()).materialName(block.getName().getString()).ingredient(block)),
+                            DEFAULT_STAIRS_SETTINGS
+                    )
+            );
         });
     }
 }
