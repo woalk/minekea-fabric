@@ -134,6 +134,7 @@ public class Covers implements ModThingGroup {
         BLOCKS.add(REGISTRY_HELPER.registerWithItem(CoverBlock.makeId("pink_stained_glass"), () -> new CoverBlock(new BlockConfig().material("pink_stained_glass").materialName("Pink Stained Glass").ingredient(Blocks.STAINED_GLASS.pink())), DEFAULT_COVER_SETTINGS));
 
         BLOCKS.add(REGISTRY_HELPER.registerWithItem(CoverBlock.makeId("acacia"), () -> new CoverBlock(new BlockConfig().material("acacia").materialName("Acacia").flammable().ingredient(Blocks.ACACIA_PLANKS).tool(Tool.AXE)), DEFAULT_COVER_SETTINGS));
+        BLOCKS.add(REGISTRY_HELPER.registerWithItem(CoverBlock.makeId("bamboo"), () -> new CoverBlock(new BlockConfig().material("bamboo").materialName("Bamboo").flammable().ingredient(Blocks.BAMBOO_PLANKS).tool(Tool.AXE)), DEFAULT_COVER_SETTINGS));
         BLOCKS.add(REGISTRY_HELPER.registerWithItem(CoverBlock.makeId("birch"), () -> new CoverBlock(new BlockConfig().material("birch").materialName("Birch").flammable().ingredient(Blocks.BIRCH_PLANKS).tool(Tool.AXE)), DEFAULT_COVER_SETTINGS));
         BLOCKS.add(REGISTRY_HELPER.registerWithItem(CoverBlock.makeId("cherry"), () -> new CoverBlock(new BlockConfig().material("cherry").materialName("Cherry").ingredient(Blocks.CHERRY_PLANKS).tool(Tool.AXE)), DEFAULT_COVER_SETTINGS));
         BLOCKS.add(REGISTRY_HELPER.registerWithItem(CoverBlock.makeId("crimson"), () -> new CoverBlock(new BlockConfig().material("crimson").materialName("Crimson").ingredient(Blocks.CRIMSON_PLANKS).tool(Tool.AXE)), DEFAULT_COVER_SETTINGS));
