@@ -76,6 +76,9 @@ public class Stairs implements ModThingGroup {
         STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(StairsBlock.makeId("gold_block"), () -> new StairsBlock(new BlockConfig().material("gold_block").materialName("Gold Block").ingredient(Blocks.GOLD_BLOCK)), DEFAULT_STAIRS_SETTINGS));
         STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(StairsBlock.makeId("dirt"), () -> new StairsBlock(new BlockConfig().material("dirt").materialName("Dirt").ingredient(Blocks.DIRT)), DEFAULT_STAIRS_SETTINGS));
         STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(StairsBlock.makeId("sand"), () -> new StairsBlock(new BlockConfig().material("sand").materialName("Sand").ingredient(Blocks.SAND)), DEFAULT_STAIRS_SETTINGS));
+        STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(StairsBlock.makeId("red_sand"), () -> new StairsBlock(new BlockConfig().material("red_sand").materialName("Red Sand").ingredient(Blocks.RED_SAND)), DEFAULT_STAIRS_SETTINGS));
+        STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(StairsBlock.makeId("glass"), () -> new StairsBlock(new BlockConfig().material("glass").materialName("Glass").ingredient(Blocks.GLASS)), DEFAULT_STAIRS_SETTINGS));
+        STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(StairsBlock.makeId("obsidian"), () -> new StairsBlock(new BlockConfig().material("obsidian").materialName("Obsidian").ingredient(Blocks.OBSIDIAN)), DEFAULT_STAIRS_SETTINGS));
 
         LogWoodFamilies.ALL.forEach(entry -> {
             STAIRS_BLOCKS.add(
@@ -112,6 +115,8 @@ public class Stairs implements ModThingGroup {
                     )
             );
         });
+        registerBlocks(Blocks.CONCRETE);
+        registerBlocks(Blocks.STAINED_GLASS);
 
         final var oakConfig = new BlockConfig()
                 .material("oak")
