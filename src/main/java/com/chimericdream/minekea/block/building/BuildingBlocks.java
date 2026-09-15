@@ -15,6 +15,7 @@ import com.chimericdream.minekea.block.building.general.WarpedNetherBricksBlock;
 import com.chimericdream.minekea.block.building.slabs.Slabs;
 import com.chimericdream.minekea.block.building.stairs.Stairs;
 import com.chimericdream.minekea.block.building.storage.StorageBlocks;
+import com.chimericdream.minekea.block.building.walls.Walls;
 import com.chimericdream.minekea.util.ModThingGroup;
 import dev.architectury.registry.registries.RegistrySupplier;
 import java.util.ArrayList;
@@ -66,6 +67,7 @@ public class BuildingBlocks implements ModThingGroup {
         BLOCKS.addAll(Stairs.BOOKSHELF_STAIRS_BLOCKS);
         BLOCKS.addAll(Stairs.VERTICAL_BOOKSHELF_STAIRS_BLOCKS);
         BLOCKS.addAll(StorageBlocks.BLOCKS);
+        BLOCKS.addAll(Walls.WALL_BLOCKS);
         BasaltBrickFamilies.ALL.forEach(family -> family.getVariants().forEach(variant -> BLOCKS.add(family.getBlock(variant).orElseThrow())));
         DyedBlockFamilies.ALL.forEach(family -> family.getVariants().forEach(variant -> BLOCKS.add(family.getBlock(variant).orElseThrow())));
     }

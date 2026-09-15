@@ -3,7 +3,6 @@ package com.chimericdream.minekea.fabric.block.building;
 import com.chimericdream.lib.fabric.blocks.family.BlockFamilyDataGenerators;
 import com.chimericdream.minekea.block.building.BasaltBrickFamilies;
 import com.chimericdream.minekea.block.building.dyed.DyedBlockFamilies;
-import com.chimericdream.minekea.block.building.BuildingBlocks;
 import com.chimericdream.minekea.block.building.beams.Beams;
 import com.chimericdream.minekea.block.building.covers.Covers;
 import com.chimericdream.minekea.block.building.dyed.DyedBlocks;
@@ -11,6 +10,8 @@ import com.chimericdream.minekea.block.building.framed.FramedBlocks;
 import com.chimericdream.minekea.block.building.slabs.Slabs;
 import com.chimericdream.minekea.block.building.stairs.Stairs;
 import com.chimericdream.minekea.block.building.storage.StorageBlocks;
+import com.chimericdream.minekea.block.building.walls.WallBlock;
+import com.chimericdream.minekea.block.building.walls.Walls;
 import com.chimericdream.minekea.fabric.block.building.general.BasaltBricksDataGenerator;
 import com.chimericdream.minekea.fabric.block.building.general.ChiseledBasaltBricksDataGenerator;
 import com.chimericdream.minekea.fabric.block.building.general.CrackedBasaltBricksDataGenerator;
@@ -29,6 +30,7 @@ import com.chimericdream.minekea.fabric.block.building.storage.BrownEggCrateBloc
 import com.chimericdream.minekea.fabric.block.building.storage.DyeBlockDataGenerator;
 import com.chimericdream.minekea.fabric.block.building.storage.EggCrateBlockDataGenerator;
 import com.chimericdream.minekea.fabric.block.building.storage.ItemStorageBlockDataGenerator;
+import com.chimericdream.minekea.fabric.block.building.walls.WallBlockDataGenerator;
 import com.chimericdream.minekea.fabric.data.ChimericLibBlockDataGenerator;
 import com.chimericdream.minekea.fabric.data.ChimericLibBlockDataGeneratorAdapter;
 import com.chimericdream.minekea.fabric.util.BlockDataGeneratorGroup;
@@ -59,6 +61,7 @@ public class BuildingBlocksDataGenerator implements BlockDataGeneratorGroup {
         Stairs.VERTICAL_STAIRS_BLOCKS.forEach(block -> BLOCK_GENERATORS.add(new VerticalStairsBlockDataGenerator(block.get())));
         Stairs.BOOKSHELF_STAIRS_BLOCKS.forEach(block -> BLOCK_GENERATORS.add(new BookshelfStairsBlockDataGenerator(block.get())));
         Stairs.VERTICAL_BOOKSHELF_STAIRS_BLOCKS.forEach(block -> BLOCK_GENERATORS.add(new VerticalBookshelfStairsBlockDataGenerator(block.get())));
+        Walls.WALL_BLOCKS.forEach(block -> BLOCK_GENERATORS.add(new WallBlockDataGenerator(block.get())));
         StorageBlocks.STORAGE_BLOCKS.forEach(block -> BLOCK_GENERATORS.add(new ItemStorageBlockDataGenerator(block.get())));
         StorageBlocks.DYE_BLOCKS.forEach(block -> BLOCK_GENERATORS.add(new DyeBlockDataGenerator(block.get())));
         BasaltBrickFamilies.ALL.forEach(family ->
