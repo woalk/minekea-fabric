@@ -15,13 +15,19 @@ import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.*;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponentInitializers;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.resources.ResourceKey;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Stream;
 
 public class ModDataGenerator implements DataGeneratorEntrypoint {
     @Override
@@ -56,9 +62,11 @@ public class ModDataGenerator implements DataGeneratorEntrypoint {
                     // MC 26.2 binds item data components lazily during a ReloadableServerResources reload rather
                     // than at bootstrap, so during datagen Item.components() (e.g. getDefaultMaxStackSize) throws
                     // "Components not bound yet". Bind them here the same way the server reload does, before any
-                    // recipe reads them.
-                    BuiltInRegistries.DATA_COMPONENT_INITIALIZERS.build(registryLookup)
-                        .forEach(pending -> pending.apply());
+                    // recipe reads them. The lookup is lenient because third-party mods loaded in the dev run
+                    // (e.g. BetterEnd's music discs) reference dynamic registry entries (jukebox songs) that only
+                    // exist once their data packs are loaded, which never happens during minekea's datagen.
+                    BuiltInRegistries.DATA_COMPONENT_INITIALIZERS.build(lenientLookup(registryLookup))
+                        .forEach(DataComponentInitializers.PendingComponents::apply);
 
                     for (BlockDataGeneratorGroup group : ModBlockDataGenerators.BLOCK_GROUPS) {
                         group.configureRecipes(registryLookup, exporter, this);
@@ -76,6 +84,35 @@ public class ModDataGenerator implements DataGeneratorEntrypoint {
         @Override
         public @NotNull String getName() {
             return "MinekeaRecipeProvider";
+        }
+
+        /**
+         * Wraps a registry lookup so that missing elements resolve to unbound stand-alone holders instead of
+         * throwing. Data component initializers only store these holders (they are never dereferenced during
+         * minekea's datagen), so this keeps the component bind from crashing on other mods' datapack entries.
+         */
+        private static HolderLookup.Provider lenientLookup(HolderLookup.Provider parent) {
+            return new HolderLookup.Provider() {
+                @Override
+                public @NotNull Stream<ResourceKey<? extends Registry<?>>> listRegistryKeys() {
+                    return parent.listRegistryKeys();
+                }
+
+                @Override
+                public <T> @NotNull Optional<? extends HolderLookup.RegistryLookup<T>> lookup(ResourceKey<? extends Registry<? extends T>> registryRef) {
+                    return parent.lookup(registryRef).map(registry -> new HolderLookup.RegistryLookup.Delegate<T>() {
+                        @Override
+                        public HolderLookup.@NotNull RegistryLookup<T> parent() {
+                            return registry;
+                        }
+
+                        @Override
+                        public @NotNull Optional<Holder.Reference<T>> get(ResourceKey<T> key) {
+                            return registry.get(key).or(() -> Optional.of(Holder.Reference.createStandAlone(registry, key)));
+                        }
+                    });
+                }
+            };
         }
     }
 

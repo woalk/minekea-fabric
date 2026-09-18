@@ -134,9 +134,10 @@ public class TableBlockDataGenerator extends ChimericLibBlockDataGenerator {
     public void configureBlockStateModels(BlockModelGenerators blockStateModelGenerator) {
         Block plankIngredient = BLOCK.config.getIngredient();
         Block logIngredient = BLOCK.config.getIngredient("log");
+        Identifier logTextureId = BLOCK.config.getTextureOrDefault("log", BuiltInRegistries.BLOCK.getKey(logIngredient).withPrefix("block/"));
 
         TextureMapping textures = new TextureMapping()
-            .put(MinekeaTextures.LOG, new Material(BuiltInRegistries.BLOCK.getKey(logIngredient).withPrefix("block/")))
+            .put(MinekeaTextures.LOG, new Material(logTextureId))
             .put(MinekeaTextures.PLANKS, new Material(BuiltInRegistries.BLOCK.getKey(plankIngredient).withPrefix("block/")));
 
         Identifier coreModelId = blockStateModelGenerator.createSuffixedVariant(BLOCK, "", CORE_MODEL, unused -> textures);

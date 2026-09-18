@@ -1,6 +1,7 @@
 package com.chimericdream.minekea.block.furniture.tables;
 
 import com.chimericdream.lib.blocks.BlockConfig;
+import com.chimericdream.minekea.fabric.data.ModDataGenerator;
 import com.chimericdream.minekea.registry.ModItemGroups;
 import com.chimericdream.minekea.util.ModThingGroup;
 import dev.architectury.registry.registries.RegistrySupplier;
@@ -8,9 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
 
@@ -32,6 +37,33 @@ public class Tables implements ModThingGroup {
         BLOCKS.add(REGISTRY_HELPER.registerWithItem(TableBlock.makeId("pale_oak"), () -> new TableBlock(new BlockConfig().material("pale_oak").materialName("Pale Oak").ingredient(Blocks.PALE_OAK_PLANKS).ingredient("log", Blocks.PALE_OAK_LOG).flammable()), DEFAULT_TABLE_SETTINGS));
         BLOCKS.add(REGISTRY_HELPER.registerWithItem(TableBlock.makeId("spruce"), () -> new TableBlock(new BlockConfig().material("spruce").materialName("Spruce").ingredient(Blocks.SPRUCE_PLANKS).ingredient("log", Blocks.SPRUCE_LOG).flammable()), DEFAULT_TABLE_SETTINGS));
         BLOCKS.add(REGISTRY_HELPER.registerWithItem(TableBlock.makeId("warped"), () -> new TableBlock(new BlockConfig().material("warped").materialName("Warped").ingredient(Blocks.WARPED_PLANKS).ingredient("log", Blocks.WARPED_STEM)), DEFAULT_TABLE_SETTINGS));
+
+        if (FabricLoader.getInstance().isModLoaded("betterend")) {
+            BLOCKS.add(REGISTRY_HELPER.registerWithItem(TableBlock.makeId("helix_tree"), () -> {
+                // BetterEnd's initializer runs after minekea's, so its blocks aren't registered yet at this point;
+                // an eager lookup would return air (which, among other issues, has no loot table). Resolve the
+                // ingredients lazily instead: recipes, models, etc. are only generated long after every mod has
+                // initialized. For the same reason the base settings can't be copied from the (still missing)
+                // planks block, so equivalent vanilla settings are used explicitly.
+                final BlockConfig config = new BlockConfig() {
+                    @Override
+                    public Block getIngredient() {
+                        return BuiltInRegistries.BLOCK.getValue(Identifier.fromNamespaceAndPath("betterend", "helix_tree_planks"));
+                    }
+
+                    @Override
+                    public Block getIngredient(String key) {
+                        if ("log".equals(key)) {
+                            return BuiltInRegistries.BLOCK.getValue(Identifier.fromNamespaceAndPath("betterend", "helix_tree_log"));
+                        }
+
+                        return super.getIngredient(key);
+                    }
+                };
+
+                return new TableBlock(config.material("helix_tree").materialName("Helix Tree").texture("log", Identifier.fromNamespaceAndPath("betterend", "block/helix_tree_log_side")).flammable().settings(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS)));
+            }, DEFAULT_TABLE_SETTINGS));
+        }
 
         CreativeModeTabEvents.modifyOutputEvent(ModItemGroups.FURNITURE_ITEM_GROUP.getKey()).register((tab) -> {
             tab.acceptAll(BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList());

@@ -33,5 +33,9 @@
     "fabric-api": "*",
     "chimericlib": ">=6.4.0",
     "minecraft": "${minecraft_version}"
+  },
+  "suggests": {
+    "betterend": ">=26.201.2",
+    "betternether": ">=26.201.2"
   }
 }

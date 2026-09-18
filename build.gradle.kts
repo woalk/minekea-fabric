@@ -25,6 +25,11 @@ java {
 fabricApi {
     configureDataGeneration {
         client = true
+
+        // Only run minekea's own datagen entrypoint. Without this, the datagen entrypoints of the
+        // localRuntime mods (BetterEnd, BetterNether, wover, ...) also run against the same output
+        // directory and delete all of minekea's freshly generated files as "stale".
+        modId = "minekea"
     }
 }
 
@@ -45,6 +50,10 @@ repositories {
         name = "Architectury"
         url = uri("https://maven.architectury.dev/")
     }
+    maven {
+        name = "Modrinth"
+        url = uri("https://api.modrinth.com/maven")
+    }
 }
 
 dependencies {
@@ -59,6 +68,22 @@ dependencies {
     implementation("curse.maven:chimericlib-1107232:8824300")
     implementation("dev.architectury:architectury-fabric:${project.property("architectury_api_version")}")
 
+    // BetterEnd & BetterNether, version 26.201.2
+    // Update version from https://modrinth.com/mod/betterend/versions & https://modrinth.com/mod/betternether/versions
+    // compileOnly so the mods are never required at runtime for end users;
+    // localRuntime so they are loaded in local dev runs (e.g. runDatagen) for loot tables & models
+    compileOnly("maven.modrinth:gc8OEnCC:VD4qwVUF")
+    localRuntime("maven.modrinth:gc8OEnCC:VD4qwVUF")
+    compileOnly("maven.modrinth:MpzVLzy5:iBR9QMPF")
+    localRuntime("maven.modrinth:MpzVLzy5:iBR9QMPF")
+
+    // Runtime-only libraries required by BetterEnd & BetterNether in dev runs:
+    // BCLib (https://modrinth.com/mod/bclib),
+    // WorldWeaver (https://modrinth.com/mod/worldweaver)
+    // and WunderLib (https://modrinth.com/mod/wunderlib)
+    localRuntime("maven.modrinth:BgNRHReB:7BfGRji6")
+    localRuntime("maven.modrinth:RiN8rDVs:GHdiOIsp")
+    localRuntime("maven.modrinth:8O0Adq7w:x1Ln5h2L")
 }
 loom {
     accessWidenerPath.set(file("src/main/resources/minekea.accesswidener"))
