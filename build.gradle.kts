@@ -56,7 +56,7 @@ dependencies {
     implementation("net.fabricmc.fabric-api:fabric-api:${project.property("fabric_api_version")}")
 
     // Update version number from https://www.curseforge.com/minecraft/mc-mods/chimericlib
-    implementation("curse.maven:chimericlib-1107232:8720725")
+    implementation("curse.maven:chimericlib-1107232:8824300")
     implementation("dev.architectury:architectury-fabric:${project.property("architectury_api_version")}")
 
 }
