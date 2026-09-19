@@ -4,5 +4,6 @@ data class ModdedBlockEntry(
     val modId: String,
     val material: String,
     val materialName: String,
-    val logTextureSuffix: String? = null,
+    val logMaterial: String = "log",
+    val logTextureSuffix: String = logMaterial,
 )

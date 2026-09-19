@@ -41,6 +41,9 @@ public class Tables implements ModThingGroup {
         BLOCKS.add(REGISTRY_HELPER.registerWithItem(TableBlock.makeId("spruce"), () -> new TableBlock(new BlockConfig().material("spruce").materialName("Spruce").ingredient(Blocks.SPRUCE_PLANKS).ingredient("log", Blocks.SPRUCE_LOG).flammable()), DEFAULT_TABLE_SETTINGS));
         BLOCKS.add(REGISTRY_HELPER.registerWithItem(TableBlock.makeId("warped"), () -> new TableBlock(new BlockConfig().material("warped").materialName("Warped").ingredient(Blocks.WARPED_PLANKS).ingredient("log", Blocks.WARPED_STEM)), DEFAULT_TABLE_SETTINGS));
 
+        if (FabricLoader.getInstance().isModLoaded(SupportedModdedBlocks.BetterNether.MOD_ID)) {
+            SupportedModdedBlocks.BetterNether.getWoods().forEach(Tables::registerModded);
+        }
         if (FabricLoader.getInstance().isModLoaded(SupportedModdedBlocks.BetterEnd.MOD_ID)) {
             SupportedModdedBlocks.BetterEnd.getWoods().forEach(Tables::registerModded);
         }
@@ -51,21 +54,17 @@ public class Tables implements ModThingGroup {
     }
 
     private static void registerModded(ModdedBlockEntry entry) {
-        registerModded(entry.getModId(), entry.getMaterial(), entry.getMaterialName(), entry.getLogTextureSuffix());
-    }
-
-    private static void registerModded(String modId, String material, String materialName, @Nullable String logTextureSuffix) {
-        BLOCKS.add(REGISTRY_HELPER.registerWithItem(TableBlock.makeId(material), () -> new TableBlock(
+        BLOCKS.add(REGISTRY_HELPER.registerWithItem(TableBlock.makeId(entry.getMaterial()).withPrefix(entry.getModId() + "/"), () -> new TableBlock(
                 new LazyBlockConfig()
-                        .material(material).materialName(materialName)
+                        .material(entry.getMaterial()).materialName(entry.getMaterialName())
                         .ingredientFunc((String key) -> {
                             if (key == null) {
-                                return BuiltInRegistries.BLOCK.getValue(Identifier.fromNamespaceAndPath(modId, material + "_planks"));
+                                return BuiltInRegistries.BLOCK.getValue(Identifier.fromNamespaceAndPath(entry.getModId(), entry.getMaterial() + "_planks"));
                             } else if ("log".equals(key)) {
-                                return BuiltInRegistries.BLOCK.getValue(Identifier.fromNamespaceAndPath(modId, material + "_log"));
+                                return BuiltInRegistries.BLOCK.getValue(Identifier.fromNamespaceAndPath(entry.getModId(), entry.getMaterial() + "_" + entry.getLogMaterial()));
                             } else return null;
                         })
-                        .texture("log", Identifier.fromNamespaceAndPath(modId, "block/" + material + "_log" + logTextureSuffix))
+                        .texture("log", Identifier.fromNamespaceAndPath(entry.getModId(), "block/" + entry.getMaterial() + "_" + entry.getLogTextureSuffix()))
                         .flammable().settings(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS))
         ), DEFAULT_TABLE_SETTINGS));
     }
