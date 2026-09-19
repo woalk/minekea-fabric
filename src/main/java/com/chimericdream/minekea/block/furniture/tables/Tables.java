@@ -1,7 +1,9 @@
 package com.chimericdream.minekea.block.furniture.tables;
 
 import com.chimericdream.lib.blocks.BlockConfig;
-import com.chimericdream.minekea.fabric.data.ModDataGenerator;
+import com.chimericdream.minekea.blocks.LazyBlockConfig;
+import com.chimericdream.minekea.blocks.ModdedBlockEntry;
+import com.chimericdream.minekea.blocks.SupportedModdedBlocks;
 import com.chimericdream.minekea.registry.ModItemGroups;
 import com.chimericdream.minekea.util.ModThingGroup;
 import dev.architectury.registry.registries.RegistrySupplier;
@@ -16,6 +18,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import org.jspecify.annotations.Nullable;
 
 import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
 
@@ -38,35 +41,32 @@ public class Tables implements ModThingGroup {
         BLOCKS.add(REGISTRY_HELPER.registerWithItem(TableBlock.makeId("spruce"), () -> new TableBlock(new BlockConfig().material("spruce").materialName("Spruce").ingredient(Blocks.SPRUCE_PLANKS).ingredient("log", Blocks.SPRUCE_LOG).flammable()), DEFAULT_TABLE_SETTINGS));
         BLOCKS.add(REGISTRY_HELPER.registerWithItem(TableBlock.makeId("warped"), () -> new TableBlock(new BlockConfig().material("warped").materialName("Warped").ingredient(Blocks.WARPED_PLANKS).ingredient("log", Blocks.WARPED_STEM)), DEFAULT_TABLE_SETTINGS));
 
-        if (FabricLoader.getInstance().isModLoaded("betterend")) {
-            BLOCKS.add(REGISTRY_HELPER.registerWithItem(TableBlock.makeId("helix_tree"), () -> {
-                // BetterEnd's initializer runs after minekea's, so its blocks aren't registered yet at this point;
-                // an eager lookup would return air (which, among other issues, has no loot table). Resolve the
-                // ingredients lazily instead: recipes, models, etc. are only generated long after every mod has
-                // initialized. For the same reason the base settings can't be copied from the (still missing)
-                // planks block, so equivalent vanilla settings are used explicitly.
-                final BlockConfig config = new BlockConfig() {
-                    @Override
-                    public Block getIngredient() {
-                        return BuiltInRegistries.BLOCK.getValue(Identifier.fromNamespaceAndPath("betterend", "helix_tree_planks"));
-                    }
-
-                    @Override
-                    public Block getIngredient(String key) {
-                        if ("log".equals(key)) {
-                            return BuiltInRegistries.BLOCK.getValue(Identifier.fromNamespaceAndPath("betterend", "helix_tree_log"));
-                        }
-
-                        return super.getIngredient(key);
-                    }
-                };
-
-                return new TableBlock(config.material("helix_tree").materialName("Helix Tree").texture("log", Identifier.fromNamespaceAndPath("betterend", "block/helix_tree_log_side")).flammable().settings(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS)));
-            }, DEFAULT_TABLE_SETTINGS));
+        if (FabricLoader.getInstance().isModLoaded(SupportedModdedBlocks.BetterEnd.MOD_ID)) {
+            SupportedModdedBlocks.BetterEnd.getWoods().forEach(Tables::registerModded);
         }
 
         CreativeModeTabEvents.modifyOutputEvent(ModItemGroups.FURNITURE_ITEM_GROUP.getKey()).register((tab) -> {
             tab.acceptAll(BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList());
         });
+    }
+
+    private static void registerModded(ModdedBlockEntry entry) {
+        registerModded(entry.getModId(), entry.getMaterial(), entry.getMaterialName(), entry.getLogTextureSuffix());
+    }
+
+    private static void registerModded(String modId, String material, String materialName, @Nullable String logTextureSuffix) {
+        BLOCKS.add(REGISTRY_HELPER.registerWithItem(TableBlock.makeId(material), () -> new TableBlock(
+                new LazyBlockConfig()
+                        .material(material).materialName(materialName)
+                        .ingredientFunc((String key) -> {
+                            if (key == null) {
+                                return BuiltInRegistries.BLOCK.getValue(Identifier.fromNamespaceAndPath(modId, material + "_planks"));
+                            } else if ("log".equals(key)) {
+                                return BuiltInRegistries.BLOCK.getValue(Identifier.fromNamespaceAndPath(modId, material + "_log"));
+                            } else return null;
+                        })
+                        .texture("log", Identifier.fromNamespaceAndPath(modId, "block/" + material + "_log" + logTextureSuffix))
+                        .flammable().settings(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS))
+        ), DEFAULT_TABLE_SETTINGS));
     }
 }
