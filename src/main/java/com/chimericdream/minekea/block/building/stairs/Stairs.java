@@ -6,13 +6,18 @@ import com.chimericdream.lib.util.Tool;
 import com.chimericdream.minekea.ModInfo;
 import com.chimericdream.minekea.block.building.LogWoodFamilies;
 import com.chimericdream.minekea.block.building.dyed.DyedBlocks;
+import com.chimericdream.minekea.block.furniture.bookshelves.BookshelfBlock;
 import com.chimericdream.minekea.block.furniture.bookshelves.Bookshelves;
+import com.chimericdream.minekea.blocks.LazyBlockConfig;
+import com.chimericdream.minekea.blocks.ModdedBlockEntry;
+import com.chimericdream.minekea.blocks.SupportedModdedBlocks;
 import com.chimericdream.minekea.util.ModThingGroup;
 import dev.architectury.registry.registries.RegistrySupplier;
 import java.util.ArrayList;
 import java.util.List;
 
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -20,6 +25,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ColorCollection;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
 
@@ -172,12 +178,66 @@ public class Stairs implements ModThingGroup {
             );
         });
 
+        if (FabricLoader.getInstance().isModLoaded(SupportedModdedBlocks.BetterNether.MOD_ID)) {
+            SupportedModdedBlocks.BetterNether.getWoods().forEach(Stairs::registerModded);
+        }
+        if (FabricLoader.getInstance().isModLoaded(SupportedModdedBlocks.BetterEnd.MOD_ID)) {
+            SupportedModdedBlocks.BetterEnd.getWoods().forEach(Stairs::registerModded);
+        }
+
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.BUILDING_BLOCKS).register((tab) -> {
             tab.acceptAll(STAIRS_BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList());
             tab.acceptAll(VERTICAL_STAIRS_BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList());
             tab.acceptAll(BOOKSHELF_STAIRS_BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList());
             tab.acceptAll(VERTICAL_BOOKSHELF_STAIRS_BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList());
         });
+    }
+
+    private static void registerModded(ModdedBlockEntry entry) {
+        Identifier bookshelfStairsId = BookshelfStairsBlock.makeId(entry.getMaterial()).withPrefix(entry.getModId() + "/");
+        Identifier verticalBookshelfStairsId = VerticalBookshelfStairsBlock.makeId(entry.getMaterial()).withPrefix(entry.getModId() + "/");
+        Identifier baseBlockId = entry.getBookshelf() != null ? entry.getBookshelf() :
+                BookshelfBlock.makeId(entry.getMaterial()).withPrefix(entry.getModId() + "/");
+
+        BOOKSHELF_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(
+                bookshelfStairsId,
+                () -> new BookshelfStairsBlock(
+                        new LazyBlockConfig()
+                                .material(entry.getMaterial())
+                                .materialName(entry.getMaterialName())
+                                .ingredientFunc((String key) -> {
+                                    if (key == null) {
+                                        return BuiltInRegistries.BLOCK.getValue(Identifier.fromNamespaceAndPath(entry.getModId(), entry.getMaterial() + "_planks"));
+                                    } else return null;
+                                })
+                                .flammable()
+                                .tool(Tool.AXE)
+                                .settings(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS)),
+                        bookshelfStairsId,
+                        baseBlockId
+                ),
+                DEFAULT_STAIRS_SETTINGS
+        ));
+
+        VERTICAL_BOOKSHELF_STAIRS_BLOCKS.add(REGISTRY_HELPER.registerWithItem(
+                verticalBookshelfStairsId,
+                () -> new VerticalBookshelfStairsBlock(
+                        new LazyBlockConfig()
+                                .material(entry.getMaterial())
+                                .materialName(entry.getMaterialName())
+                                .ingredientFunc((String key) -> {
+                                    if (key == null) {
+                                        return BuiltInRegistries.BLOCK.getValue(Identifier.fromNamespaceAndPath(entry.getModId(), entry.getMaterial() + "_planks"));
+                                    } else return null;
+                                })
+                                .flammable()
+                                .tool(Tool.AXE)
+                                .settings(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS)),
+                        verticalBookshelfStairsId,
+                        baseBlockId
+                ),
+                DEFAULT_VERTICAL_STAIRS_SETTINGS
+        ));
     }
 
     private static void registerBlocks(ColorCollection<Block> blocks) {

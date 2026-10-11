@@ -60,7 +60,11 @@ public class TableBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     public TableBlock(BlockConfig config) {
-        super(config.getBaseSettings().setId(REGISTRY_HELPER.makeBlockRegistryKey(makeId(config.getMaterial()))));
+        this(config, makeId(config.getMaterial()));
+    }
+
+    public TableBlock(BlockConfig config, Identifier id) {
+        super(config.getBaseSettings().setId(REGISTRY_HELPER.makeBlockRegistryKey(id)));
 
         this.registerDefaultState(
             this.stateDefinition
@@ -72,7 +76,7 @@ public class TableBlock extends Block implements SimpleWaterloggedBlock {
                 .setValue(WATERLOGGED, false)
         );
 
-        BLOCK_ID = makeId(config.getMaterial());
+        BLOCK_ID = id;
         this.config = config;
     }
 

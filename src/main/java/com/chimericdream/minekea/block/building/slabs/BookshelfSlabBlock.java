@@ -14,17 +14,17 @@ public class BookshelfSlabBlock extends SlabBlock {
     public final BlockConfig config;
 
     public BookshelfSlabBlock(BlockConfig config) {
-        super(config.getBaseSettings().setId(REGISTRY_HELPER.makeBlockRegistryKey(makeId(config.getMaterial()))));
-
-        BLOCK_ID = makeId(config.getMaterial());
-        BASE_BLOCK_ID = BookshelfBlock.makeId(config.getMaterial());
-        this.config = config;
+        this(config, makeId(config.getMaterial()), BookshelfBlock.makeId(config.getMaterial()));
     }
 
     public BookshelfSlabBlock(BlockConfig config, Identifier baseBlockId) {
-        super(config.getBaseSettings().setId(REGISTRY_HELPER.makeBlockRegistryKey(makeId(config.getMaterial()))));
+        this(config, makeId(config.getMaterial()), baseBlockId);
+    }
 
-        BLOCK_ID = makeId(config.getMaterial());
+    public BookshelfSlabBlock(BlockConfig config, Identifier id, Identifier baseBlockId) {
+        super(config.getBaseSettings().setId(REGISTRY_HELPER.makeBlockRegistryKey(id)));
+
+        BLOCK_ID = id;
         BASE_BLOCK_ID = baseBlockId;
         this.config = config;
     }

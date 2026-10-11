@@ -54,7 +54,8 @@ public class Tables implements ModThingGroup {
     }
 
     private static void registerModded(ModdedBlockEntry entry) {
-        BLOCKS.add(REGISTRY_HELPER.registerWithItem(TableBlock.makeId(entry.getMaterial()).withPrefix(entry.getModId() + "/"), () -> new TableBlock(
+        Identifier id = TableBlock.makeId(entry.getMaterial()).withPrefix(entry.getModId() + "/");
+        BLOCKS.add(REGISTRY_HELPER.registerWithItem(id, () -> new TableBlock(
                 new LazyBlockConfig()
                         .material(entry.getMaterial()).materialName(entry.getMaterialName())
                         .ingredientFunc((String key) -> {
@@ -65,7 +66,8 @@ public class Tables implements ModThingGroup {
                             } else return null;
                         })
                         .texture("log", Identifier.fromNamespaceAndPath(entry.getModId(), "block/" + entry.getMaterial() + "_" + entry.getLogTextureSuffix()))
-                        .flammable().settings(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS))
+                        .flammable().settings(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS)),
+                id
         ), DEFAULT_TABLE_SETTINGS));
     }
 }

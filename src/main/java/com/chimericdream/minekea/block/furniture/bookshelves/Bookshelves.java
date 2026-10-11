@@ -4,6 +4,7 @@ import com.chimericdream.lib.blocks.BlockConfig;
 import com.chimericdream.lib.util.Tool;
 import com.chimericdream.minekea.blocks.LazyBlockConfig;
 import com.chimericdream.minekea.blocks.ModdedBlockEntry;
+import com.chimericdream.minekea.blocks.SupportedModdedBlocks;
 import com.chimericdream.minekea.util.ModThingGroup;
 import dev.architectury.registry.registries.RegistrySupplier;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -59,7 +61,8 @@ public class Bookshelves implements ModThingGroup {
     }
 
     private static void registerModded(ModdedBlockEntry entry) {
-        BLOCKS.add(REGISTRY_HELPER.registerWithItem(BookshelfBlock.makeId(entry.getMaterial()).withPrefix(entry.getModId() + "/"), () -> new BookshelfBlock(
+        Identifier id = BookshelfBlock.makeId(entry.getMaterial()).withPrefix(entry.getModId() + "/");
+        BLOCKS.add(REGISTRY_HELPER.registerWithItem(id, () -> new BookshelfBlock(
                 new LazyBlockConfig()
                         .material(entry.getMaterial()).materialName(entry.getMaterialName())
                         .ingredientFunc((String key) -> {
@@ -67,7 +70,8 @@ public class Bookshelves implements ModThingGroup {
                                 return BuiltInRegistries.BLOCK.getValue(Identifier.fromNamespaceAndPath(entry.getModId(), entry.getMaterial() + "_planks"));
                             } else return null;
                         })
-                        .flammable().tool(Tool.AXE).settings(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS))
+                        .flammable().tool(Tool.AXE).settings(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS)),
+                id
         ), DEFAULT_BOOKSHELF_SETTINGS));
     }
 }

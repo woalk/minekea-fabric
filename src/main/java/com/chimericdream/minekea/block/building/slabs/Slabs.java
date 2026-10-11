@@ -4,19 +4,26 @@ import com.chimericdream.lib.blocks.BlockConfig;
 import com.chimericdream.lib.resource.TextureUtils;
 import com.chimericdream.lib.util.Tool;
 import com.chimericdream.minekea.block.building.LogWoodFamilies;
+import com.chimericdream.minekea.block.furniture.bookshelves.BookshelfBlock;
 import com.chimericdream.minekea.block.furniture.bookshelves.Bookshelves;
+import com.chimericdream.minekea.blocks.LazyBlockConfig;
+import com.chimericdream.minekea.blocks.ModdedBlockEntry;
+import com.chimericdream.minekea.blocks.SupportedModdedBlocks;
 import com.chimericdream.minekea.util.ModThingGroup;
 import dev.architectury.registry.registries.RegistrySupplier;
 import java.util.ArrayList;
 import java.util.List;
 
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ColorCollection;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
 
@@ -89,10 +96,43 @@ public class Slabs implements ModThingGroup {
             );
         });
 
+        if (FabricLoader.getInstance().isModLoaded(SupportedModdedBlocks.BetterNether.MOD_ID)) {
+            SupportedModdedBlocks.BetterNether.getWoods().forEach(Slabs::registerModded);
+        }
+        if (FabricLoader.getInstance().isModLoaded(SupportedModdedBlocks.BetterEnd.MOD_ID)) {
+            SupportedModdedBlocks.BetterEnd.getWoods().forEach(Slabs::registerModded);
+        }
+
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.BUILDING_BLOCKS).register((tab) -> {
             tab.acceptAll(SLAB_BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList());
             tab.acceptAll(BOOKSHELF_SLAB_BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList());
         });
+    }
+
+    private static void registerModded(ModdedBlockEntry entry) {
+        Identifier id = BookshelfSlabBlock.makeId(entry.getMaterial()).withPrefix(entry.getModId() + "/");
+        Identifier baseBlockId = entry.getBookshelf() != null ? entry.getBookshelf() :
+                BookshelfBlock.makeId(entry.getMaterial()).withPrefix(entry.getModId() + "/");
+
+        BOOKSHELF_SLAB_BLOCKS.add(REGISTRY_HELPER.registerWithItem(
+                id,
+                () -> new BookshelfSlabBlock(
+                        new LazyBlockConfig()
+                                .material(entry.getMaterial())
+                                .materialName(entry.getMaterialName())
+                                .ingredientFunc((String key) -> {
+                                    if (key == null) {
+                                        return BuiltInRegistries.BLOCK.getValue(Identifier.fromNamespaceAndPath(entry.getModId(), entry.getMaterial() + "_planks"));
+                                    } else return null;
+                                })
+                                .flammable()
+                                .tool(Tool.AXE)
+                                .settings(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS)),
+                        id,
+                        baseBlockId
+                ),
+                DEFAULT_SLAB_SETTINGS
+        ));
     }
 
     private static void registerBlocks(ColorCollection<Block> blocks) {

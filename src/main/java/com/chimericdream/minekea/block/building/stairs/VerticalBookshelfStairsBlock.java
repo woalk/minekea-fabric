@@ -9,16 +9,16 @@ public class VerticalBookshelfStairsBlock extends VerticalStairsBlock {
     public final Identifier BASE_BLOCK_ID;
 
     public VerticalBookshelfStairsBlock(BlockConfig config) {
-        super(config, makeId(config.getMaterial()));
-
-        BLOCK_ID = makeId(config.getMaterial());
-        BASE_BLOCK_ID = BookshelfBlock.makeId(config.getMaterial());
+        this(config, makeId(config.getMaterial()), BookshelfBlock.makeId(config.getMaterial()));
     }
 
     public VerticalBookshelfStairsBlock(BlockConfig config, Identifier baseBlockId) {
-        super(config, makeId(config.getMaterial()));
+        this(config, makeId(config.getMaterial()), baseBlockId);
+    }
 
-        BLOCK_ID = makeId(config.getMaterial());
+    public VerticalBookshelfStairsBlock(BlockConfig config, Identifier id, Identifier baseBlockId) {
+        super(config, id);
+
         BASE_BLOCK_ID = baseBlockId;
     }
 

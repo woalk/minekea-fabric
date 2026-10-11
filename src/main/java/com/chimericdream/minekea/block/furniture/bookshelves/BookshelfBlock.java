@@ -12,9 +12,13 @@ public class BookshelfBlock extends Block {
     public final BlockConfig config;
 
     public BookshelfBlock(BlockConfig config) {
-        super(config.getBaseSettings().setId(REGISTRY_HELPER.makeBlockRegistryKey(makeId(config.getMaterial()))));
+        this(config, makeId(config.getMaterial()));
+    }
 
-        BLOCK_ID = makeId(config.getMaterial());
+    public BookshelfBlock(BlockConfig config, Identifier id) {
+        super(config.getBaseSettings().setId(REGISTRY_HELPER.makeBlockRegistryKey(id)));
+
+        BLOCK_ID = id;
         this.config = config;
     }
 
