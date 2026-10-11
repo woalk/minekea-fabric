@@ -2,8 +2,8 @@ package com.chimericdream.minekea.block.furniture.bookshelves;
 
 import com.chimericdream.lib.blocks.BlockConfig;
 import com.chimericdream.lib.util.Tool;
-import com.chimericdream.minekea.block.building.BuildingBlocks;
-import com.chimericdream.minekea.block.building.general.WarpedNetherBricksBlock;
+import com.chimericdream.minekea.blocks.LazyBlockConfig;
+import com.chimericdream.minekea.blocks.ModdedBlockEntry;
 import com.chimericdream.minekea.util.ModThingGroup;
 import dev.architectury.registry.registries.RegistrySupplier;
 import java.util.ArrayList;
@@ -13,10 +13,12 @@ import java.util.Map;
 
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
 
@@ -54,5 +56,18 @@ public class Bookshelves implements ModThingGroup {
                 .register((tab) -> tab.acceptAll(
                         BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList()
                 ));
+    }
+
+    private static void registerModded(ModdedBlockEntry entry) {
+        BLOCKS.add(REGISTRY_HELPER.registerWithItem(BookshelfBlock.makeId(entry.getMaterial()).withPrefix(entry.getModId() + "/"), () -> new BookshelfBlock(
+                new LazyBlockConfig()
+                        .material(entry.getMaterial()).materialName(entry.getMaterialName())
+                        .ingredientFunc((String key) -> {
+                            if (key == null) {
+                                return BuiltInRegistries.BLOCK.getValue(Identifier.fromNamespaceAndPath(entry.getModId(), entry.getMaterial() + "_planks"));
+                            } else return null;
+                        })
+                        .flammable().tool(Tool.AXE).settings(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS))
+        ), DEFAULT_BOOKSHELF_SETTINGS));
     }
 }
