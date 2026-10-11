@@ -96,11 +96,8 @@ public class Slabs implements ModThingGroup {
             );
         });
 
-        if (FabricLoader.getInstance().isModLoaded(SupportedModdedBlocks.BetterNether.MOD_ID)) {
-            SupportedModdedBlocks.BetterNether.getWoods().forEach(Slabs::registerModded);
-        }
         if (FabricLoader.getInstance().isModLoaded(SupportedModdedBlocks.BetterEnd.MOD_ID)) {
-            SupportedModdedBlocks.BetterEnd.getWoods().forEach(Slabs::registerModded);
+            Slabs.registerModded(SupportedModdedBlocks.BetterEnd.INSTANCE.getHelixTree());
         }
 
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.BUILDING_BLOCKS).register((tab) -> {

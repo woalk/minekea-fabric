@@ -178,11 +178,8 @@ public class Stairs implements ModThingGroup {
             );
         });
 
-        if (FabricLoader.getInstance().isModLoaded(SupportedModdedBlocks.BetterNether.MOD_ID)) {
-            SupportedModdedBlocks.BetterNether.getWoods().forEach(Stairs::registerModded);
-        }
         if (FabricLoader.getInstance().isModLoaded(SupportedModdedBlocks.BetterEnd.MOD_ID)) {
-            SupportedModdedBlocks.BetterEnd.getWoods().forEach(Stairs::registerModded);
+            Stairs.registerModded(SupportedModdedBlocks.BetterEnd.INSTANCE.getHelixTree());
         }
 
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.BUILDING_BLOCKS).register((tab) -> {
