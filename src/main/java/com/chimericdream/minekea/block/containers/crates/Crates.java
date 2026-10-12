@@ -85,10 +85,11 @@ public class Crates implements ModThingGroup {
         BLOCKS.addAll(CRATES.values());
 
         if (FabricLoader.getInstance().isModLoaded(SupportedModdedBlocks.BetterNether.MOD_ID)) {
-            SupportedModdedBlocks.BetterNether.getWoods().forEach(Crates::registerModded);
+            registerModded(SupportedModdedBlocks.BetterNether.INSTANCE.getWart());
         }
         if (FabricLoader.getInstance().isModLoaded(SupportedModdedBlocks.BetterEnd.MOD_ID)) {
-            SupportedModdedBlocks.BetterEnd.getWoods().forEach(Crates::registerModded);
+            registerModded(SupportedModdedBlocks.BetterEnd.INSTANCE.getPythadendron());
+            registerModded(SupportedModdedBlocks.BetterEnd.INSTANCE.getJellyshroom());
         }
 
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.FUNCTIONAL_BLOCKS)
