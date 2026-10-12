@@ -8,6 +8,7 @@ data class ModdedBlockEntry(
     val materialName: String,
     val logMaterial: String = "log",
     val logTextureSuffix: String = logMaterial,
+    val strippedLogTextureSuffix: String = logTextureSuffix,
     val hasBookshelf: Boolean = false,
 ) {
     val bookshelf: Identifier?

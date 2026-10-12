@@ -13,7 +13,7 @@ public class ContainerBlocksDataGenerator implements BlockDataGeneratorGroup {
 
     static {
         Barrels.BLOCKS.forEach(block -> BLOCK_GENERATORS.add(new BarrelBlockDataGenerator(block.get())));
-        Crates.CRATES.values().forEach(block -> BLOCK_GENERATORS.add(new CrateBlockDataGenerator(block.get())));
+        Crates.BLOCKS.forEach(block -> BLOCK_GENERATORS.add(new CrateBlockDataGenerator(block.get())));
 
         BLOCK_GENERATORS.add(new BarrelBlockDataGenerator.OakBarrelDataGenerator());
         BLOCK_GENERATORS.add(new CrateBlockDataGenerator.SharedCrateDataGenerator());

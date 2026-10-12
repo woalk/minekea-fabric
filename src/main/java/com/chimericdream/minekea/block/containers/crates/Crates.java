@@ -2,6 +2,9 @@ package com.chimericdream.minekea.block.containers.crates;
 
 import com.chimericdream.lib.blocks.BlockConfig;
 import com.chimericdream.lib.resource.TextureUtils;
+import com.chimericdream.minekea.blocks.LazyBlockConfig;
+import com.chimericdream.minekea.blocks.ModdedBlockEntry;
+import com.chimericdream.minekea.blocks.SupportedModdedBlocks;
 import com.chimericdream.minekea.client.screen.crate.CrateScreenHandler;
 import com.chimericdream.minekea.client.screen.crate.DoubleCrateScreenHandler;
 import com.chimericdream.minekea.entity.block.containers.CrateBlockEntity;
@@ -16,7 +19,12 @@ import java.util.Set;
 import java.util.function.Supplier;
 
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -24,6 +32,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
 
@@ -75,6 +84,13 @@ public class Crates implements ModThingGroup {
 
         BLOCKS.addAll(CRATES.values());
 
+        if (FabricLoader.getInstance().isModLoaded(SupportedModdedBlocks.BetterNether.MOD_ID)) {
+            SupportedModdedBlocks.BetterNether.getWoods().forEach(Crates::registerModded);
+        }
+        if (FabricLoader.getInstance().isModLoaded(SupportedModdedBlocks.BetterEnd.MOD_ID)) {
+            SupportedModdedBlocks.BetterEnd.getWoods().forEach(Crates::registerModded);
+        }
+
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.FUNCTIONAL_BLOCKS)
                 .register((tab) -> tab.acceptAll(
                         BLOCKS.stream().map((block) -> block.get().asItem().getDefaultInstance()).toList()
@@ -87,5 +103,26 @@ public class Crates implements ModThingGroup {
                 Set.of(BLOCKS.stream().map(Supplier::get).toList().toArray(Block[]::new))
             )
         );
+    }
+
+    private static void registerModded(ModdedBlockEntry entry) {
+        Identifier id = CrateBlock.makeId(entry.getMaterial()).withPrefix(entry.getModId() + "/");
+        BLOCKS.add(REGISTRY_HELPER.registerWithItem(id, () -> new CrateBlock(
+                new LazyBlockConfig()
+                        .material(entry.getMaterial()).materialName(entry.getMaterialName())
+                        .ingredientFunc((String key) -> {
+                            if (key == null) {
+                                return BuiltInRegistries.BLOCK.getValue(Identifier.fromNamespaceAndPath(entry.getModId(), entry.getMaterial() + "_planks"));
+                            } else return null;
+                        })
+                        .tagIngredientFunc((String key) -> {
+                            if (key == null) {
+                                return TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(entry.getModId(), entry.getMaterial() + "_logs"));
+                            } else return null;
+                        })
+                        .texture("brace", Identifier.fromNamespaceAndPath(entry.getModId(), "block/" + entry.getMaterial() + "_stripped_" + entry.getStrippedLogTextureSuffix()))
+                        .flammable().settings(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS)),
+                id
+        ), DEFAULT_CRATE_SETTINGS));
     }
 }
