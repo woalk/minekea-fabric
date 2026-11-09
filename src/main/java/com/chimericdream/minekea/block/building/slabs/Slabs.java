@@ -71,8 +71,6 @@ public class Slabs implements ModThingGroup {
         });
         
         registerBlocks(Blocks.STAINED_GLASS);
-        registerBlocks(Blocks.CONCRETE);
-        registerBlocks(Blocks.WOOL);
 
         final var oakConfig = new BlockConfig()
                 .material("oak")
