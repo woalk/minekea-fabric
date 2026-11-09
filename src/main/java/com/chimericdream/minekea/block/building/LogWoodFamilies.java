@@ -29,6 +29,7 @@ public class LogWoodFamilies {
         ALL.addAll(woodFamily("mangrove", "Mangrove", Blocks.MANGROVE_LOG, Blocks.MANGROVE_WOOD, Blocks.STRIPPED_MANGROVE_LOG, Blocks.STRIPPED_MANGROVE_WOOD, Blocks.MANGROVE_PLANKS, true));
         ALL.addAll(woodFamily("cherry", "Cherry", Blocks.CHERRY_LOG, Blocks.CHERRY_WOOD, Blocks.STRIPPED_CHERRY_LOG, Blocks.STRIPPED_CHERRY_WOOD, Blocks.CHERRY_PLANKS, true));
         ALL.addAll(woodFamily("pale_oak", "Pale Oak", Blocks.PALE_OAK_LOG, Blocks.PALE_OAK_WOOD, Blocks.STRIPPED_PALE_OAK_LOG, Blocks.STRIPPED_PALE_OAK_WOOD, Blocks.PALE_OAK_PLANKS, true));
+        ALL.addAll(woodFamily("poplar", "Poplar", Blocks.POPLAR_LOG, Blocks.POPLAR_WOOD, Blocks.STRIPPED_POPLAR_LOG, Blocks.STRIPPED_POPLAR_WOOD, Blocks.POPLAR_PLANKS, true));
 
         ALL.addAll(stemFamily("crimson", "Crimson", Blocks.CRIMSON_STEM, Blocks.CRIMSON_HYPHAE, Blocks.STRIPPED_CRIMSON_STEM, Blocks.STRIPPED_CRIMSON_HYPHAE, Blocks.CRIMSON_PLANKS));
         ALL.addAll(stemFamily("warped", "Warped", Blocks.WARPED_STEM, Blocks.WARPED_HYPHAE, Blocks.STRIPPED_WARPED_STEM, Blocks.STRIPPED_WARPED_HYPHAE, Blocks.WARPED_PLANKS));

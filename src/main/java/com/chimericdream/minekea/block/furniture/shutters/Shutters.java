@@ -37,6 +37,7 @@ public class Shutters implements ModThingGroup {
         CONFIGS.put("mangrove", new BlockConfig().material("mangrove").materialName("Mangrove").ingredient(Blocks.MANGROVE_PLANKS).ingredient("log", Blocks.MANGROVE_LOG).flammable());
         CONFIGS.put("oak", new BlockConfig().material("oak").materialName("Oak").ingredient(Blocks.OAK_PLANKS).ingredient("log", Blocks.OAK_LOG).flammable());
         CONFIGS.put("pale_oak", new BlockConfig().material("pale_oak").materialName("Pale Oak").ingredient(Blocks.PALE_OAK_PLANKS).ingredient("log", Blocks.PALE_OAK_LOG).flammable());
+        CONFIGS.put("poplar", new BlockConfig().material("poplar").materialName("Poplar").ingredient(Blocks.POPLAR_PLANKS).ingredient("log", Blocks.POPLAR_LOG).flammable());
         CONFIGS.put("spruce", new BlockConfig().material("spruce").materialName("Spruce").ingredient(Blocks.SPRUCE_PLANKS).ingredient("log", Blocks.SPRUCE_LOG).flammable());
         CONFIGS.put("warped", new BlockConfig().material("warped").materialName("Warped").ingredient(Blocks.WARPED_PLANKS).ingredient("log", Blocks.WARPED_STEM));
 

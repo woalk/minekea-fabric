@@ -66,6 +66,7 @@ public class Crates implements ModThingGroup {
         CONFIGS.put("mangrove", new BlockConfig().material("mangrove").materialName("Mangrove").ingredient(Blocks.MANGROVE_PLANKS).tagIngredient(ItemTags.MANGROVE_LOGS).texture("brace", TextureUtils.block(Blocks.STRIPPED_MANGROVE_LOG)).flammable());
         CONFIGS.put("oak", new BlockConfig().material("oak").materialName("Oak").ingredient(Blocks.OAK_PLANKS).tagIngredient(ItemTags.OAK_LOGS).texture("brace", TextureUtils.block(Blocks.STRIPPED_OAK_LOG)).flammable());
         CONFIGS.put("pale_oak", new BlockConfig().material("pale_oak").materialName("Pale Oak").ingredient(Blocks.PALE_OAK_PLANKS).tagIngredient(ItemTags.PALE_OAK_LOGS).texture("brace", TextureUtils.block(Blocks.STRIPPED_PALE_OAK_LOG)).flammable());
+        CONFIGS.put("poplar", new BlockConfig().material("poplar").materialName("Poplar").ingredient(Blocks.POPLAR_PLANKS).tagIngredient(ItemTags.POPLAR_LOGS).texture("brace", TextureUtils.block(Blocks.STRIPPED_POPLAR_LOG)).flammable());
         CONFIGS.put("spruce", new BlockConfig().material("spruce").materialName("Spruce").ingredient(Blocks.SPRUCE_PLANKS).tagIngredient(ItemTags.SPRUCE_LOGS).texture("brace", TextureUtils.block(Blocks.STRIPPED_SPRUCE_LOG)).flammable());
         CONFIGS.put("warped", new BlockConfig().material("warped").materialName("Warped").ingredient(Blocks.WARPED_PLANKS).tagIngredient(ItemTags.WARPED_STEMS).texture("brace", TextureUtils.block(Blocks.STRIPPED_WARPED_STEM)));
 
@@ -79,6 +80,7 @@ public class Crates implements ModThingGroup {
         CRATES.put("mangrove", REGISTRY_HELPER.registerWithItem(CrateBlock.makeId("mangrove"), () -> new CrateBlock(CONFIGS.get("mangrove")), DEFAULT_CRATE_SETTINGS.setId(REGISTRY_HELPER.makeItemRegistryKey(CrateBlock.makeId("mangrove")))));
         CRATES.put("oak", REGISTRY_HELPER.registerWithItem(CrateBlock.makeId("oak"), () -> new CrateBlock(CONFIGS.get("oak")), DEFAULT_CRATE_SETTINGS.setId(REGISTRY_HELPER.makeItemRegistryKey(CrateBlock.makeId("oak")))));
         CRATES.put("pale_oak", REGISTRY_HELPER.registerWithItem(CrateBlock.makeId("pale_oak"), () -> new CrateBlock(CONFIGS.get("pale_oak")), DEFAULT_CRATE_SETTINGS.setId(REGISTRY_HELPER.makeItemRegistryKey(CrateBlock.makeId("pale_oak")))));
+        CRATES.put("poplar", REGISTRY_HELPER.registerWithItem(CrateBlock.makeId("poplar"), () -> new CrateBlock(CONFIGS.get("poplar")), DEFAULT_CRATE_SETTINGS.setId(REGISTRY_HELPER.makeItemRegistryKey(CrateBlock.makeId("poplar")))));
         CRATES.put("spruce", REGISTRY_HELPER.registerWithItem(CrateBlock.makeId("spruce"), () -> new CrateBlock(CONFIGS.get("spruce")), DEFAULT_CRATE_SETTINGS.setId(REGISTRY_HELPER.makeItemRegistryKey(CrateBlock.makeId("spruce")))));
         CRATES.put("warped", REGISTRY_HELPER.registerWithItem(CrateBlock.makeId("warped"), () -> new CrateBlock(CONFIGS.get("warped")), DEFAULT_CRATE_SETTINGS.setId(REGISTRY_HELPER.makeItemRegistryKey(CrateBlock.makeId("warped")))));
 
