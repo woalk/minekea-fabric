@@ -1,7 +1,6 @@
 package com.chimericdream.minekea.crop;
 
 import com.chimericdream.minekea.ModInfo;
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
@@ -25,8 +24,6 @@ import org.jetbrains.annotations.NotNull;
 import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
 
 public class WarpedWartPlantBlock extends VegetationBlock {
-    public static final MapCodec<WarpedWartPlantBlock> CODEC = simpleCodec(_unused -> new WarpedWartPlantBlock());
-
     public static final Identifier BLOCK_ID = Identifier.fromNamespaceAndPath(ModInfo.MOD_ID, "crops/warped_wart/block");
     public static final IntegerProperty AGE;
     private static final VoxelShape[] AGE_TO_SHAPE;
@@ -35,10 +32,6 @@ public class WarpedWartPlantBlock extends VegetationBlock {
         super(Properties.ofFullCopy(Blocks.NETHER_WART).mapColor(MapColor.WARPED_WART_BLOCK).setId(REGISTRY_HELPER.makeBlockRegistryKey(BLOCK_ID)));
 
         this.registerDefaultState(this.stateDefinition.any().setValue(AGE, 0));
-    }
-
-    public @NotNull MapCodec<WarpedWartPlantBlock> codec() {
-        return CODEC;
     }
 
     public @NotNull VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {

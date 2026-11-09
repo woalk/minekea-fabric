@@ -9,7 +9,7 @@ import net.minecraft.resources.Identifier;
 public class Keybindings {
     public static final KeyMapping CYCLE_PAINTER_COLOR = new KeyMapping(
         "key.minekea.items.painter.cycle_color",
-        InputConstants.Type.KEYSYM,
+        InputConstants.Type.KEYBOARD,
         InputConstants.KEY_EQUALS,
         KeyMapping.Category.register(Identifier.fromNamespaceAndPath(ModInfo.MOD_ID, "keybinds"))
     );

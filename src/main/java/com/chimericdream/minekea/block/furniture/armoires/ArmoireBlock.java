@@ -4,7 +4,6 @@ import com.chimericdream.lib.blocks.BlockConfig;
 import com.chimericdream.minekea.MinekeaMod;
 import com.chimericdream.minekea.ModInfo;
 import com.chimericdream.minekea.entity.block.furniture.ArmoireBlockEntity;
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.Identifier;
@@ -130,7 +129,7 @@ public class ArmoireBlock extends BaseEntityBlock {
     public final BlockConfig config;
 
     public ArmoireBlock(BlockConfig config) {
-        super(Properties.ofFullCopy(config.getIngredient("planks")).pushReaction(PushReaction.IGNORE).setId(REGISTRY_HELPER.makeBlockRegistryKey(makeId(config.getMaterial()))));
+        super(Properties.ofFullCopy(config.getIngredient("planks")).pushReaction(PushReaction.IGNORE_ENTITY).setId(REGISTRY_HELPER.makeBlockRegistryKey(makeId(config.getMaterial()))));
 
         this.registerDefaultState(
             this.stateDefinition
@@ -239,11 +238,6 @@ public class ArmoireBlock extends BaseEntityBlock {
         }
 
         return createTickerHelper(type, Armoires.ARMOIRE_BLOCK_ENTITY.get(), ArmoireBlockEntity::cleanUpLegacyArmorStands);
-    }
-
-    @Override
-    protected @NotNull MapCodec<? extends BaseEntityBlock> codec() {
-        return simpleCodec((_unused) -> new ArmoireBlock(this.config));
     }
 
     @Override

@@ -3,7 +3,6 @@ package com.chimericdream.minekea.block.containers.barrels;
 import com.chimericdream.lib.blocks.BlockConfig;
 import com.chimericdream.minekea.ModInfo;
 import com.chimericdream.minekea.entity.block.containers.MinekeaBarrelBlockEntity;
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.Identifier;
@@ -37,8 +36,6 @@ import org.jetbrains.annotations.Nullable;
 import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
 
 public class BarrelBlock extends BaseEntityBlock {
-    public static final MapCodec<BarrelBlock> CODEC = simpleCodec(BarrelBlock::new);
-
     public final Identifier BLOCK_ID;
     public final BlockConfig config;
     public final String sideTextureKey;
@@ -54,11 +51,6 @@ public class BarrelBlock extends BaseEntityBlock {
 
     public BarrelBlock(Properties settings) {
         this(new BlockConfig().material("acacia").materialName("Acacia").ingredient(Blocks.ACACIA_PLANKS).ingredient("slab", Blocks.ACACIA_SLAB), "acacia_planks", "stripped_acacia_log");
-    }
-
-    @Override
-    protected @NotNull MapCodec<BarrelBlock> codec() {
-        return CODEC;
     }
 
     public BarrelBlock(BlockConfig config, String sideTextureKey, String faceTextureKey) {

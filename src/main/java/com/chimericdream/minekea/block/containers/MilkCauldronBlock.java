@@ -4,7 +4,6 @@ import com.chimericdream.minekea.ModInfo;
 import com.chimericdream.minekea.fluid.ModFluids;
 import com.chimericdream.minekea.mixin.CauldronDispatcherAccessor;
 import com.chimericdream.minekea.mixin.CauldronInteractionsAccessor;
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.cauldron.CauldronInteraction;
@@ -31,7 +30,6 @@ import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
 public class MilkCauldronBlock extends AbstractCauldronBlock {
     public static final Identifier BLOCK_ID = Identifier.fromNamespaceAndPath(ModInfo.MOD_ID, "containers/cauldrons/milk");
     public static CauldronInteraction.Dispatcher BEHAVIORS = new CauldronInteraction.Dispatcher();
-    public static final MapCodec<MilkCauldronBlock> CODEC = simpleCodec(MilkCauldronBlock::new);
 
     public static final CauldronInteraction FILL_WITH_MILK;
     public static final CauldronInteraction EMPTY_CAULDRON;
@@ -70,11 +68,6 @@ public class MilkCauldronBlock extends AbstractCauldronBlock {
 
     public MilkCauldronBlock() {
         super(Properties.ofFullCopy(Blocks.CAULDRON).setId(REGISTRY_HELPER.makeBlockRegistryKey(BLOCK_ID)), BEHAVIORS);
-    }
-
-    @Override
-    protected @NotNull MapCodec<MilkCauldronBlock> codec() {
-        return CODEC;
     }
 
     protected double getContentHeight(BlockState state) {

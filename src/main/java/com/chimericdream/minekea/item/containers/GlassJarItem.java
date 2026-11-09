@@ -154,7 +154,7 @@ public class GlassJarItem extends BlockItem {
 
         if (blockState2.is(blockState.getBlock())) {
             blockState2 = this.updateBlockStateFromTag(blockPos, world, itemStack, blockState2);
-            this.updateCustomBlockEntityTag(blockPos, world, playerEntity, itemStack, blockState2);
+            this.updateCustomBlockEntityTag(world, playerEntity, blockPos, itemStack);
             updateBlockEntityComponents(world, blockPos, itemStack);
             blockState2.getBlock().setPlacedBy(world, blockPos, blockState2, playerEntity, itemStack);
             if (playerEntity instanceof ServerPlayer) {

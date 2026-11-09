@@ -225,7 +225,7 @@ public class BeamBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     public PushReaction getPistonBehavior(BlockState state) {
-        return PushReaction.NORMAL;
+        return PushReaction.PUSH_PULL;
     }
 
     @Override

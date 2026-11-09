@@ -190,13 +190,13 @@ abstract public class GlassJarBlockEntityRenderer implements BlockEntityRenderer
 
         Direction facing = state.facing;
         if (facing.equals(Direction.NORTH)) {
-            matrices.mulPose((new Quaternionf()).rotationY(3.1415927f));
+            matrices.rotate((new Quaternionf()).rotationY(3.1415927f));
         } else if (facing.equals(Direction.SOUTH)) {
-            matrices.mulPose(new Quaternionf());
+            matrices.rotate(new Quaternionf());
         } else if (facing.equals(Direction.WEST)) {
-            matrices.mulPose((new Quaternionf()).rotationY(-1.5707964f));
+            matrices.rotate((new Quaternionf()).rotationY(-1.5707964f));
         } else {
-            matrices.mulPose((new Quaternionf()).rotationY(1.5707964f));
+            matrices.rotate((new Quaternionf()).rotationY(1.5707964f));
         }
 
         //noinspection SwitchStatementWithTooFewBranches

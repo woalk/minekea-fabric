@@ -4,7 +4,6 @@ import com.chimericdream.lib.blocks.BlockConfig;
 import com.chimericdream.minekea.MinekeaMod;
 import com.chimericdream.minekea.ModInfo;
 import com.chimericdream.minekea.entity.block.furniture.ShelfBlockEntity;
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
@@ -74,11 +73,6 @@ public class ShelfBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
 
     public static Identifier makeId(String material) {
         return Identifier.fromNamespaceAndPath(ModInfo.MOD_ID, String.format("furniture/shelves/supported/%s", material));
-    }
-
-    @Override
-    protected @NotNull MapCodec<ShelfBlock> codec() {
-        return simpleCodec((_unused) -> new ShelfBlock(this.config));
     }
 
     public @NotNull BlockState rotate(BlockState state, Rotation rotation) {

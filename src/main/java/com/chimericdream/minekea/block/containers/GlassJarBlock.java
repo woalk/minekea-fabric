@@ -12,7 +12,6 @@ import com.chimericdream.minekea.crop.WarpedWartItem;
 import com.chimericdream.minekea.entity.block.containers.GlassJarBlockEntity;
 import com.chimericdream.minekea.fluid.ModFluids;
 import com.chimericdream.minekea.item.containers.ContainerItems;
-import com.mojang.serialization.MapCodec;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -71,8 +70,6 @@ import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
 import static com.chimericdream.minekea.sound.MinekeaSoundGroup.GLASS_JAR_SOUND_GROUP;
 
 public class GlassJarBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {
-    public static final MapCodec<GlassJarBlock> CODEC = simpleCodec(GlassJarBlock::new);
-
     public static final Map<String, String> ALLOWED_ITEM_IDS = new LinkedHashMap<>();
     public static final List<Item> ALLOWED_ITEMS = new ArrayList<>();
 
@@ -286,10 +283,6 @@ public class GlassJarBlock extends BaseEntityBlock implements SimpleWaterloggedB
                 .setValue(FACING, Direction.NORTH)
                 .setValue(WATERLOGGED, false)
         );
-    }
-
-    protected @NotNull MapCodec<GlassJarBlock> codec() {
-        return CODEC;
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {

@@ -7,6 +7,7 @@ import com.chimericdream.minekea.fabric.data.ChimericLibBlockDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.advancements.predicates.StatePropertiesPredicate;
 import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -20,9 +21,9 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
-import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import net.minecraft.world.level.storage.loot.predicates.MatchBlock;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ConstantValue;
+import net.minecraft.world.level.storage.loot.providers.number.ints.UniformGenerator;
 
 public class WarpedWartCropDataGenerator extends ChimericLibBlockDataGenerator {
     public static final Block BLOCK = ModCrops.WARPED_WART_PLANT_BLOCK.get();
@@ -38,23 +39,19 @@ public class WarpedWartCropDataGenerator extends ChimericLibBlockDataGenerator {
                     generator.applyExplosionDecay(
                         block,
                         LootPool.lootPool()
-                            .setRolls(ConstantValue.exactly(1.0F))
+                            .setRolls(Holder.direct(new ConstantValue(1)))
                             .add(
                                 LootItem.lootTableItem(ModCrops.WARPED_WART_ITEM.get())
                                     .apply(
-                                        SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))
+                                        SetItemCountFunction.setCount(Holder.direct(new UniformGenerator(Holder.direct(new ConstantValue(2)), Holder.direct(new ConstantValue(4)))))
                                             .when(
-                                                LootItemBlockStatePropertyCondition
-                                                    .hasBlockStateProperties(block)
-                                                    .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(WarpedWartPlantBlock.AGE, 3))
+                                                MatchBlock.blockMatches(registryLookup.lookupOrThrow(Registries.BLOCK), block, StatePropertiesPredicate.Builder.properties().hasProperty(WarpedWartPlantBlock.AGE, 3))
                                             )
                                     )
                                     .apply(
                                         ApplyBonusCount.addUniformBonusCount(impl.getOrThrow(Enchantments.FORTUNE))
                                             .when(
-                                                LootItemBlockStatePropertyCondition
-                                                    .hasBlockStateProperties(block)
-                                                    .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(WarpedWartPlantBlock.AGE, 3))
+                                                MatchBlock.blockMatches(registryLookup.lookupOrThrow(Registries.BLOCK), block, StatePropertiesPredicate.Builder.properties().hasProperty(WarpedWartPlantBlock.AGE, 3))
                                             )
                                     )
                             )

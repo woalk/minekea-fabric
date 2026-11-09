@@ -5,7 +5,6 @@ import com.chimericdream.lib.inventories.ImplementedInventory;
 import com.chimericdream.minekea.MinekeaMod;
 import com.chimericdream.minekea.ModInfo;
 import com.chimericdream.minekea.entity.block.furniture.DisplayCaseBlockEntity;
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
@@ -173,11 +172,6 @@ public class DisplayCaseBlock extends BaseEntityBlock implements SimpleWaterlogg
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new DisplayCaseBlockEntity(pos, state);
-    }
-
-    @Override
-    protected @NotNull MapCodec<? extends BaseEntityBlock> codec() {
-        return simpleCodec((_unused) -> new DisplayCaseBlock(this.config));
     }
 
     @Override

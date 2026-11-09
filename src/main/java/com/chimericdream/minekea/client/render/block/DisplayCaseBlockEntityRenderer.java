@@ -95,20 +95,20 @@ public class DisplayCaseBlockEntityRenderer implements BlockEntityRenderer<Displ
             matrices.translate(0.5, 0.65 + Math.min((0.3 * Math.abs(maxY - 1.0)), 0.125), 0.5);
 
             if (!isHead) {
-                matrices.mulPose(Axis.YP.rotationDegrees(rotation * 45));
+                matrices.rotate(Axis.YP.rotationDegrees(rotation * 45));
             }
         } else {
             matrices.translate(0.5, 0.85, 0.5);
-            matrices.mulPose(Axis.XP.rotationDegrees(90));
-            matrices.mulPose(Axis.ZP.rotationDegrees(rotation * 45));
+            matrices.rotate(Axis.XP.rotationDegrees(90));
+            matrices.rotate(Axis.ZP.rotationDegrees(rotation * 45));
             matrices.scale(0.5f, 0.5f, 0.5f);
         }
 
         // Rotate some items so they face up instead of being half inside the case
         if (isHead || isJar || isLantern) {
 //            matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180));
-            matrices.mulPose(Axis.YP.rotationDegrees(180 - (rotation * 45)));
-            matrices.mulPose(Axis.XN.rotationDegrees(90));
+            matrices.rotate(Axis.YP.rotationDegrees(180 - (rotation * 45)));
+            matrices.rotate(Axis.XN.rotationDegrees(90));
             matrices.translate(0, -0.0625, 0);
         }
 

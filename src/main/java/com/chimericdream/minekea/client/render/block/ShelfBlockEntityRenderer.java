@@ -115,13 +115,13 @@ public class ShelfBlockEntityRenderer implements BlockEntityRenderer<ShelfBlockE
 
         matrices.translate(0.5, 0.5, 0.5);
 
-        matrices.mulPose(rotation);
+        matrices.rotate(rotation);
         matrices.translate(-0.5, -0.5, -0.5);
 
         if (isJarItem) {
             matrices.translate(x, 0.785, 0.25);
             matrices.scale(0.9f, 0.9f, 0.9f);
-            matrices.mulPose(Axis.YP.rotationDegrees(90));
+            matrices.rotate(Axis.YP.rotationDegrees(90));
         } else if (isBlockItem) {
             matrices.translate(x, 0.65, 0.25);
             matrices.scale(0.375f, 0.375f, 0.375f);
@@ -130,7 +130,7 @@ public class ShelfBlockEntityRenderer implements BlockEntityRenderer<ShelfBlockE
             matrices.scale(0.25f, 0.25f, 0.25f);
         }
 
-        matrices.mulPose(Axis.YP.rotationDegrees(180));
+        matrices.rotate(Axis.YP.rotationDegrees(180));
 
         displayItem.submit(matrices, queue, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
 

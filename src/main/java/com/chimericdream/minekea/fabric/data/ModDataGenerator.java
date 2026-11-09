@@ -13,6 +13,7 @@ import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.*;
+import net.minecraft.advancements.Advancement;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.core.Holder;
@@ -22,7 +23,9 @@ import net.minecraft.core.component.DataComponentInitializers;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.crafting.Recipe;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
@@ -55,8 +58,8 @@ public class ModDataGenerator implements DataGeneratorEntrypoint {
         }
 
         @Override
-        protected @NotNull RecipeProvider createRecipeProvider(HolderLookup.Provider registryLookup, RecipeOutput exporter) {
-            return new RecipeProvider(registryLookup, exporter) {
+        protected @NotNull RecipeProvider createRecipeProvider(HolderLookup.Provider registryLookup, BootstrapContext<Recipe<?>> recipes, BootstrapContext<Advancement> advancements) {
+            return new RecipeProvider(recipes, advancements) {
                 @Override
                 public void buildRecipes() {
                     // MC 26.2 binds item data components lazily during a ReloadableServerResources reload rather
@@ -69,14 +72,14 @@ public class ModDataGenerator implements DataGeneratorEntrypoint {
                         .forEach(DataComponentInitializers.PendingComponents::apply);
 
                     for (BlockDataGeneratorGroup group : ModBlockDataGenerators.BLOCK_GROUPS) {
-                        group.configureRecipes(registryLookup, exporter, this);
+                        group.configureRecipes(registryLookup, this.output, this);
                     }
 
                     for (ItemDataGeneratorGroup group : ModItemDataGenerators.ITEM_GROUPS) {
-                        group.configureRecipes(registryLookup, exporter, this);
+                        group.configureRecipes(registryLookup, this.output, this);
                     }
 
-//                    MinekeaMod.ITEMS.configureRecipes(exporter);
+//                    MinekeaMod.ITEMS.configureRecipes(this.output);
                 }
             };
         }

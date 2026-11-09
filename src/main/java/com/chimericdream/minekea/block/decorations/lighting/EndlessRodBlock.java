@@ -1,7 +1,6 @@
 package com.chimericdream.minekea.block.decorations.lighting;
 
 import com.chimericdream.minekea.ModInfo;
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -21,11 +20,6 @@ import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
 
 public class EndlessRodBlock extends RodBlock {
     public final static Identifier BLOCK_ID = Identifier.fromNamespaceAndPath(ModInfo.MOD_ID, "decorations/lighting/endless_rod");
-    public static final MapCodec<EndlessRodBlock> CODEC = simpleCodec(EndlessRodBlock::new);
-
-    public @NotNull MapCodec<EndlessRodBlock> codec() {
-        return CODEC;
-    }
 
     public EndlessRodBlock(Properties settings) {
         this();

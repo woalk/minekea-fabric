@@ -4,7 +4,6 @@ import com.chimericdream.lib.blocks.BlockConfig;
 import com.chimericdream.minekea.ModInfo;
 import com.chimericdream.minekea.client.screen.crate.DoubleCrateScreenHandler;
 import com.chimericdream.minekea.entity.block.containers.CrateBlockEntity;
-import com.mojang.serialization.MapCodec;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -49,8 +48,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import static com.chimericdream.minekea.MinekeaMod.REGISTRY_HELPER;
 
 public class CrateBlock extends BaseEntityBlock {
-    public static final MapCodec<CrateBlock> CODEC = simpleCodec(CrateBlock::new);
-
     public static final Integer ROW_COUNT = 6;
 
     public static final EnumProperty<Direction> FACING;
@@ -152,11 +149,6 @@ public class CrateBlock extends BaseEntityBlock {
 
     public static Identifier makeId(String material) {
         return Identifier.fromNamespaceAndPath(ModInfo.MOD_ID, String.format("containers/crates/%s", material));
-    }
-
-    @Override
-    protected @NotNull MapCodec<CrateBlock> codec() {
-        return CODEC;
     }
 
     @Override

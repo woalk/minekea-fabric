@@ -20,7 +20,6 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.EquipmentClientInfo;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.data.AtlasIds;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
@@ -52,7 +51,7 @@ public class ArmoireBlockEntityRenderer implements BlockEntityRenderer<ArmoireBl
         this.armorModels = ArmorModelSet.bake(ModelLayers.ARMOR_STAND_SMALL_ARMOR, ctx.entityModelSet(), ArmorStandArmorModel::new);
         this.equipmentRenderer = new EquipmentLayerRenderer(
             ctx.entityRenderer().equipmentAssets,
-            Minecraft.getInstance().getAtlasManager().getAtlasOrThrow(AtlasIds.ARMOR_TRIMS)
+            Minecraft.getInstance().getPalettedTextureManager()
         );
     }
 
@@ -165,9 +164,9 @@ public class ArmoireBlockEntityRenderer implements BlockEntityRenderer<ArmoireBl
             matrices.pushPose();
 
             matrices.translate(xOffset, yOffset, zOffset);
-            matrices.mulPose(rotation);
+            matrices.rotate(rotation);
             matrices.scale(0.5f, 0.5f, 0.5f);
-            matrices.mulPose(Axis.YP.rotationDegrees(180));
+            matrices.rotate(Axis.YP.rotationDegrees(180));
 
             renderState.submit(matrices, queue, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
 
@@ -181,7 +180,7 @@ public class ArmoireBlockEntityRenderer implements BlockEntityRenderer<ArmoireBl
 
             // The same transform LivingEntityRenderer applied to the invisible armor stands
             matrices.translate(stand.xOffset(), STAND_Y_OFFSET, stand.zOffset());
-            matrices.mulPose(Axis.YP.rotationDegrees(180.0f - standYaw));
+            matrices.rotate(Axis.YP.rotationDegrees(180.0f - standYaw));
             matrices.scale(-1.0f, -1.0f, 1.0f);
             matrices.translate(0.0f, -1.501f, 0.0f);
 

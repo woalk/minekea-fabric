@@ -65,25 +65,25 @@ dependencies {
     implementation("net.fabricmc.fabric-api:fabric-api:${project.property("fabric_api_version")}")
 
     // Update version number from https://www.curseforge.com/minecraft/mc-mods/chimericlib
-    implementation("curse.maven:chimericlib-1107232:8824300")
+    include(implementation(files("libs/chimericlib-fabric-${project.property("minecraft_version")}-6.4.0.jar"))!!)
     implementation("dev.architectury:architectury-fabric:${project.property("architectury_api_version")}")
 
     // BetterEnd & BetterNether, version 26.201.2
     // Update version from https://modrinth.com/mod/betterend/versions & https://modrinth.com/mod/betternether/versions
     // compileOnly so the mods are never required at runtime for end users;
     // localRuntime so they are loaded in local dev runs (e.g. runDatagen) for loot tables & models
-    compileOnly("maven.modrinth:gc8OEnCC:VD4qwVUF")
-    localRuntime("maven.modrinth:gc8OEnCC:VD4qwVUF")
-    compileOnly("maven.modrinth:MpzVLzy5:iBR9QMPF")
-    localRuntime("maven.modrinth:MpzVLzy5:iBR9QMPF")
+    compileOnly("maven.modrinth:gc8OEnCC:o5kyaTJb")
+    localRuntime("maven.modrinth:gc8OEnCC:o5kyaTJb")
+    compileOnly("maven.modrinth:MpzVLzy5:py6mlNTk")
+    localRuntime("maven.modrinth:MpzVLzy5:py6mlNTk")
 
     // Runtime-only libraries required by BetterEnd & BetterNether in dev runs:
     // BCLib (https://modrinth.com/mod/bclib),
     // WorldWeaver (https://modrinth.com/mod/worldweaver)
     // and WunderLib (https://modrinth.com/mod/wunderlib)
-    localRuntime("maven.modrinth:BgNRHReB:7BfGRji6")
-    localRuntime("maven.modrinth:RiN8rDVs:GHdiOIsp")
-    localRuntime("maven.modrinth:8O0Adq7w:x1Ln5h2L")
+    localRuntime("maven.modrinth:BgNRHReB:6QI6JObW")
+    localRuntime("maven.modrinth:RiN8rDVs:Vv5f9mYh")
+    localRuntime("maven.modrinth:8O0Adq7w:emLYjVJd")
 }
 loom {
     accessWidenerPath.set(file("src/main/resources/minekea.accesswidener"))

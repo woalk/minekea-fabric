@@ -15,6 +15,7 @@ import net.minecraft.client.data.models.model.ModelTemplate;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.renderer.block.dispatch.Variant;
 import net.minecraft.client.resources.model.sprite.Material;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -26,7 +27,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ConstantValue;
 
 import java.util.Optional;
 import java.util.function.Function;
@@ -68,7 +69,7 @@ public class BookshelfBlockDataGenerator extends ChimericLibBlockDataGenerator {
     }
 
     public void configureBlockLootTables(BlockLootSubProvider generator, HolderLookup.Provider registryLookup) {
-        generator.add(BLOCK, generator.createSingleItemTableWithSilkTouch(BLOCK, Items.BOOK, ConstantValue.exactly(3)));
+        generator.add(BLOCK, generator.createSingleItemTableWithSilkTouch(BLOCK, Items.BOOK, Holder.direct(new ConstantValue(3))));
     }
 
     public void configureTranslations(HolderLookup.Provider registryLookup, FabricLanguageProvider.TranslationBuilder translationBuilder) {
