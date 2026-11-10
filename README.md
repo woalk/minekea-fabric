@@ -14,8 +14,8 @@ _Simple, functional, decorative blocks._
 
 This mod is compatible with Fabric on Minecraft 26.2.
 
-It requires Fabric API, [ChimericLib](https://www.curseforge.com/minecraft/mc-mods/chimericlib)
-and [Architectury API](https://modrinth.com/mod/architectury-api).
+It requires Fabric API and [Architectury API](https://modrinth.com/mod/architectury-api).
+ChimericLib is bundled with this mod, so it does not need to be installed separately.
 
 ## Origin
 

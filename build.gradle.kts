@@ -42,6 +42,9 @@ sourceSets {
 }
 
 repositories {
+    flatDir {
+        dirs("libs")
+    }
     maven {
         name = "CurseForge"
         url = uri("https://cursemaven.com")
@@ -64,8 +67,7 @@ dependencies {
 
     implementation("net.fabricmc.fabric-api:fabric-api:${project.property("fabric_api_version")}")
 
-    // Update version number from https://www.curseforge.com/minecraft/mc-mods/chimericlib
-    include(implementation(files("libs/chimericlib-fabric-${project.property("minecraft_version")}-6.4.0.jar"))!!)
+    include(implementation("local:chimericlib-fabric-${project.property("minecraft_version")}:6.4.0")!!)
     implementation("dev.architectury:architectury-fabric:${project.property("architectury_api_version")}")
 
     // BetterEnd & BetterNether, version 26.201.2
