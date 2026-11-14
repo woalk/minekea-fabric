@@ -1,7 +1,10 @@
 package com.chimericdream.minekea.fabric.util;
 
 import com.chimericdream.minekea.fabric.data.ChimericLibBlockDataGenerator;
+import com.chimericdream.minekea.fabric.data.ModDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootSubProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.core.HolderLookup;
@@ -19,8 +22,8 @@ import java.util.function.Function;
 public interface BlockDataGeneratorGroup {
     List<ChimericLibBlockDataGenerator> getBlockGenerators();
 
-    default void configureRecipes(HolderLookup.Provider registryLookup, RecipeOutput exporter, RecipeProvider recipeGenerator) {
-        getBlockGenerators().forEach(generator -> generator.configureRecipes(registryLookup, exporter, recipeGenerator));
+    default void configureRecipes(HolderLookup.Provider registryLookup, RecipeOutput exporter, RecipeProvider recipeGenerator, ModDataGenerator.MinekeaRecipeProvider provider) {
+        getBlockGenerators().forEach(generator -> generator.configureRecipes(registryLookup, exporter, recipeGenerator, provider));
     }
 
     default void configureBlockLootTables(BlockLootSubProvider lootTableGenerator, HolderLookup.Provider registryLookup) {

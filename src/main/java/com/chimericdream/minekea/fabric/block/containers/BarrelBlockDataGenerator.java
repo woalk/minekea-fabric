@@ -5,10 +5,14 @@ import com.chimericdream.lib.fabric.blocks.TranslationUtils;
 import com.chimericdream.lib.fabric.data.TextureGenerator;
 import com.chimericdream.lib.resource.TextureUtils;
 import com.chimericdream.lib.util.Tool;
+import com.chimericdream.minekea.ModInfo;
 import com.chimericdream.minekea.block.containers.barrels.BarrelBlock;
 import com.chimericdream.minekea.fabric.data.ChimericLibBlockDataGenerator;
+import com.chimericdream.minekea.fabric.data.ModDataGenerator;
 import com.mojang.math.Quadrant;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditions;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.MultiVariant;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
@@ -21,12 +25,14 @@ import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.tags.TagAppender;
 import net.minecraft.resources.Identifier;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -38,21 +44,31 @@ import java.util.function.Function;
 
 public class BarrelBlockDataGenerator extends ChimericLibBlockDataGenerator {
     private final BarrelBlock BLOCK;
+    private final boolean isNetherBarrel;
 
     public BarrelBlockDataGenerator(Block block) {
         BLOCK = (BarrelBlock) block;
+
+        Block plankIngredient = BLOCK.config.getIngredient();
+        isNetherBarrel = plankIngredient == Blocks.CRIMSON_PLANKS || plankIngredient == Blocks.WARPED_PLANKS;
     }
 
     @Override
     public void configureBlockTags(HolderLookup.Provider registryLookup, Function<TagKey<Block>, TagAppender<Block>> getBuilder) {
-        TagUtils.applyMineableTag(getBuilder, BLOCK.config.getTool(), Tool.AXE, BLOCK);
+        if (isNetherBarrel) {
+            getBuilder.apply(BlockTags.MINEABLE_WITH_AXE).addOptional(BLOCK.builtInRegistryHolder().key());
+        } else {
+            TagUtils.applyMineableTag(getBuilder, BLOCK.config.getTool(), Tool.AXE, BLOCK);
+        }
     }
 
     @Override
-    public void configureRecipes(HolderLookup.Provider registryLookup, RecipeOutput exporter, RecipeProvider generator) {
+    public void configureRecipes(HolderLookup.Provider registryLookup, RecipeOutput exporter, RecipeProvider generator, ModDataGenerator.MinekeaRecipeProvider provider) {
         Block plankIngredient = BLOCK.config.getIngredient();
         Block slabIngredient = BLOCK.config.getIngredient("slab");
 
+        var actualExporter = (isNetherBarrel) ?
+                provider.conditions(exporter, ResourceConditions.not(ResourceConditions.allModsLoaded("betternether"))) : exporter;
         generator.shaped(RecipeCategory.BUILDING_BLOCKS, BLOCK, 1)
             .pattern("PSP")
             .pattern("P P")
@@ -63,7 +79,7 @@ public class BarrelBlockDataGenerator extends ChimericLibBlockDataGenerator {
                 generator.has(plankIngredient))
             .unlockedBy(RecipeProvider.getHasName(slabIngredient),
                 generator.has(slabIngredient))
-            .save(exporter);
+            .save(actualExporter);
     }
 
     @Override
@@ -73,7 +89,11 @@ public class BarrelBlockDataGenerator extends ChimericLibBlockDataGenerator {
 
     @Override
     public void configureBlockLootTables(BlockLootSubProvider generator, HolderLookup.Provider registryLookup) {
-        generator.dropSelf(BLOCK);
+        if (isNetherBarrel) {
+            generator.withConditions(ResourceConditions.not(ResourceConditions.allModsLoaded("betternether"))).dropSelf(BLOCK);
+        } else {
+            generator.dropSelf(BLOCK);
+        }
     }
 
     @Override

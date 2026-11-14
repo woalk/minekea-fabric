@@ -13,6 +13,7 @@ import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.*;
+import net.fabricmc.fabric.api.resource.conditions.v1.ResourceCondition;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
@@ -52,7 +53,7 @@ public class ModDataGenerator implements DataGeneratorEntrypoint {
         }
     }
 
-    private static class MinekeaRecipeProvider extends FabricRecipeProvider {
+    public static class MinekeaRecipeProvider extends FabricRecipeProvider {
         public MinekeaRecipeProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
             super(output, registriesFuture);
         }
@@ -72,7 +73,7 @@ public class ModDataGenerator implements DataGeneratorEntrypoint {
                         .forEach(DataComponentInitializers.PendingComponents::apply);
 
                     for (BlockDataGeneratorGroup group : ModBlockDataGenerators.BLOCK_GROUPS) {
-                        group.configureRecipes(registryLookup, this.output, this);
+                        group.configureRecipes(registryLookup, this.output, this, MinekeaRecipeProvider.this);
                     }
 
                     for (ItemDataGeneratorGroup group : ModItemDataGenerators.ITEM_GROUPS) {
@@ -116,6 +117,10 @@ public class ModDataGenerator implements DataGeneratorEntrypoint {
                     });
                 }
             };
+        }
+
+        public RecipeOutput conditions(RecipeOutput output, ResourceCondition... conditions) {
+            return withConditions(output, conditions);
         }
     }
 

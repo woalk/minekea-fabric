@@ -1,6 +1,8 @@
 package com.chimericdream.minekea.fabric.data;
 
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootSubProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.core.HolderLookup;
@@ -37,5 +39,9 @@ abstract public class ChimericLibBlockDataGenerator {
     }
 
     public void configureTranslations(HolderLookup.Provider registryLookup, FabricLanguageProvider.TranslationBuilder translationBuilder) {
+    }
+
+    public void configureRecipes(HolderLookup.Provider registryLookup, RecipeOutput exporter, RecipeProvider generator, ModDataGenerator.MinekeaRecipeProvider provider) {
+        configureRecipes(registryLookup, exporter, generator);
     }
 }
